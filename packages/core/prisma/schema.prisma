@@ -8,8 +8,11 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model User {
-    id    Int     @id
-    email String  @unique
-    name  String?
+model Post {
+    domain String @id
+    url    String
+
+    content    String
+    updatedAt  DateTime?
+    authorName String?
 }

@@ -2,6 +2,9 @@ import { createCheerioRouter } from "crawlee";
 import { getMeta } from "../common/meta.js";
 import normalizeUrl from "normalize-url";
 import { getPageContent } from "../common/content.js";
+import { getDatabaseClient } from "@repo/core";
+
+const db = getDatabaseClient();
 
 export const router = createCheerioRouter();
 
@@ -30,7 +33,7 @@ router.addHandler("document", async ({ $, request, log }) => {
     const content = await getPageContent(url, $.html());
 
     const wordCount = content?.split(/\s+/).length || 0;
-    if (wordCount < 200) {
+    if (!content || wordCount < 200) {
         // save crawl exclude
         log.info("\ttoo_short");
         log.info(content!);
@@ -39,4 +42,12 @@ router.addHandler("document", async ({ $, request, log }) => {
 
     // store results
     log.info("\tsuccess");
+
+    await db.post.create({
+        data: {
+            domain: meta.domain,
+            url,
+            content
+        }
+    });
 });

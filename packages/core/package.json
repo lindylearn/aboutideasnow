@@ -8,7 +8,7 @@
         "dev": "tsc -w",
         "build": "tsc",
         "generate": "prisma generate",
-        "migrate": "yarn prisma migrate dev --name"
+        "migrate": "prisma migrate dev --name"
     },
     "keywords": [],
     "author": "",
