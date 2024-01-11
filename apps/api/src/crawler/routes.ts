@@ -30,7 +30,7 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
         where: { domain: { in: nowLinks.map(getDomain) } }
     });
     const scrapedDomains = scrapeStates
-        .filter((s) => s.status !== ScrapeStatus.NO_CONTENT)
+        // .filter((s) => s.status !== ScrapeStatus.NO_CONTENT)
         .map((s) => s.domain);
     const newLinks = nowLinks.filter((link) => !scrapedDomains.includes(getDomain(link)));
     console.log(`Found ${newLinks.length} new links`);
