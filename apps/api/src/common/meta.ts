@@ -17,7 +17,6 @@ export async function getMeta(
     const domain = getDomain(url);
 
     return {
-        ...meta,
         domain,
         date: meta.date
     };
