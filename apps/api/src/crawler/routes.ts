@@ -29,10 +29,17 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
     const scrapeStates = await db.scrapeState.findMany({
         where: { domain: { in: nowLinks.map(getDomain) } }
     });
-    const scrapedDomains = scrapeStates
-        // .filter((s) => s.status !== ScrapeStatus.NO_CONTENT)
-        .map((s) => s.domain);
-    const newLinks = nowLinks.filter((link) => !scrapedDomains.includes(getDomain(link)));
+    const existingPosts = await db.post.findMany({
+        where: { domain: { in: nowLinks.map(getDomain) } }
+    });
+
+    const scrapedDomains = new Set();
+    scrapeStates
+        .filter((s) => s.status !== ScrapeStatus.SCRAPED)
+        .forEach((s) => scrapedDomains.add(s.domain));
+    existingPosts.forEach((p) => scrapedDomains.add(p.domain));
+
+    const newLinks = nowLinks.filter((link) => !scrapedDomains.has(getDomain(link)));
     console.log(`Found ${newLinks.length} new links`);
 
     await enqueueLinks({

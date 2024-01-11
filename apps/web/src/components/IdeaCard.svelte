@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="mb-2 whitespace-pre-wrap line-clamp-[10]">{post.content}</div>
-    {#if post.updatedAt}
+    {#if post.updatedAt && post.updatedAt.getFullYear() !== 1970}
         <div class="font-bold">
             {new Intl.DateTimeFormat("en-US", {
                 month: "long",
