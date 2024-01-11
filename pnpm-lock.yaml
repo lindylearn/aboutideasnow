@@ -38,9 +38,6 @@ importers:
       cheerio:
         specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
-      chrono-node:
-        specifier: ^2.7.4
-        version: 2.7.4
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -53,9 +50,6 @@ importers:
       express:
         specifier: ^4.18.2
         version: 4.18.2
-      find-dates:
-        specifier: ^0.1.3
-        version: 0.1.3
       jsdom:
         specifier: ^23.2.0
         version: 23.2.0
@@ -4381,10 +4375,6 @@ packages:
       unpipe: 1.0.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /find-dates@0.1.3:
-    resolution: {integrity: sha512-j78bA3xBDFi30kpgRUWyzfiGSy0g+wF5iVqUXmkioEG68Wy6oKfrkE4WUgvYbnXfOdKbyacoCQvmqQkLuJ0AVQ==}
     dev: false
 
   /find-up@4.1.0:
