@@ -1,16 +1,16 @@
-# fly.toml app configuration file generated for project-template on 2024-01-11T00:37:38+01:00
+# fly.toml app configuration file generated for ideasideasideas on 2024-01-11T10:40:26+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "project-template"
-primary_region = "ams"
+app = "ideasideasideas"
+primary_region = "iad"
 
 [build]
   dockerfile = "Dockerfile"
 
 [env]
-  PORT=3000
+  PORT = "3000"
 
 [http_service]
   internal_port = 3000
