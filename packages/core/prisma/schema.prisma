@@ -25,6 +25,7 @@ enum PostType {
 
 model ScrapeState {
     domain String @id
+    url    String
 
     status   ScrapeStatus
     scapedAt DateTime?

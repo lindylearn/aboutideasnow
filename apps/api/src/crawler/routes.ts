@@ -4,16 +4,41 @@ import normalizeUrl from "normalize-url";
 import { getPageContent } from "../common/content.js";
 import { PostType, ScrapeStatus } from "@repo/core/generated/prisma-client";
 import { db } from "../common/db.js";
+import { isExcludedPage } from "../common/filter.js";
 
 export const router = createCheerioRouter();
 
 router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
-    log.info(`crawling directory: ${request.loadedUrl}`);
+    const url = request.loadedUrl!;
+    const domain = getDomain(url);
+    log.info(`crawling directory: ${url}`);
+
+    // Extract links
+    const links = $("a[href]")
+        .map((_, el) => $(el).attr("href"))
+        .get()
+        // map to absolute urls
+        .map((link) => new URL(link, url))
+        // filter out current-domain links
+        .filter((url) => url.hostname !== domain)
+        // map back to strings
+        .map((url) => url.toString());
+    const nowLinks = links.filter((link) => link.endsWith("/now"));
+
+    // Exclude already scraped links
+    const scrapeStates = await db.scrapeState.findMany({
+        where: { domain: { in: nowLinks.map(getDomain) } }
+    });
+    const scrapedDomains = scrapeStates
+        .filter((s) => s.status !== ScrapeStatus.NO_CONTENT)
+        .map((s) => s.domain);
+    const newLinks = nowLinks.filter((link) => !scrapedDomains.includes(getDomain(link)));
+    console.log(`Found ${newLinks.length} new links`);
 
     await enqueueLinks({
         strategy: "all",
-        regexps: [/\/now\/?$/],
-        label: "document"
+        label: "document",
+        urls: newLinks
     });
 });
 
@@ -29,12 +54,12 @@ router.addHandler("document", async ({ $, request, log }) => {
 
     // Extract content
     const meta = await getMeta(url, $.html());
+    const title = $("title").text();
     const content = await getPageContent(url, $.html());
 
-    const wordCount = content?.split(/\s+/).length || 0;
-    if (!content || wordCount < 200) {
+    if (!content || isExcludedPage(title, content)) {
         // save crawl exclude
-        log.info("\ttoo_short");
+        log.info("\texcluding page");
         const scrapeState = {
             domain: meta.domain,
             status: ScrapeStatus.NO_CONTENT,
