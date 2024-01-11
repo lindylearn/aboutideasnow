@@ -1,0 +1,42 @@
+name: 🚀 Deploy
+
+on:
+    push:
+        branches:
+            - master
+            - main
+
+permissions:
+    contents: read
+
+env:
+    FLYCTL_VERSION: 0.0.500
+
+jobs:
+    changes:
+        runs-on: ubuntu-latest
+        outputs:
+            api: ${{ steps.changes.outputs.api }}
+        steps:
+            - uses: actions/checkout@v4
+            - uses: dorny/paths-filter@v2
+              id: changes
+              with:
+                  filters: |
+                      api:
+                        - 'packages/core/**'
+                        - 'apps/api/**'
+                        - '.github/**'
+
+    api:
+        needs: changes
+        if: ${{ needs.changes.outputs.api == 'true' }}
+        runs-on: ubuntu-latest
+        env:
+            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        steps:
+            - uses: actions/checkout@v4
+            - uses: superfly/flyctl-actions@master
+              with:
+                  args: deploy --config apps/api/fly.toml .
+                  version: $FLYCTL_VERSION

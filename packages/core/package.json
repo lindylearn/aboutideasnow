@@ -1,0 +1,23 @@
+{
+    "name": "@repo/core",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "scripts": {
+        "postinstall": "pnpm generate",
+        "dev": "tsc -w",
+        "build": "tsc",
+        "generate": "prisma generate",
+        "migrate": "yarn prisma migrate dev --name"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@prisma/client": "^5.8.0",
+        "prisma": "^5.8.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.3.3"
+    }
+}

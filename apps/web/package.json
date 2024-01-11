@@ -1,0 +1,37 @@
+{
+    "name": "web",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "vite dev --port 7100",
+        "build": "vite build",
+        "preview": "vite preview",
+        "test": "playwright test",
+        "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+        "lint": "prettier --plugin-search-dir . --check .",
+        "format": "prettier --plugin-search-dir . --write ."
+    },
+    "dependencies": {
+        "@repo/core": "workspace:*"
+    },
+    "devDependencies": {
+        "@csstools/postcss-oklab-function": "^3.0.3",
+        "@playwright/test": "^1.28.1",
+        "@sveltejs/adapter-auto": "^2.0.0",
+        "@sveltejs/adapter-vercel": "^4.0.4",
+        "@sveltejs/kit": "^1.20.4",
+        "autoprefixer": "^10.4.15",
+        "postcss": "^8.4.29",
+        "prettier": "^3.0.3",
+        "prettier-plugin-svelte": "^2.10.1",
+        "prettier-plugin-tailwindcss": "^0.5.4",
+        "svelte": "^4.0.5",
+        "svelte-check": "^3.4.3",
+        "tailwindcss": "^3.3.3",
+        "tslib": "^2.4.1",
+        "typescript": "^5.0.0",
+        "vite": "^4.4.2"
+    },
+    "type": "module"
+}
