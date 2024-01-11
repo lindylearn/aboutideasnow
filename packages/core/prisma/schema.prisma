@@ -34,5 +34,6 @@ model ScrapeState {
 enum ScrapeStatus {
     UNAVAILABLE
     NO_CONTENT
+    REDIRECTED
     SCRAPED
 }

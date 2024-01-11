@@ -48,6 +48,19 @@ router.addHandler("document", async ({ $, request, log }) => {
     log.info(`scraping content: ${url}`);
 
     if (url !== originalUrl) {
+        // Save redirect state for original url
+        const originalDomain = getDomain(originalUrl);
+        const scrapeState = {
+            domain: originalDomain,
+            status: ScrapeStatus.REDIRECTED,
+            scapedAt: new Date()
+        };
+        await db.scrapeState.upsert({
+            where: { domain: originalDomain },
+            create: scrapeState,
+            update: scrapeState
+        });
+
         // Skip if new page doesn't end with /now
         if (!/\/now\/?$/.test(url)) {
             console.log("\tredirected to non-now page");
