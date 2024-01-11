@@ -9,10 +9,29 @@ datasource db {
 }
 
 model Post {
-    domain String @id
+    domain String   @id
     url    String
+    type   PostType
 
     content    String
     updatedAt  DateTime?
     authorName String?
+}
+
+enum PostType {
+    NOW
+    IDEAS
+}
+
+model ScrapeState {
+    domain String @id
+
+    status   ScrapeStatus
+    scapedAt DateTime?
+}
+
+enum ScrapeStatus {
+    UNAVAILABLE
+    NO_CONTENT
+    SCRAPED
 }

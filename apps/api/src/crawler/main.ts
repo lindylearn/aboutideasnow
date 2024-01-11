@@ -10,6 +10,9 @@ import {
 import { MemoryStorage } from "@crawlee/memory-storage";
 import { router } from "./routes.js";
 import normalizeUrl from "normalize-url";
+import { db } from "../common/db.js";
+import { getDomain } from "../common/meta.js";
+import { ScrapeStatus } from "@repo/core/generated/prisma-client";
 
 export async function runCrawler() {
     // Seed URLs
@@ -48,9 +51,19 @@ export async function runCrawler() {
             requestHandler: router,
             failedRequestHandler: async ({ request }) => {
                 const url = normalizeUrl(request.url);
+                const domain = getDomain(url);
 
                 console.log(`Failed to crawl ${url}`);
-                // TODO save crawl exclude
+                const scrapeState = {
+                    domain,
+                    status: ScrapeStatus.UNAVAILABLE,
+                    scapedAt: new Date()
+                };
+                await db.scrapeState.upsert({
+                    where: { domain },
+                    create: scrapeState,
+                    update: scrapeState
+                });
             }
         },
         new Configuration({

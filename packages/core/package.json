@@ -2,7 +2,10 @@
     "name": "@repo/core",
     "version": "1.0.0",
     "description": "",
-    "main": "dist/index.js",
+    "exports": {
+        ".": "./dist/index.js",
+        "./generated/prisma-client": "./generated/prisma-client/index.js"
+    },
     "scripts": {
         "postinstall": "pnpm generate",
         "dev": "tsc -w",

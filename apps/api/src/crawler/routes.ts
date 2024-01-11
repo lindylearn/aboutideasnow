@@ -1,10 +1,9 @@
 import { createCheerioRouter } from "crawlee";
-import { getMeta } from "../common/meta.js";
+import { getDomain, getMeta } from "../common/meta.js";
 import normalizeUrl from "normalize-url";
 import { getPageContent } from "../common/content.js";
-import { getDatabaseClient } from "@repo/core";
-
-const db = getDatabaseClient();
+import { PostType, ScrapeStatus } from "@repo/core/generated/prisma-client";
+import { db } from "../common/db.js";
 
 export const router = createCheerioRouter();
 
@@ -36,18 +35,42 @@ router.addHandler("document", async ({ $, request, log }) => {
     if (!content || wordCount < 200) {
         // save crawl exclude
         log.info("\ttoo_short");
-        log.info(content!);
+        const scrapeState = {
+            domain: meta.domain,
+            status: ScrapeStatus.NO_CONTENT,
+            scapedAt: new Date()
+        };
+        await db.scrapeState.upsert({
+            where: { domain: meta.domain },
+            create: scrapeState,
+            update: scrapeState
+        });
         return;
     }
 
-    // store results
+    // Store post
     log.info("\tsuccess");
+    const post = {
+        domain: meta.domain,
+        url,
+        type: PostType.NOW,
+        content
+    };
+    await db.post.upsert({
+        where: { domain: meta.domain },
+        create: post,
+        update: post
+    });
 
-    await db.post.create({
-        data: {
-            domain: meta.domain,
-            url,
-            content
-        }
+    // Save scrape success
+    const scrapeState = {
+        domain: meta.domain,
+        status: ScrapeStatus.SCRAPED,
+        scapedAt: new Date()
+    };
+    await db.scrapeState.upsert({
+        where: { domain: meta.domain },
+        create: scrapeState,
+        update: scrapeState
     });
 });
