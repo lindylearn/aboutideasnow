@@ -3,7 +3,11 @@
     export let post: Post;
 </script>
 
-<a href={post.url} class="flex flex-col w-full h-full p-4 bg-white rounded-md" target="_blank">
+<a
+    href={post.url}
+    class="flex flex-col w-full h-full p-4 bg-white rounded-md transition-all hover:shadow-lg"
+    target="_blank"
+>
     <div class="flex mb-4 align-center">
         <img
             alt={post.domain}
@@ -14,7 +18,7 @@
             <h2 class="font-bold">{post.domain}</h2>
         </div>
     </div>
-    <div class="mb-2">{post.content.substring(0, 300)}</div>
+    <div class="mb-2 whitespace-pre-wrap line-clamp-6">{post.content}</div>
     <div class="flex">
         {#if post.type === "NOW"}
             <div class="w-auto px-2 py-1 text-sm text-white bg-gray-300 rounded-md">/now</div>
