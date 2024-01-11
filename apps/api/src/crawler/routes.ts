@@ -48,15 +48,18 @@ router.addHandler("document", async ({ $, request, log }) => {
     log.info(`scraping content: ${url}`);
 
     if (url !== originalUrl) {
-        // TODO save url redirect
-        console.log("\tgot redirected");
+        // Skip if new page doesn't end with /now
+        if (!/\/now\/?$/.test(url)) {
+            console.log("\tredirected to non-now page");
+            return;
+        }
     }
 
     // Extract content
     const meta = await getMeta(url, $.html());
     const title = $("title").text();
     const content = await getPageContent(url, $.html());
-    console.log(content);
+    // console.log(content);
 
     if (!content || isExcludedPage(title, content)) {
         // save crawl exclude
@@ -81,7 +84,7 @@ router.addHandler("document", async ({ $, request, log }) => {
         url,
         type: PostType.NOW,
         content,
-        updatedAt: meta.date?.toString().slice(0, 10) || "1970-01-01"
+        updatedAt: meta.date || new Date("1970-01-01")
     };
     await db.post.upsert({
         where: { domain: meta.domain },
