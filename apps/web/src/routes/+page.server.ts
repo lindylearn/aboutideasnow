@@ -5,8 +5,7 @@ export async function load() {
 
     const posts = await db.post.findMany({
         orderBy: {
-            // updatedAt: "desc",
-            domain: "asc"
+            updatedAt: "desc"
         }
     });
 

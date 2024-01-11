@@ -12,7 +12,8 @@ export async function getPageContent(url: string, html: string) {
         return;
     }
 
-    // console.log(article.content);
+    // console.log(html);
+    // console.log(document.body.innerText);
 
     // Convert to Markdown
     return new TurndownService()

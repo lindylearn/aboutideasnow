@@ -80,7 +80,8 @@ router.addHandler("document", async ({ $, request, log }) => {
         domain: meta.domain,
         url,
         type: PostType.NOW,
-        content
+        content,
+        updatedAt: meta.date?.toString().slice(0, 10) || "1970-01-01"
     };
     await db.post.upsert({
         where: { domain: meta.domain },

@@ -6,8 +6,12 @@ export function isExcludedPage(title: string, content?: string) {
     }
 
     // Check words in title
-    const wordBlocklist = ["404", "not found"];
-    if (wordBlocklist.some((w) => title.toLowerCase().includes(w))) {
+    const wordBlocklist = ["404", "page not found", "couldn't find the page"];
+    if (
+        wordBlocklist.some(
+            (w) => title.toLowerCase().includes(w) || content.toLowerCase().includes(w)
+        )
+    ) {
         return true;
     }
 }

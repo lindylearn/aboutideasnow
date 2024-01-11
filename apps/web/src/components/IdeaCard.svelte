@@ -27,5 +27,14 @@
             </div>
         </div>
     </div>
-    <div class="mb-2 whitespace-pre-wrap line-clamp-6">{post.content}</div>
+    <div class="mb-2 whitespace-pre-wrap line-clamp-[10]">{post.content}</div>
+    {#if post.updatedAt}
+        <div class="font-bold">
+            {new Intl.DateTimeFormat("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            }).format(post.updatedAt)}
+        </div>
+    {/if}
 </a>
