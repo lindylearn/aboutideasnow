@@ -22,6 +22,7 @@
         "metascraper": "^5.43.2",
         "metascraper-date": "^5.43.1",
         "normalize-url": "^8.0.0",
+        "openai": "^4.24.3",
         "turndown": "^7.1.2"
     },
     "devDependencies": {

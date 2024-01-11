@@ -69,9 +69,11 @@ router.addHandler("document", async ({ $, request, log }) => {
     }
 
     // Extract content
-    const meta = await getMeta(url, $.html());
+
     const title = $("title").text();
-    const content = await getPageContent(url, $.html());
+    const html = $.html();
+    const content = await getPageContent(url, html);
+    const meta = await getMeta(url, html, content);
 
     console.log(content);
     console.log(meta.date);
