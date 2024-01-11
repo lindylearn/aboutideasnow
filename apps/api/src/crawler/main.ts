@@ -42,7 +42,7 @@ export async function runCrawler() {
             // additionalHttpErrorStatusCodes: [403, 444, 503],
 
             minConcurrency: 1,
-            maxConcurrency: 1,
+            maxConcurrency: 5,
             retryOnBlocked: false,
             maxRequestRetries: 1,
             maxRequestsPerMinute: 100,

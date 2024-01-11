@@ -1,3 +1,3 @@
-import { getDatabaseClient } from "@repo/core";
+import { getDatabaseClient } from "@repo/core/dist";
 
 export const db = getDatabaseClient();
