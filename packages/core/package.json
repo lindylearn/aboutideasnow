@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "exports": {
-        ".": "./dist/index.js",
+        "./dist": "./dist/index.js",
         "./generated/prisma-client": "./generated/prisma-client/index.js"
     },
     "scripts": {
