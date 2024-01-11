@@ -56,6 +56,7 @@ router.addHandler("document", async ({ $, request, log }) => {
     const meta = await getMeta(url, $.html());
     const title = $("title").text();
     const content = await getPageContent(url, $.html());
+    console.log(content);
 
     if (!content || isExcludedPage(title, content)) {
         // save crawl exclude

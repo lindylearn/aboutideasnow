@@ -12,6 +12,21 @@ export async function getPageContent(url: string, html: string) {
         return;
     }
 
+    // console.log(article.content);
+
     // Convert to Markdown
-    return new TurndownService().turndown(article.content);
+    return new TurndownService()
+        .addRule("remove-tags", {
+            filter: ["figure", "img"],
+            replacement: function () {
+                return "";
+            }
+        })
+        .addRule("unwrap-links", {
+            filter: ["a"],
+            replacement: function (content) {
+                return content;
+            }
+        })
+        .turndown(article.content);
 }
