@@ -74,7 +74,7 @@ router.addHandler("document", async ({ $, request, log }) => {
     const content = await getPageContent(url, $.html());
     // console.log(content);
 
-    if (!content || isExcludedPage(title, content)) {
+    if (!content || isExcludedPage(meta.domain, title, content)) {
         // save crawl exclude
         log.info("\texcluding page");
         const scrapeState = {
@@ -87,6 +87,12 @@ router.addHandler("document", async ({ $, request, log }) => {
             create: scrapeState,
             update: scrapeState
         });
+
+        // Delete post if exists
+        try {
+            await db.post.delete({ where: { domain: meta.domain } });
+        } catch {}
+
         return;
     }
 
