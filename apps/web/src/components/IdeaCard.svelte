@@ -5,7 +5,7 @@
 
 <a
     href={post.url}
-    class="flex flex-col w-full h-full p-4 bg-white rounded-md transition-all hover:shadow-lg"
+    class="flex flex-col w-full h-full p-4 bg-light transition-all font-mono"
     target="_blank"
 >
     <div class="flex mb-4 align-center">
@@ -15,7 +15,7 @@
             src="https://www.google.com/s2/favicons?sz=256&domain_url={post.domain}"
         />
         <div class="flex flex-row justify-center items-center gap-2">
-            <h2 class="font-bold">
+            <h2 class="font-title font-bold">
                 {post.domain}
             </h2>
             <div class="flex">

@@ -6,12 +6,14 @@ export default {
     theme: {
         extend: {
             colors: {
-                background: "rgb(241 245 249)",
-                text: "#333333"
+                background: "#f4eedc",
+                light: "white",
+                text: "#351e30"
             },
             fontFamily: {
-                text: ["Karla", "sans-serif"],
-                title: ["Young Serif", "serif"]
+                title: ["Apercu", "serif"],
+                text: ["Apercu", "sans-serif"],
+                mono: ["PT Mono", "monospace"]
             },
             keyframes: {
                 fadein: {
