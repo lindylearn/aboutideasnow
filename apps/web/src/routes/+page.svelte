@@ -14,7 +14,7 @@
     </header>
     <main class="text-center max-w-2xl flex flex-col gap-4">
         <div class="h-32 mx-auto">
-            <img class="h-full" src="/typewriter.png" />
+            <img class="h-full" src="/telephone.png" />
         </div>
 
         <!-- <p>
@@ -24,7 +24,7 @@
         </p> -->
         <p>
             Add a /now page to your website with what you're doing now, and /ideas with what you
-            want to do. Then check this website to find people like you.
+            want to do. Then use this website to find people like you.
         </p>
     </main>
     <div class="flex gap-2 justify-center">
