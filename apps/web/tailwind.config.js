@@ -8,11 +8,12 @@ export default {
             colors: {
                 background: "#f4eedc",
                 light: "white",
+                bold: "#ffb200",
                 text: "#351e30"
             },
             fontFamily: {
-                title: ["Apercu", "serif"],
-                text: ["Apercu", "sans-serif"],
+                title: ["", "serif"],
+                text: ["", "sans-serif"],
                 mono: ["PT Mono", "monospace"]
             },
             keyframes: {

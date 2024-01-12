@@ -20,9 +20,7 @@
             </h2>
             <div class="flex">
                 {#if post.type === "NOW"}
-                    <div class="w-auto px-2 py-1 text-sm text-white bg-gray-300 rounded-md">
-                        /now
-                    </div>
+                    <div class="w-auto px-2 py-1 text-sm text-white bg-text rounded-md">/now</div>
                 {/if}
             </div>
         </div>
