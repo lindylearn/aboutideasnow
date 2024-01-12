@@ -5,7 +5,10 @@ export default {
     plugins: [],
     theme: {
         extend: {
-            colors: {},
+            colors: {
+                background: "rgb(241 245 249)",
+                text: "#333333"
+            },
             fontFamily: {
                 text: ["Karla", "sans-serif"],
                 title: ["Young Serif", "serif"]
