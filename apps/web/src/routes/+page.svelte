@@ -4,7 +4,7 @@
     export let data: PageData;
 </script>
 
-<main class="flex flex-col items-center gap-3 md:gap-10">
+<main class="flex flex-col items-center gap-3 md:gap-7">
     <header class="flex flex-col justify-center items-center h-auto align-center">
         <h1 class="mr-2 text-5xl font-title font-bold">
             <span class="">ideas</span> <span class="">ideas</span>
@@ -12,10 +12,10 @@
         </h1>
         <h2 class="text-lg font-bold">1000s of ideas, 1000s of people to talk to</h2>
     </header>
-    <main class="text-center max-w-2xl flex flex-col gap-4">
-        <div class="h-32 mx-auto">
+    <main class="text-center max-w-xl flex flex-col gap-4">
+        <!-- <div class="h-32 mx-auto">
             <img class="h-full" src="/telephone.png" />
-        </div>
+        </div> -->
 
         <!-- <p>
             The internet can feel lonely if you're doing your own thing and are not really posting
