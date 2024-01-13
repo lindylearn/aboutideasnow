@@ -9,10 +9,6 @@ LABEL fly_launch_runtime="Node.js/Prisma"
 # Node.js/Prisma app lives here
 WORKDIR /app
 
-# Set production environment
-ENV NODE_ENV="production"
-
-
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
@@ -27,18 +23,17 @@ COPY --link . .
 RUN npm install -g pnpm turbo
 
 # Install dependencies
-RUN turbo prune @repo/api --docker
 RUN pnpm install --frozen-lockfile
 
 # Build application
 RUN pnpm build --filter=@repo/api
 
 # Remove development dependencies
-RUN pnpm install --prod
-
+RUN pnpm install --prod --frozen-lockfile
 
 # Final stage for app image
 FROM base
+ENV NODE_ENV="production"
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
