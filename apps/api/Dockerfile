@@ -27,11 +27,11 @@ COPY --link . .
 RUN npm install -g pnpm turbo
 
 # Install dependencies
-RUN turbo prune api --docker
+RUN turbo prune @repo/api --docker
 RUN pnpm install --frozen-lockfile
 
 # Build application
-RUN pnpm build --filter=/apps/api
+RUN pnpm build --filter=@repo/api
 
 # Remove development dependencies
 RUN pnpm install --prod
