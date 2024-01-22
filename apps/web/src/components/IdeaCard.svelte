@@ -34,8 +34,13 @@
             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
         </div>
     </div>
-    <div class="bg-light text-sm p-4 whitespace-pre-wrap line-clamp-[10]">
-        {post.content}
+    <div class="bg-light text-sm px-4 pt-4 whitespace-pre-wrap line-clamp-[10]">
+        <div class="relative">
+            {post.content}
+            <div
+                class="absolute bottom-0 w-full h-16 pointer-events-none bg-gradient-to-t from-white via-white via-30%"
+            ></div>
+        </div>
     </div>
 
     {#if post.updatedAt && post.updatedAt.getFullYear() !== 1970}
