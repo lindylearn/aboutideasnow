@@ -49,14 +49,16 @@
     </div>
     <footer>
         <p>
-            Made by <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>
+            Made with 💡 by <a class="font-bold" href="https://lindylearn.io" target="_blank"
+                >Peter Hagen</a
+            >
             and
-            <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>.
-            Contribute
+            <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>.
+            Contribute on
             <a
                 class="font-bold"
                 href="https://github.com/lindylearn/ideasideasideas"
-                target="_blank">on GitHub</a
+                target="_blank">GitHub</a
             > to add your name here!
         </p>
     </footer>
