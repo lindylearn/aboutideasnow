@@ -38,36 +38,37 @@
     </main>
 
     <div class="text-center">
-        {#if isAddingDomain}
-            Indexing your domain...
-        {:else if form?.addedDomain === false}
+        {#if form?.addedDomain === false}
             Error indexing your domain :(<br />We will take a look and add your site as soon as
             possible!
-        {:else if form?.scrapedPosts?.length}
-            Indexed your website successfully! Found posts:
-            <ul class="list-disc">
-                {#each form.scrapedPosts as post}
-                    <li>
-                        {post.url}
-                        last updated at {new Intl.DateTimeFormat("en-US", {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric"
-                        }).format(new Date(post.updatedAt))}
-                    </li>
-                {/each}
-            </ul>
+        {:else if form?.scrapedPosts}
+            {#if form?.scrapedPosts.length === 0}
+                We didn't find a /now, /about, or /ideas page on your website. Add one and try
+                again!
+            {:else}
+                Indexed your website successfully! Found posts:
+                <ul class="list-disc">
+                    {#each form.scrapedPosts as post}
+                        <li>
+                            {post.url}
+                            last updated at {new Intl.DateTimeFormat("en-US", {
+                                month: "long",
+                                day: "numeric",
+                                year: "numeric"
+                            }).format(new Date(post.updatedAt))}
+                        </li>
+                    {/each}
+                </ul>
+            {/if}
+        {:else if isAddingDomain}
+            Indexing your domain...
         {:else}
             <form
                 class="flex flex-col justify-center w-full gap-2 mb-4 md:gap-4 md:flex-row"
                 method="POST"
                 use:enhance={() => {
-                    // add loading state
+                    // Show loading state until page data is reloaded
                     isAddingDomain = true;
-                    return async ({ update }) => {
-                        isAddingDomain = false;
-                        update();
-                    };
                 }}
             >
                 <input
