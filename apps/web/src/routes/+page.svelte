@@ -1,7 +1,12 @@
 <script lang="ts">
+    import { enhance } from "$app/forms";
     import IdeaCard from "../components/IdeaCard.svelte";
-    import type { PageData } from "./$types";
+    import type { PageData, ActionData } from "./$types";
+
     export let data: PageData;
+    export let form: ActionData;
+
+    let isAddingDomain = false;
     let colorPalette = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
 </script>
 
@@ -31,19 +36,57 @@
             do. Then use this website to find people like you.
         </p>
     </main>
-    <div class="flex flex-col justify-center w-full gap-2 mb-4 md:gap-4 md:flex-row">
-        <input
-            class="w-full px-3 py-2 text-lg text-center rounded-md shadow-sm md:w-auto md:text-left"
-            placeholder="mywebsite.com"
-        />
-        <button class="w-full h-auto px-3 py-2 text-white rounded-md md:w-auto bg-text">
-            Find people like me
-        </button>
+
+    <div class="text-center">
+        {#if isAddingDomain}
+            Indexing your domain...
+        {:else if form?.addedDomain === false}
+            Error indexing your domain :(<br />We will take a look and add your site as soon as
+            possible!
+        {:else if form?.scrapedPosts?.length}
+            Indexed your website successfully! Found posts:
+            <ul class="list-disc">
+                {#each form.scrapedPosts as post}
+                    <li>
+                        {post.url}
+                        last updated at {new Intl.DateTimeFormat("en-US", {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric"
+                        }).format(new Date(post.updatedAt))}
+                    </li>
+                {/each}
+            </ul>
+        {:else}
+            <form
+                class="flex flex-col justify-center w-full gap-2 mb-4 md:gap-4 md:flex-row"
+                method="POST"
+                use:enhance={() => {
+                    // add loading state
+                    isAddingDomain = true;
+                    return async ({ update }) => {
+                        isAddingDomain = false;
+                        update();
+                    };
+                }}
+            >
+                <input
+                    class="w-full px-3 py-2 text-lg text-center rounded-md shadow-sm md:w-auto md:text-left"
+                    placeholder="mywebsite.com"
+                    name="domain"
+                    required
+                />
+                <button class="w-full h-auto px-3 py-2 text-white rounded-md md:w-auto bg-text">
+                    Add my website
+                </button>
+            </form>
+        {/if}
     </div>
+
     <div
         class="flex flex-col items-center justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
     >
-        {#each data.posts.slice(0, 100) as post, index}
+        {#each data.posts as post, index}
             <IdeaCard {post} color={colorPalette[index % colorPalette.length]}></IdeaCard>
         {/each}
     </div>

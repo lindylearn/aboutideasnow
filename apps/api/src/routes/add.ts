@@ -33,7 +33,7 @@ export async function addDomain(req: Request, res: Response) {
         where: { domain }
     });
 
-    return res.json({ message: "Success", posts });
+    return res.json(posts);
 }
 
 function parseUrl(req: Request) {
@@ -41,6 +41,16 @@ function parseUrl(req: Request) {
 
     if (!url?.startsWith("http")) {
         url = `https://${url}`;
+    }
+
+    // Validate url
+    if (!url.includes(".")) {
+        return;
+    }
+    try {
+        new URL(url);
+    } catch (error) {
+        return;
     }
 
     return url;
