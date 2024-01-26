@@ -27,8 +27,14 @@ model ScrapeState {
     domain String  @id
     url    String?
 
-    status   ScrapeStatus
-    scapedAt DateTime?
+    domainType DomainType   @default(INDIVIDUAL_SITE)
+    status     ScrapeStatus
+    scapedAt   DateTime?
+}
+
+enum DomainType {
+    INDIVIDUAL_SITE
+    DIRECTORY
 }
 
 enum ScrapeStatus {

@@ -8,6 +8,7 @@ import { isExcludedPage } from "../common/filter.js";
 
 export const router = createCheerioRouter();
 
+// Scrape a directory of links
 router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
     const url = request.loadedUrl!;
     const domain = getDomain(url);
@@ -25,21 +26,16 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
         .map((url) => url.toString());
     const nowLinks = links.filter((link) => link.endsWith("/now"));
 
-    // Exclude already scraped links
+    // Exclude already checked links
+    const excludedDomains = new Set();
     const scrapeStates = await db.scrapeState.findMany({
         where: { domain: { in: nowLinks.map(getDomain) } }
     });
-    const existingPosts = await db.post.findMany({
-        where: { domain: { in: nowLinks.map(getDomain) } }
-    });
-
-    const scrapedDomains = new Set();
     scrapeStates
-        .filter((s) => s.status !== ScrapeStatus.SCRAPED)
-        .forEach((s) => scrapedDomains.add(s.domain));
-    existingPosts.forEach((p) => scrapedDomains.add(p.domain));
+        // .filter((s) => s.status === ScrapeStatus.SCRAPED)
+        .forEach((s) => excludedDomains.add(s.domain));
 
-    const newLinks = nowLinks.filter((link) => !scrapedDomains.has(getDomain(link)));
+    const newLinks = nowLinks.filter((link) => !excludedDomains.has(getDomain(link)));
     console.log(`Found ${newLinks.length} new links`);
 
     await enqueueLinks({
@@ -49,10 +45,10 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
     });
 });
 
+// Scrape an individual page
 router.addHandler("document", async ({ $, request, log }) => {
     const originalUrl = normalizeUrl(request.url);
     const url = normalizeUrl(request.loadedUrl || request.url);
-    log.info(`scraping content: ${url}`);
 
     if (url !== originalUrl) {
         // Save redirect state for original url
@@ -70,20 +66,22 @@ router.addHandler("document", async ({ $, request, log }) => {
 
         // Skip if new page doesn't end with /now
         if (!/\/now\/?$/.test(url)) {
-            console.log("\tredirected to non-now page");
+            log.info(`${originalUrl} redirected to non-now page`);
             return;
         }
     }
 
     // Extract content
-
     const title = $("title").text();
     const html = $.html();
     const content = await getPageContent(url, html);
+    const wordCount = content?.split(/\s+/).length || 0;
     const meta = await getMeta(url, html, content);
 
-    console.log(content);
-    console.log(meta.date);
+    // Log debug stats
+    log.info(`scraped ${url}:`);
+    log.info(`\twords: ${wordCount}`);
+    log.info(`\tdate: ${meta.date?.toISOString().slice(0, 10)}`);
 
     if (!content || isExcludedPage(meta.domain, title, content)) {
         // save crawl exclude
@@ -107,8 +105,10 @@ router.addHandler("document", async ({ $, request, log }) => {
         return;
     }
 
+    // Print newline
+    log.info(``);
+
     // Store post
-    log.info("\tsuccess");
     const post = {
         domain: meta.domain,
         url,

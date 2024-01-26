@@ -14,21 +14,18 @@ import { db } from "../common/db.js";
 import { getDomain } from "../common/meta.js";
 import { ScrapeStatus } from "@repo/core/generated/prisma-client";
 
-export async function runCrawler(directoryUrl?: string, documentUrl?: string) {
+export async function runCrawler(directoryUrls: string[], documentUrls: string[]) {
     // Seed URLs
-    const crawlerQueue: RequestOptions[] = [];
-    if (directoryUrl) {
-        crawlerQueue.push({
-            url: directoryUrl,
+    const crawlerQueue: RequestOptions[] = [
+        ...directoryUrls.map((url) => ({
+            url,
             label: "directory"
-        });
-    }
-    if (documentUrl) {
-        crawlerQueue.push({
-            url: documentUrl,
+        })),
+        ...documentUrls.map((url) => ({
+            url,
             label: "document"
-        });
-    }
+        }))
+    ];
 
     // Run crawler
     // const proxyConfiguration = new ProxyConfiguration({
