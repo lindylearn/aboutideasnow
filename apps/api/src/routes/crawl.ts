@@ -3,7 +3,7 @@ import { runCrawler } from "../crawler/main.js";
 import { db } from "../common/db.js";
 
 export async function periodicCrawl(req: Request, res: Response) {
-    const limit = parseInt(req.query.limit as string) || 100;
+    const limit = parseInt(req.query.limit as string) || 10_000;
 
     // Re-scrape all previously scraped documents
     const scrapeStates = await db.scrapeState.findMany({
