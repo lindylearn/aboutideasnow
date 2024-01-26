@@ -35,7 +35,7 @@
             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
         </div>
     </div>
-    <div class="bg-light text-sm px-4 pt-4 whitespace-pre-wrap line-clamp-[16] rounded-b-md">
+    <div class="bg-light text-sm px-4 pt-4 whitespace-pre-wrap line-clamp-[16] rounded-b-md grow">
         <div class="relative">
             {#if post.updatedAt}
                 Updated {new Intl.DateTimeFormat("en-US", {
