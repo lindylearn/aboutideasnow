@@ -16,6 +16,10 @@ export async function getMeta(url: string, html: string, content?: string) {
     // Use GPT date parse by default as it's the most reliable
     if (content) {
         date = await findDateUsingGPT(content.slice(0, 2000));
+        // Don't trust future dates, e.g. on https://kunalmarwaha.com/now
+        if (date && date.toISOString().slice(0, 10) >= new Date().toISOString().slice(0, 10)) {
+            date = undefined;
+        }
     }
 
     if (!date) {
