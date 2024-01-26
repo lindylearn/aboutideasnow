@@ -18,7 +18,8 @@ export async function periodicCrawl(req: Request, res: Response) {
         .filter((s) => s.domainType === "INDIVIDUAL_SITE")
         .map((s) => `https://${s.domain}/now`);
 
-    await runCrawler(directories, documents);
+    // Don't await response
+    runCrawler(directories, documents);
 
     return res.json({ message: "Pending" });
 }
