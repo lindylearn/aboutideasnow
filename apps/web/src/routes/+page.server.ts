@@ -30,7 +30,8 @@ export async function load() {
     const posts = await db.post.findMany({
         orderBy: {
             updatedAt: "desc"
-        }
+        },
+        take: 100
     });
 
     return { posts };

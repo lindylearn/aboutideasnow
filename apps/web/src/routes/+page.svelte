@@ -12,28 +12,25 @@
 
 <main class="flex flex-col items-center gap-3 md:gap-7">
     <header class="flex flex-col items-center justify-center h-auto">
-        <h1 class="mb-4 mr-2 text-4xl font-bold leading-relaxed text-center md:text-5xl font-title">
-            <span style="background-color: {colorPalette[2]}" class="px-2 rounded-md">ideas</span>
-            <span style="background-color: {colorPalette[3]}" class="px-2 rounded-md">ideas</span>
+        <h1 class="text-4xl font-bold leading-relaxed text-center md:text-5xl font-title">
+            <span style="background-color: {colorPalette[2]}" class="px-2 rounded-md">about</span>
+            <span style="background-color: {colorPalette[3]}" class="px-2 rounded-md">now</span>
             <span style="background-color: {colorPalette[4]}" class="px-2 rounded-md">ideas</span>
         </h1>
-        <h2 class="font-bold text-center md:text-lg">1000s of ideas, 1000s of people to talk to</h2>
+        <!-- <h2 class="font-bold text-center md:text-lg">index of personal websites</h2> -->
     </header>
-    <main class="flex flex-col max-w-xl mt-8 text-center">
-        <!-- <div class="h-32 mx-auto">
-            <img class="h-full" src="/telephone.png" />
-        </div> -->
 
-        <!-- <p>
-            The internet can feel lonely if you're doing your own thing and are not really posting
-            on social media. But 1000s of people are thinking and writing about the same things as
-            you.
-        </p> -->
+    <main class="flex flex-col max-w-xl text-center gap-3">
         <p>
-            Add a <span class="px-2 py-1 text-sm rounded-md bg-slate-300">/now</span> page to your
-            website with what you're doing now, and
-            <span class="px-2 py-1 text-sm bg-blue-300 rounded-md">/ideas</span> with what you want to
-            do. Then use this website to find people like you.
+            Social networks are not good at creating authentic human connections.
+            <br />
+            But how can you find people on the internet without them?
+        </p>
+        <p>It's simple — create your own website and browse other people's websites.</p>
+        <p>
+            aboutnowideas.com helps with that by letting you search the /about, /now, and /ideas
+            pages of people's personal websites. <a class="font-bold" href="/">Read our manifesto</a
+            >
         </p>
     </main>
 
@@ -84,6 +81,18 @@
         {/if}
     </div>
 
+    <div class="w-full flex gap-2">
+        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">{data.posts.length} posts</button>
+        <input
+            class="grow px-3 py-2 text-lg text-center rounded-md shadow-sm md:w-auto md:text-left"
+            placeholder="Search for anything that people are doing"
+        />
+
+        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All posts</button>
+        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All languages</button>
+        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All time</button>
+    </div>
+
     <div
         class="flex flex-col items-center justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
     >
@@ -93,17 +102,19 @@
     </div>
     <footer>
         <p>
-            Made with 💡 by <a class="font-bold" href="https://lindylearn.io" target="_blank"
-                >Peter Hagen</a
-            >
+            Made with 💡 by
+            <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>
             and
             <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>.
             Contribute on
             <a
                 class="font-bold"
                 href="https://github.com/lindylearn/ideasideasideas"
-                target="_blank">GitHub</a
-            > to add your name here!
+                target="_blank"
+            >
+                GitHub
+            </a>
+            to add your name here!
         </p>
     </footer>
 </main>
