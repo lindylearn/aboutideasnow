@@ -20,20 +20,27 @@
         <!-- <h2 class="font-bold text-center md:text-lg">index of personal websites</h2> -->
     </header>
 
-    <main class="flex flex-col max-w-xl text-center gap-3">
-        <p>
+    <main class="flex flex-col max-w-xl text-center text-lg items-center gap-3">
+        <!-- <p>
             Social media is not good at creating authentic human connections.
             <br />
             But how can you find people on the internet without it?
-        </p>
-        <p>It's simple — create your personal website and browse other people's websites.</p>
+        </p> -->
+        <!-- <p>Browsing personal websites is the best way to get to know people on the internet.</p> -->
         <p>
-            aboutnowideas.com lets you search the /about, /now, and /ideas pages of other people's
-            personal websites. <a class="font-bold" href="/">Read our manifesto</a>
+            Find people to talk to or collaborate with by searching across the
+            <span class="px-2 py-1 text-sm rounded-md bg-slate-300">/about</span>
+            <span class="px-2 py-1 text-sm rounded-md bg-slate-300">/now</span> and
+            <span class="px-2 py-1 text-sm rounded-md bg-slate-300">/ideas</span>
+            pages of 1000s of personal websites.
         </p>
     </main>
 
-    <div class="text-center">
+    <a class="w-max px-3 py-2 text-white rounded-md bg-text" href="/manifesto">
+        Read the /ideas manifesto
+    </a>
+
+    <!-- <div class="text-center">
         {#if form?.addedDomain === false}
             Error indexing your domain :(<br />We will take a look and add your site as soon as
             possible!
@@ -78,9 +85,9 @@
                 </button>
             </form>
         {/if}
-    </div>
+    </div> -->
 
-    <div class="w-full flex gap-2">
+    <div class="w-full flex gap-2 mt-5">
         <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">{data.posts.length} posts</button>
         <input
             class="grow px-3 py-2 text-lg text-center rounded-md shadow-sm md:w-auto md:text-left"
