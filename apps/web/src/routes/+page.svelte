@@ -22,15 +22,14 @@
 
     <main class="flex flex-col max-w-xl text-center gap-3">
         <p>
-            Social networks are not good at creating authentic human connections.
+            Social media is not good at creating authentic human connections.
             <br />
-            But how can you find people on the internet without them?
+            But how can you find people on the internet without it?
         </p>
-        <p>It's simple — create your own website and browse other people's websites.</p>
+        <p>It's simple — create your personal website and browse other people's websites.</p>
         <p>
-            aboutnowideas.com helps with that by letting you search the /about, /now, and /ideas
-            pages of people's personal websites. <a class="font-bold" href="/">Read our manifesto</a
-            >
+            aboutnowideas.com lets you search the /about, /now, and /ideas pages of other people's
+            personal websites. <a class="font-bold" href="/">Read our manifesto</a>
         </p>
     </main>
 
