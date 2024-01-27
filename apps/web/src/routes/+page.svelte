@@ -14,8 +14,8 @@
     <header class="flex flex-col items-center justify-center h-auto">
         <h1 class="text-4xl font-bold leading-relaxed text-center md:text-5xl font-title">
             <span style="background-color: {colorPalette[2]}" class="px-2 rounded-md">about</span>
-            <span style="background-color: {colorPalette[3]}" class="px-2 rounded-md">now</span>
-            <span style="background-color: {colorPalette[4]}" class="px-2 rounded-md">ideas</span>
+            <span style="background-color: {colorPalette[3]}" class="px-2 rounded-md">ideas</span>
+            <span style="background-color: {colorPalette[4]}" class="px-2 rounded-md">now</span>
         </h1>
         <!-- <h2 class="font-bold text-center md:text-lg">index of personal websites</h2> -->
     </header>
@@ -30,8 +30,8 @@
         <p>
             Find people to talk to or collaborate with by searching across the
             <span class="px-2 py-1 text-sm rounded-md bg-slate-300">/about</span>
-            <span class="px-2 py-1 text-sm rounded-md bg-slate-300">/now</span> and
-            <span class="px-2 py-1 text-sm rounded-md bg-slate-300">/ideas</span>
+            <span class="px-2 py-1 text-sm rounded-md bg-slate-300">/ideas</span> and
+            <span class="px-2 py-1 text-sm rounded-md bg-slate-300">/now</span>
             pages of 1000s of personal websites.
         </p>
     </main>
