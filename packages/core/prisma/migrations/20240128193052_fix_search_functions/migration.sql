@@ -7,8 +7,7 @@ create or replace function match_posts (
   match_count int DEFAULT null,
   filter jsonb DEFAULT '{}'
 ) returns table (
-  id integer,
-  content text,
+  "url" text,
   similarity float
 )
 language plpgsql
@@ -17,8 +16,7 @@ as $$
 begin
   return query
   select
-    id,
-    content,
+    "url",
     1 - ("Post".embedding <=> query_embedding) as similarity
   from "Post"
   order by "Post".embedding <=> query_embedding
@@ -28,12 +26,12 @@ $$;
 
 -- Create a function to keyword search for "Post"
 create or replace function kw_match_posts(query_text text, match_count int)
-returns table (id integer, content text, similarity real)
+returns table ("url" text, similarity real)
 as $$
 
 begin
 return query execute
-format('select id, content, ts_rank(to_tsvector(content), plainto_tsquery($1)) as similarity
+format('select "url", ts_rank(to_tsvector(content), plainto_tsquery($1)) as similarity
 from "Post"
 where to_tsvector(content) @@ plainto_tsquery($1)
 order by similarity desc

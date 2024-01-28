@@ -16,7 +16,8 @@
         "@langchain/community": "^0.0.21",
         "@langchain/openai": "^0.0.13",
         "@repo/core": "workspace:*",
-        "@supabase/supabase-js": "^2.39.3"
+        "@supabase/supabase-js": "^2.39.3",
+        "openai": "^4.26.0"
     },
     "devDependencies": {
         "@csstools/postcss-oklab-function": "^3.0.3",

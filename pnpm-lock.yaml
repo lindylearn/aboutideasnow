@@ -108,6 +108,9 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.39.3
         version: 2.39.3
+      openai:
+        specifier: ^4.26.0
+        version: 4.26.0
     devDependencies:
       '@csstools/postcss-oklab-function':
         specifier: ^3.0.3
