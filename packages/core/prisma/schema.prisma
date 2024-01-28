@@ -9,8 +9,8 @@ datasource db {
 }
 
 model Post {
-    domain String   @id
-    url    String
+    url    String   @id
+    domain String
     type   PostType
 
     content    String

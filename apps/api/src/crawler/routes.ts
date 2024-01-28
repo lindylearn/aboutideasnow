@@ -99,7 +99,7 @@ router.addHandler("document", async ({ $, request, log }) => {
 
         // Delete post if exists
         try {
-            await db.post.delete({ where: { domain: meta.domain } });
+            await db.post.delete({ where: { url } });
         } catch {}
 
         return;
@@ -117,7 +117,7 @@ router.addHandler("document", async ({ $, request, log }) => {
         updatedAt: meta.date || new Date("1970-01-01")
     };
     await db.post.upsert({
-        where: { domain: meta.domain },
+        where: { url },
         create: post,
         update: post
     });
