@@ -5,6 +5,7 @@ import { getPageContent } from "../common/content.js";
 import { PostType, ScrapeStatus } from "@repo/core/generated/prisma-client";
 import { db } from "../common/db.js";
 import { isExcludedPage } from "../common/filter.js";
+import { generateEmbedding } from "../common/openai.js";
 
 export const router = createCheerioRouter();
 
@@ -110,8 +111,8 @@ router.addHandler("document", async ({ $, request, log }) => {
 
     // Store post
     const post = {
-        domain: meta.domain,
         url,
+        domain: meta.domain,
         type: PostType.NOW,
         content,
         updatedAt: meta.date || new Date("1970-01-01")
@@ -121,6 +122,11 @@ router.addHandler("document", async ({ $, request, log }) => {
         create: post,
         update: post
     });
+
+    // Generate embedding
+    const embedding = await generateEmbedding(content);
+    // Need raw query because the Prisma client doesn't support vector columns
+    await db.$executeRaw`UPDATE "Post" SET "embedding" = ${embedding} WHERE "url" = ${url}`;
 
     // Save scrape success
     const scrapeState = {

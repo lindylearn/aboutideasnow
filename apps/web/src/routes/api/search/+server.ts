@@ -13,7 +13,7 @@ const embeddings = new OpenAIEmbeddings({
 
 const retriever = new SupabaseHybridSearch(embeddings, {
     client,
-    similarityK: 0,
+    similarityK: 10,
     keywordK: 10,
     tableName: "Post",
     similarityQueryName: "match_posts",
