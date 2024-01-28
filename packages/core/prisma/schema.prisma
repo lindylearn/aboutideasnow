@@ -9,14 +9,12 @@ datasource db {
 }
 
 model Post {
-    id     Int      @id @default(autoincrement())
-    url    String   @unique
+    url    String   @id
     domain String
     type   PostType
 
-    content    String
-    updatedAt  DateTime
-    authorName String?
+    content   String
+    updatedAt DateTime
 
     embedding Unsupported("vector(1024)")?
 }

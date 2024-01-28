@@ -38,6 +38,7 @@ export const GET: RequestHandler = async ({ url }) => {
         ...semanticSearchResponse.data,
         ...keywordSearchResponse.data
     ];
+    posts.sort((a, b) => b.similarity - a.similarity);
 
     // importing json() helper from @sveltejs/kit causes a build error
     return new Response(JSON.stringify({ posts }));
