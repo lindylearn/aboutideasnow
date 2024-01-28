@@ -8,15 +8,6 @@
 </script>
 
 <main class="flex flex-col items-center gap-3 md:gap-7">
-    <header class="flex flex-col items-center justify-center h-auto">
-        <h1 class="text-4xl font-bold leading-relaxed text-center md:text-5xl font-title">
-            <span style="background-color: {colorPalette[2]}" class="px-2 rounded-md">about</span>
-            <span style="background-color: {colorPalette[3]}" class="px-2 rounded-md">ideas</span>
-            <span style="background-color: {colorPalette[4]}" class="px-2 rounded-md">now</span>
-        </h1>
-        <!-- <h2 class="font-bold text-center md:text-lg">index of personal websites</h2> -->
-    </header>
-
     <main class="flex flex-col max-w-xl text-center text-lg items-center gap-3">
         <!-- <p>
             Social media is not good at creating authentic human connections.
