@@ -34,7 +34,10 @@ export const GET: RequestHandler = async ({ url }) => {
     }
 
     // Combine results
-    const posts: Post[] = [...semanticSearchResponse.data, ...keywordSearchResponse.data];
+    const posts: (Post & { similarity: number })[] = [
+        ...semanticSearchResponse.data,
+        ...keywordSearchResponse.data
+    ];
 
     // importing json() helper from @sveltejs/kit causes a build error
     return new Response(JSON.stringify({ posts }));
