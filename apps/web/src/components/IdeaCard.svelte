@@ -1,8 +1,9 @@
 <script lang="ts">
-    import { updated } from "$app/stores";
     import type { Post } from "@repo/core/generated/prisma-client";
     export let post: Post;
     export let color: string;
+
+    const date = post.updatedAt ? new Date(post.updatedAt) : undefined;
 </script>
 
 <a
@@ -37,13 +38,14 @@
     </div>
     <div class="bg-light text-sm px-4 pt-4 whitespace-pre-wrap line-clamp-[16] rounded-b-md grow">
         <div class="relative">
-            {#if post.updatedAt && post.updatedAt.getFullYear() !== 1970}
+            {#if date && date.getFullYear() !== 1970}
                 Updated {new Intl.DateTimeFormat("en-US", {
                     month: "long",
                     day: "numeric",
                     year: "numeric"
-                }).format(post.updatedAt)}
-                <br /><br />{/if}{post.content}
+                }).format(date)}
+                <br /><br />{/if}
+            {post.content}
             <div
                 class="absolute bottom-0 w-full h-16 pointer-events-none bg-gradient-to-t from-white via-white via-30%"
             ></div>

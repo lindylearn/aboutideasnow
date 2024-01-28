@@ -15,7 +15,7 @@
         </h1>
     </header>
 
-    <div class="grow">
+    <div class="grow w-full">
         <slot />
     </div>
 

@@ -1,8 +1,26 @@
 <script lang="ts">
     import IdeaCard from "../components/IdeaCard.svelte";
     import type { PageData } from "./$types";
+    import type { Post } from "@repo/core/generated/prisma-client";
+    import debounce from "lodash/debounce";
 
     export let data: PageData;
+
+    let searchQuery = "";
+    let isLoading = false;
+    let posts: Post[] = data.posts;
+    $: if (!searchQuery) {
+        posts = data.posts;
+        isLoading = false;
+    }
+    const search = debounce(async () => {
+        isLoading = true;
+        const res = await fetch(`/api/search?query=${searchQuery}`);
+        const json = await res.json();
+
+        posts = json.posts;
+        isLoading = false;
+    }, 500);
 
     let colorPalette = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
 </script>
@@ -29,10 +47,12 @@
     </a>
 
     <div class="w-full flex gap-2 mt-5">
-        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">{data.posts.length} posts</button>
+        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">{posts.length} posts</button>
         <input
             class="grow px-3 py-2 text-lg text-center rounded-md shadow-sm md:w-auto md:text-left"
             placeholder="Search for anything that people are doing"
+            bind:value={searchQuery}
+            on:input={search}
         />
 
         <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All posts</button>
@@ -40,28 +60,15 @@
         <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All time</button>
     </div>
 
-    <div
-        class="flex flex-col items-center justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
-    >
-        {#each data.posts as post, index}
-            <IdeaCard {post} color={colorPalette[index % colorPalette.length]}></IdeaCard>
-        {/each}
-    </div>
-    <footer>
-        <p>
-            Made with 💡 by
-            <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>
-            and
-            <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>.
-            Contribute on
-            <a
-                class="font-bold"
-                href="https://github.com/lindylearn/ideasideasideas"
-                target="_blank"
-            >
-                GitHub
-            </a>
-            to add your name here!
-        </p>
-    </footer>
+    {#if isLoading}
+        <div class="text-center">Loading...</div>
+    {:else}
+        <div
+            class="flex flex-col items-center justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+        >
+            {#each posts as post, index}
+                <IdeaCard {post} color={colorPalette[index % colorPalette.length]}></IdeaCard>
+            {/each}
+        </div>
+    {/if}
 </main>
