@@ -1,10 +1,13 @@
+drop function if exists match_posts;
+drop function if exists kw_match_posts;
+
 -- Create a function to similarity search for "Post"
 create or replace function match_posts (
   query_embedding vector(1024),
   match_count int DEFAULT null,
   filter jsonb DEFAULT '{}'
 ) returns table (
-  id bigint,
+  id integer,
   content text,
   similarity float
 )
@@ -14,7 +17,7 @@ as $$
 begin
   return query
   select
-    url as id,
+    id,
     content,
     1 - ("Post".embedding <=> query_embedding) as similarity
   from "Post"
@@ -25,12 +28,12 @@ $$;
 
 -- Create a function to keyword search for "Post"
 create or replace function kw_match_posts(query_text text, match_count int)
-returns table (id bigint, content text, similarity real)
+returns table (id integer, content text, similarity real)
 as $$
 
 begin
 return query execute
-format('select url as id, content, ts_rank(to_tsvector(content), plainto_tsquery($1)) as similarity
+format('select id, content, ts_rank(to_tsvector(content), plainto_tsquery($1)) as similarity
 from "Post"
 where to_tsvector(content) @@ plainto_tsquery($1)
 order by similarity desc

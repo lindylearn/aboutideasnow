@@ -9,7 +9,8 @@ datasource db {
 }
 
 model Post {
-    url    String   @id
+    id     Int      @id @default(autoincrement())
+    url    String   @unique
     domain String
     type   PostType
 

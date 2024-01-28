@@ -13,8 +13,8 @@ const embeddings = new OpenAIEmbeddings({
 
 const retriever = new SupabaseHybridSearch(embeddings, {
     client,
-    similarityK: 2,
-    keywordK: 2,
+    similarityK: 0,
+    keywordK: 10,
     tableName: "Post",
     similarityQueryName: "match_posts",
     keywordQueryName: "kw_match_posts"
@@ -29,5 +29,5 @@ export const GET: RequestHandler = async ({ url }) => {
     const results = await retriever.getRelevantDocuments(query);
 
     // importing json() helper from @sveltejs/kit causes a build error
-    return new Response(JSON.stringify({ message: "Hello from the server!" }));
+    return new Response(JSON.stringify({ results }));
 };
