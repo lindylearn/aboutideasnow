@@ -7,7 +7,7 @@ export async function load() {
         orderBy: {
             updatedAt: "desc"
         },
-        take: 100
+        take: 12
     });
 
     return { posts };

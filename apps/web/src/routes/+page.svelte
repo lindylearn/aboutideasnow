@@ -46,8 +46,38 @@
         Read the /ideas manifesto
     </a>
 
+    <div class="flex flex-wrap gap-2">
+        <button
+            class="px-2 py-1 bg-slate-300 rounded-md text-lg"
+            on:click={() => {
+                searchQuery = "Writing a book";
+                search();
+            }}
+        >
+            Writing a book
+        </button>
+        <button
+            class="px-2 py-1 bg-slate-300 rounded-md text-lg"
+            on:click={() => {
+                searchQuery = "Spending time with my kids";
+                search();
+            }}
+        >
+            Spending time with my kids
+        </button>
+        <button
+            class="px-2 py-1 bg-slate-300 rounded-md text-lg"
+            on:click={() => {
+                searchQuery = "Searching for a job";
+                search();
+            }}
+        >
+            Searching for a job
+        </button>
+    </div>
+
     <div class="w-full flex gap-2 mt-5">
-        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">{posts.length} posts</button>
+        <!-- <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">{posts.length} posts</button> -->
         <input
             class="grow px-3 py-2 text-lg text-center rounded-md shadow-sm md:w-auto md:text-left"
             placeholder="Search for anything that people are doing"
@@ -55,9 +85,9 @@
             on:input={search}
         />
 
-        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All posts</button>
+        <!-- <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All posts</button>
         <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All languages</button>
-        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All time</button>
+        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All time</button> -->
     </div>
 
     {#if isLoading}
