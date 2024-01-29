@@ -26,7 +26,7 @@
 </script>
 
 <main class="flex flex-col items-center gap-3 md:gap-7">
-    <main class="flex flex-col max-w-xl text-center text-lg items-center gap-3">
+    <main class="flex flex-col items-center max-w-xl gap-3 text-lg text-center">
         <!-- <p>
             Social media is not good at creating authentic human connections.
             <br />
@@ -42,13 +42,13 @@
         </p>
     </main>
 
-    <a class="w-max px-3 py-2 text-white rounded-md bg-text" href="/manifesto">
+    <a class="px-3 py-2 text-white rounded-md w-max bg-text" href="/manifesto">
         Read the /ideas manifesto
     </a>
 
     <div class="flex flex-wrap gap-2">
         <button
-            class="px-2 py-1 bg-slate-300 rounded-md text-lg"
+            class="px-2 py-1 text-lg rounded-md bg-slate-300"
             on:click={() => {
                 searchQuery = "Writing a book";
                 search();
@@ -57,7 +57,7 @@
             Writing a book
         </button>
         <button
-            class="px-2 py-1 bg-slate-300 rounded-md text-lg"
+            class="px-2 py-1 text-lg rounded-md bg-slate-300"
             on:click={() => {
                 searchQuery = "Spending time with my kids";
                 search();
@@ -66,7 +66,7 @@
             Spending time with my kids
         </button>
         <button
-            class="px-2 py-1 bg-slate-300 rounded-md text-lg"
+            class="px-2 py-1 text-lg rounded-md bg-slate-300"
             on:click={() => {
                 searchQuery = "Searching for a job";
                 search();
@@ -76,18 +76,18 @@
         </button>
     </div>
 
-    <div class="w-full flex gap-2 mt-5">
-        <!-- <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">{posts.length} posts</button> -->
+    <div class="flex w-full gap-2 mt-5">
+        <!-- <button class="px-2 py-1 text-lg rounded-md bg-slate-300">{posts.length} posts</button> -->
         <input
-            class="grow px-3 py-2 text-lg text-center rounded-md shadow-sm md:w-auto md:text-left"
+            class="px-3 py-2 text-lg text-center rounded-md shadow-sm grow md:w-auto md:text-left"
             placeholder="Search for anything that people are doing"
             bind:value={searchQuery}
             on:input={search}
         />
 
-        <!-- <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All posts</button>
-        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All languages</button>
-        <button class="px-2 py-1 bg-slate-300 rounded-md text-lg">All time</button> -->
+        <!-- <button class="px-2 py-1 text-lg rounded-md bg-slate-300">All posts</button>
+        <button class="px-2 py-1 text-lg rounded-md bg-slate-300">All languages</button>
+        <button class="px-2 py-1 text-lg rounded-md bg-slate-300">All time</button> -->
     </div>
 
     {#if isLoading}
