@@ -8,8 +8,8 @@ export const openai = new OpenAI({
 export async function generateEmbedding(text: string) {
     const result = await openai.embeddings.create({
         input: text,
-        model: "text-embedding-3-large",
-        dimensions: 1024
+        model: "text-embedding-3-small",
+        dimensions: 512
     });
 
     const [{ embedding }] = result.data;

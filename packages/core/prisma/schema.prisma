@@ -16,7 +16,7 @@ model Post {
     content   String
     updatedAt DateTime
 
-    embedding Unsupported("vector(1024)")?
+    embedding Unsupported("vector(512)")?
 }
 
 enum PostType {
