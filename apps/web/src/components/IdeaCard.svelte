@@ -20,7 +20,7 @@
                 src="https://www.google.com/s2/favicons?sz=256&domain_url={post.domain}"
             />
             <div class="flex flex-row items-center justify-center gap-2">
-                <h2 class="mr-0 font-sans font-bold text-slate-700">
+                <h2 class="mr-0 font-bold font-title text-slate-700">
                     {post.domain}
                 </h2>
                 <div class="flex gap-2">
