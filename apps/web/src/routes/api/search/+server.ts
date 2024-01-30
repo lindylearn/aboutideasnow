@@ -9,17 +9,21 @@ export const GET: RequestHandler = async ({ url }) => {
         return new Response(JSON.stringify({ error: "No query provided" }), { status: 400 });
     }
 
-    const embedding = await generateEmbedding(query);
-
-    // Query the database
-    const semanticSearchResponse = await supabase.rpc("match_posts", {
-        query_embedding: embedding,
-        match_count: 10
-    });
-    const keywordSearchResponse = await supabase.rpc("kw_match_posts", {
-        query_text: embedding,
-        match_count: 10
-    });
+    const t0 = Date.now();
+    const [keywordSearchResponse, semanticSearchResponse] = await Promise.all([
+        supabase.rpc("kw_match_posts", {
+            query_text: query,
+            match_count: 10
+        }),
+        generateEmbedding(query).then((embedding) =>
+            supabase.rpc("match_posts", {
+                query_embedding: embedding,
+                match_count: 10
+            })
+        )
+    ]);
+    const t1 = Date.now();
+    console.log(`Search completed in ${t1 - t0}ms`);
 
     // Return errors
     if (semanticSearchResponse.error) {
