@@ -25,7 +25,7 @@
                 </h2>
                 <div class="flex gap-2">
                     {#if post.type === "NOW"}
-                        <div class="w-auto px-2 py-1 text-sm rounded-md bg-slate-300">/now</div>
+                        <div class="w-auto px-2 py-1 text-sm bg-red-200 rounded-md">/now</div>
                     {/if}
                 </div>
             </div>
