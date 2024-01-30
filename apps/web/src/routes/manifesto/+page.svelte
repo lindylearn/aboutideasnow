@@ -10,19 +10,24 @@
 <main class="flex flex-col items-center gap-3 md:gap-7">
     <p class="mb-4 text-lg">Thousands of personal sites. One directory.</p>
     <main class="flex flex-col max-w-xl gap-3 text-lg text-left items-left">
-        <h1 class="mt-8">What is About Ideas Now?</h1>
+        <h1 class="mt-8">
+            What is <span class="px-2 py-1 bg-green-200 rounded-md">about</span>
+            <span class="px-2 py-1 bg-yellow-200 rounded-md">ideas</span>
+            <span class="px-2 py-1 bg-red-200 rounded-md">now</span>?
+        </h1>
         Thousands of personal sites exist on the internet, created by creators, thinkers, and doers of
         all sorts. These sites are used by people to tell the world:
 
         <ul>
             <li>
-                <b>About</b> themselves
+                <span class="px-2 py-1 font-bold bg-green-200 rounded-md">about</span> themselves
             </li>
             <li>
-                Their <b>ideas</b>
+                Their <span class="px-2 py-1 font-bold bg-yellow-200 rounded-md">ideas</span>
             </li>
             <li>
-                What they're up to <b>now</b>
+                What they're up to <span class="px-2 py-1 font-bold bg-red-200 rounded-md">now</span
+                >
             </li>
         </ul>
 
@@ -31,7 +36,14 @@
             them.
         </p>
         <p>
-            We created <a href="https://www.aboutideasnow.com" target="_blank">aboutideasnow.com</a>
+            We created <a
+                href="https://www.aboutideasnow.com"
+                target="_blank"
+                class="font-bold hover:underline"
+                ><span class="px-1 py-1 bg-green-200 rounded-md">about</span><span
+                    class="px-1 py-1 bg-yellow-200 rounded-md">ideas</span
+                ><span class="px-1 py-1 bg-red-200 rounded-md">now</span>.com</a
+            >
             as a directory bringing these personal sites into a searchable, up-to-date space, so that
             you can:
         </p>
@@ -43,8 +55,13 @@
         <p>To find people working on interesting things:</p>
         <ol>
             <li>
-                Search for a topic on <a href="https://www.aboutideasnow.com" target="_blank"
-                    >aboutideasnow.com</a
+                Search for a topic on <a
+                    href="https://www.aboutideasnow.com"
+                    target="_blank"
+                    class="font-bold hover:underline"
+                    ><span class="px-1 py-1 bg-green-200 rounded-md">about</span><span
+                        class="px-1 py-1 bg-yellow-200 rounded-md">ideas</span
+                    ><span class="px-1 py-1 bg-red-200 rounded-md">now</span>.com</a
                 >
             </li>
             <li>Go to a person's site to read more</li>
@@ -54,9 +71,17 @@
         <ol>
             <li>Add at least one of these pages to your website:</li>
             <ul>
-                <li>/about to describe yourself</li>
-                <li>/ideas with what you want to do</li>
-                <li>/now with what you're up to right now</li>
+                <li>
+                    <span class="px-2 py-1 bg-green-200 rounded-md">/about</span> to describe yourself
+                </li>
+                <li>
+                    <span class="px-2 py-1 bg-yellow-200 rounded-md">/ideas</span> with what you want
+                    to do
+                </li>
+                <li>
+                    <span class="px-2 py-1 bg-red-200 rounded-md">/now</span> with what you're up to
+                    right now
+                </li>
             </ul>
             <li>Submit your site here:</li>
             <div class="text-center">
@@ -110,8 +135,15 @@
         </ol>
         <h1 class="mt-8">About us</h1>
         <p>
-            aboutideasnow.com is a decentralized solution on the increasingly centralized web. We’re
-            just here to display the content that you host on your personal site.
+            <a
+                href="https://www.aboutideasnow.com"
+                target="_blank"
+                class="font-bold hover:underline"
+                ><span class="px-1 py-1 bg-green-200 rounded-md">about</span><span
+                    class="px-1 py-1 bg-yellow-200 rounded-md">ideas</span
+                ><span class="px-1 py-1 bg-red-200 rounded-md">now</span>.com</a
+            > is a decentralized solution on the increasingly centralized web. We’re just here to display
+            the content that you host on your personal site.
         </p>
         <p>This is an unofficial continuation of Derek Sivers’ Now page project, which we love.</p>
         <p>
