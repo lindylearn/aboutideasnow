@@ -19,12 +19,14 @@
         <slot />
     </div>
 
-    <footer class="my-8">
+    <footer class="flex flex-col items-center my-8">
         <p>
             Made with 💡 by
             <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>
             and
             <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>.
+        </p>
+        <p class="mt-2 text-sm">
             Contribute on
             <a
                 class="font-bold"
