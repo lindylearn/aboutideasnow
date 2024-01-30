@@ -5,7 +5,7 @@
 </script>
 
 <div
-    class="p-5 overflow-hidden sm:pt-10 bg-slate-100 font-text text-text min-h-screen flex flex-col items-center"
+    class="flex flex-col items-center min-h-screen p-5 overflow-hidden sm:pt-10 bg-slate-100 font-text text-text"
 >
     <header class="flex flex-col items-center justify-center h-auto mb-5">
         <h1 class="text-4xl font-bold leading-relaxed text-center md:text-5xl font-title">
@@ -15,11 +15,11 @@
         </h1>
     </header>
 
-    <div class="grow w-full">
+    <div class="w-full grow">
         <slot />
     </div>
 
-    <footer>
+    <footer class="my-8">
         <p>
             Made with 💡 by
             <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>
