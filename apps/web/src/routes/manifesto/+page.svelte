@@ -39,10 +39,7 @@
             We created <a
                 href="https://www.aboutideasnow.com"
                 target="_blank"
-                class="font-bold hover:underline"
-                ><span class="px-1 py-1 bg-green-200 rounded-md">about</span><span
-                    class="px-1 py-1 bg-yellow-200 rounded-md">ideas</span
-                ><span class="px-1 py-1 bg-red-200 rounded-md">now</span>.com</a
+                class="font-bold underline">aboutideasnow.com</a
             >
             as a directory bringing these personal sites into a searchable, up-to-date space, so that
             you can:
@@ -58,10 +55,7 @@
                 Search for a topic on <a
                     href="https://www.aboutideasnow.com"
                     target="_blank"
-                    class="font-bold hover:underline"
-                    ><span class="px-1 py-1 bg-green-200 rounded-md">about</span><span
-                        class="px-1 py-1 bg-yellow-200 rounded-md">ideas</span
-                    ><span class="px-1 py-1 bg-red-200 rounded-md">now</span>.com</a
+                    class="font-bold underline">aboutideasnow.com</a
                 >
             </li>
             <li>Go to a person's site to read more</li>
@@ -72,19 +66,20 @@
             <li>Add at least one of these pages to your website:</li>
             <ul>
                 <li>
-                    <span class="px-2 py-1 bg-green-200 rounded-md">/about</span> to describe yourself
+                    <span class="px-2 py-1 font-bold bg-green-200 rounded-md">/about</span> to describe
+                    yourself
                 </li>
                 <li>
-                    <span class="px-2 py-1 bg-yellow-200 rounded-md">/ideas</span> with what you want
-                    to do
+                    <span class="px-2 py-1 font-bold bg-yellow-200 rounded-md">/ideas</span> with what
+                    you want to do
                 </li>
                 <li>
-                    <span class="px-2 py-1 bg-red-200 rounded-md">/now</span> with what you're up to
-                    right now
+                    <span class="px-2 py-1 font-bold bg-red-200 rounded-md">/now</span> with what you're
+                    up to right now
                 </li>
             </ul>
             <li>Submit your personal site here:</li>
-            <div class="text-center">
+            <div class="flex flex-col items-center mt-4 text-center">
                 {#if form?.addedDomain === false}
                     Error indexing your domain :(<br />We will take a look and add your site as soon
                     as possible!
@@ -111,7 +106,7 @@
                     Indexing your domain...
                 {:else}
                     <form
-                        class="flex flex-col justify-center w-full gap-2 mt-8 md:gap-4 md:flex-row"
+                        class="flex flex-col items-center gap-2 w-96 md:w-full md:gap-4 md:flex-row"
                         method="POST"
                         use:enhance={() => {
                             // Show loading state until page data is reloaded
@@ -119,7 +114,7 @@
                         }}
                     >
                         <input
-                            class="w-full px-3 py-2 text-lg text-center rounded-md shadow-sm md:w-auto md:text-left"
+                            class="flex-1 w-full px-3 py-2 text-lg text-center rounded-md shadow-sm md:w-auto md:text-left"
                             placeholder="mysite.com"
                             name="domain"
                             required
@@ -135,13 +130,8 @@
         </ol>
         <h1 class="mt-8">About us</h1>
         <p>
-            <a
-                href="https://www.aboutideasnow.com"
-                target="_blank"
-                class="font-bold hover:underline"
-                ><span class="px-1 py-1 bg-green-200 rounded-md">about</span><span
-                    class="px-1 py-1 bg-yellow-200 rounded-md">ideas</span
-                ><span class="px-1 py-1 bg-red-200 rounded-md">now</span>.com</a
+            <a href="https://www.aboutideasnow.com" target="_blank" class="font-bold underline"
+                >aboutideasnow.com</a
             > is a decentralized solution on the increasingly centralized web. We’re just here to display
             the content that you host on your personal site.
         </p>
