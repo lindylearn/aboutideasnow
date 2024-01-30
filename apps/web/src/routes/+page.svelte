@@ -54,7 +54,7 @@
                 search();
             }}
         >
-            Writing a book
+            📚 Writing a book
         </button>
         <button
             class="px-2 py-1 text-lg rounded-md bg-slate-300"
@@ -76,10 +76,10 @@
         </button>
     </div>
 
-    <div class="flex w-full gap-2 mt-5">
+    <div class="flex justify-center w-full gap-2 mt-5">
         <!-- <button class="px-2 py-1 text-lg rounded-md bg-slate-300">{posts.length} posts</button> -->
         <input
-            class="px-3 py-2 text-lg text-center rounded-md shadow-sm grow md:w-auto md:text-left"
+            class="max-w-2xl px-3 py-2 text-lg text-center rounded-md shadow-sm grow md:w-auto md:text-left"
             placeholder="Search for anything that people are doing"
             bind:value={searchQuery}
             on:input={search}
