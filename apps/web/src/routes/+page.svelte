@@ -11,7 +11,7 @@
         },
         {
             term: "design",
-            emoji: "📈✍️"
+            emoji: "✍️"
         },
         {
             term: "art",
