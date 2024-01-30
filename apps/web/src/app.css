@@ -1,5 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=PT+Mono:wght@500&family=Crimson+Pro:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-2xl font-bold;
+    }
+    h2 {
+        @apply text-xl;
+    }
+
+    p {
+        @apply mb-1;
+    }
+
+    h3 {
+        @apply text-lg;
+    }
+    /* a {
+        @apply text-blue-600 underline;
+    } */
+
+    ul {
+        @apply ml-6 list-disc list-outside;
+    }
+    li {
+        @apply mb-3;
+    }
+    ol {
+        @apply ml-6 list-decimal list-outside;
+    }
+}
