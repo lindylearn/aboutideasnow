@@ -12,9 +12,9 @@ export default {
                 text: "#351e30"
             },
             fontFamily: {
-                title: ["", "serif"],
-                text: ["", "sans-serif"],
-                mono: ["PT Mono", "monospace"]
+                title: ["Inter", "serif"],
+                text: ["Inter", "sans-serif"],
+                mono: ["Roboto Mono", "monospace"]
             },
             keyframes: {
                 fadein: {
