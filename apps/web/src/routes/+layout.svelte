@@ -7,11 +7,11 @@
 <div
     class="flex flex-col items-center min-h-screen p-5 overflow-hidden sm:pt-10 bg-slate-100 font-text text-text"
 >
-    <header class="flex flex-col items-center justify-center h-auto mb-5">
+    <header class="flex flex-col items-center justify-center h-auto mb-8">
         <h1 class="text-4xl font-bold leading-relaxed text-center md:text-5xl font-title">
-            <span style="background-color: {colorPalette[2]}" class="px-2 rounded-md">about</span>
-            <span style="background-color: {colorPalette[3]}" class="px-2 rounded-md">ideas</span>
-            <span style="background-color: {colorPalette[4]}" class="px-2 rounded-md">now</span>
+            <span class="px-2 text-white bg-green-500 rounded-md shadow-sm">about</span>
+            <span class="px-2 text-white bg-yellow-500 rounded-md shadow-sm">ideas</span>
+            <span class="px-2 text-white bg-red-500 rounded-md">now</span>
         </h1>
     </header>
 
