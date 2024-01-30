@@ -61,7 +61,7 @@
 </script>
 
 <main class="flex flex-col items-center gap-3 md:gap-7">
-    <main class="flex flex-col items-center max-w-xl gap-3 mb-8 text-lg text-center">
+    <main class="flex flex-col items-center max-w-xl gap-3 text-lg text-center">
         <!-- <p>
             Social media is not good at creating authentic human connections.
             <br />
@@ -78,7 +78,7 @@
     </main>
 
     <a
-        class="px-6 py-4 mb-8 text-lg text-white bg-blue-600 rounded-md shadow-lg w-max"
+        class="px-6 py-4 mb-4 text-lg text-white bg-blue-400 rounded-md shadow-lg hover:bg-blue-600 w-max"
         href="/manifesto"
     >
         Read the manifesto
