@@ -83,7 +83,7 @@
                     right now
                 </li>
             </ul>
-            <li>Submit your site here:</li>
+            <li>Submit your personal site here:</li>
             <div class="text-center">
                 {#if form?.addedDomain === false}
                     Error indexing your domain :(<br />We will take a look and add your site as soon
@@ -120,14 +120,14 @@
                     >
                         <input
                             class="w-full px-3 py-2 text-lg text-center rounded-md shadow-sm md:w-auto md:text-left"
-                            placeholder="mywebsite.com"
+                            placeholder="mysite.com"
                             name="domain"
                             required
                         />
                         <button
-                            class="w-full h-auto px-3 py-2 text-white rounded-md md:w-auto bg-text"
+                            class="w-full h-auto px-3 py-2 text-white bg-blue-400 rounded-md md:w-auto hover:bg-blue-600"
                         >
-                            Add my website
+                            Add my site
                         </button>
                     </form>
                 {/if}
