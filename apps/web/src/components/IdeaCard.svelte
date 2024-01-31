@@ -9,11 +9,10 @@
 
 <a
     href={post.url}
-    class="flex flex-col w-full h-full font-mono transition-all rounded-md shadow-sm"
-    style="background-color: {color}"
+    class="flex flex-col w-full h-80 font-mono transition-all rounded-md shadow-sm bg-light overflow-hidden relative"
     target="_blank"
 >
-    <div class="flex p-2">
+    <div class="flex p-2" style="background-color: {color}">
         <div class="flex flex-1 rounded-md bg-light">
             <img
                 alt={post.domain}
@@ -37,22 +36,19 @@
             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
         </div>
     </div>
-    <div class="bg-light text-sm px-4 pt-4 whitespace-pre-wrap line-clamp-[16] rounded-b-md grow">
-        <div class="relative">
-            {#if date && date.getFullYear() !== 1970}
-                Updated {new Intl.DateTimeFormat("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric"
-                }).format(date)}
-                <br /><br />{/if}
-
+    <div class="text-sm px-4 pt-4 whitespace-pre-wrap rounded-b-md overflow-hidden">
+        {#if date && date.getFullYear() !== 1970}
+            Updated {new Intl.DateTimeFormat("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            }).format(date)}
             <!-- Use HTML to easily style search highlights -->
-            {@html post.content}
-            <div
-                class="absolute bottom-0 w-full h-16 pointer-events-none bg-gradient-to-t from-white via-white via-30%"
-            ></div>
-        </div>
+            <br /><br />{/if}{@html post.content}
+        <div
+            id="bottom-fade"
+            class="absolute left-0 -bottom-2 w-full h-16 pointer-events-none bg-gradient-to-t from-white via-white via-30%"
+        />
     </div>
 
     <!-- Maybe the updated date looks less distracting inside the post text? -->

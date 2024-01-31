@@ -44,7 +44,7 @@
     let searchQuery = "";
     let posts: SearchedPost[] = [];
     $: if (!searchQuery) {
-        posts = data.posts;
+        posts = [];
     }
     const search = debounce(async () => {
         // Call TypeSense directly from the browser
@@ -81,7 +81,7 @@
     <div class="flex justify-center w-full gap-2">
         <!-- <button class="px-2 py-1 text-lg rounded-md bg-slate-300">{posts.length} posts</button> -->
         <input
-            class="w-8 max-w-2xl px-3 py-2 text-lg text-center rounded-md shadow-sm grow md:w-auto"
+            class="w-8 max-w-2xl px-3 py-2 text-lg text-center rounded-md shadow-sm grow md:w-auto outline-none"
             placeholder="🔍 Search"
             bind:value={searchQuery}
             on:input={search}
@@ -108,7 +108,7 @@
     <div
         class="flex flex-col items-center justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
     >
-        {#each posts as post, index (post.url)}
+        {#each posts as post, index (post.content)}
             <IdeaCard {post} color={colorPalette[index % colorPalette.length]}></IdeaCard>
         {/each}
     </div>
