@@ -27,11 +27,16 @@ export async function searchPosts(query: string): Promise<SearchedPost[]> {
             // query_by: "embedding",
             query_by: "embedding,content,domain",
             // exclude_fields: "embedding",
-            prefix: false // required for embeddings
+            prefix: false, // required for embeddings
+
+            // group by domain to return only best paragraph
+            group_by: "domain",
+            group_limit: 1
         });
 
+    const hits = searchResults.grouped_hits?.map((hit) => hit.hits[0]) || [];
     return (
-        searchResults.hits?.map((hit) => {
+        hits.map((hit) => {
             // Highlight search matches
             let htmlContent = hit.document.content;
             hit.highlights?.forEach((highlight) => {
