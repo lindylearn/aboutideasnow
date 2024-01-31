@@ -49,7 +49,7 @@
     const search = debounce(async () => {
         // Call TypeSense directly from the browser
         posts = await searchPosts(searchQuery);
-    }, 100);
+    }, 200);
 
     let colorPalette = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
 </script>
@@ -106,9 +106,9 @@
     </div>
 
     <div
-        class="flex flex-col items-center justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+        class="flex flex-col items-start justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
     >
-        {#each posts as post, index (post.content)}
+        {#each posts as post, index (post.id)}
             <IdeaCard {post} color={colorPalette[index % colorPalette.length]}></IdeaCard>
         {/each}
     </div>
