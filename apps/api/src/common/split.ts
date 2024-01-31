@@ -16,5 +16,6 @@ export async function getPostParagraphs(text: string) {
 
     // console.log(lines.slice(0, 10));
 
-    return await splitter.splitText(text);
+    const paragraphs = await splitter.splitText(text);
+    return paragraphs.slice(0, 10);
 }

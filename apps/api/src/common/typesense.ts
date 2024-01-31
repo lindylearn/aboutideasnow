@@ -23,7 +23,18 @@ export const typesense = new Typesense.Client({
 //         { name: "type", type: "string", facet: true },
 //         { name: "url", type: "string" },
 //         { name: "content", type: "string" },
-//         { name: "updatedAt", type: "int64" } // epoch milliseconds to enable sorting
+//         { name: "updatedAt", type: "int64" }, // epoch milliseconds to enable sorting,
+//         {
+//             name: "embedding",
+//             type: "float[]",
+//             embed: {
+//                 from: ["content"],
+//                 model_config: {
+//                     model_name: "openai/text-embedding-3-small",
+//                     api_key: env.OPENAI_API_KEY!
+//                 }
+//             }
+//         }
 //     ],
 //     default_sorting_field: "updatedAt"
 // });

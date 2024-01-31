@@ -14,13 +14,21 @@ export const typesense = new Typesense.Client({
     connectionTimeoutSeconds: 2
 });
 
-export type SearchedPost = Post & {};
+export type SearchedPost = Post & {
+    id: number;
+};
 
 export async function searchPosts(query: string): Promise<SearchedPost[]> {
-    const searchResults = await typesense.collections<Post>("paragraphs").documents().search({
-        q: query,
-        query_by: "content,domain"
-    });
+    const searchResults = await typesense
+        .collections<Post & { id: number }>("paragraphs")
+        .documents()
+        .search({
+            q: query,
+            // query_by: "embedding",
+            query_by: "embedding,content,domain",
+            // exclude_fields: "embedding",
+            prefix: false // required for embeddings
+        });
 
     return (
         searchResults.hits?.map((hit) => {
@@ -32,7 +40,7 @@ export async function searchPosts(query: string): Promise<SearchedPost[]> {
                 }
 
                 highlight.matched_tokens?.forEach((token) => {
-                    if (typeof token !== "string") {
+                    if (typeof token !== "string" || token.length <= 3) {
                         return;
                     }
 
