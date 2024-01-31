@@ -2,7 +2,7 @@ import { MarkdownTextSplitter } from "langchain/text_splitter";
 
 const splitter = new MarkdownTextSplitter({
     chunkSize: 500,
-    chunkOverlap: 50
+    chunkOverlap: 0
 });
 
 export async function getPostParagraphs(text: string) {
@@ -17,5 +17,5 @@ export async function getPostParagraphs(text: string) {
     // console.log(lines.slice(0, 10));
 
     const paragraphs = await splitter.splitText(text);
-    return paragraphs.slice(0, 10);
+    return paragraphs.filter((paragraph) => paragraph.length > 100).slice(0, 10);
 }
