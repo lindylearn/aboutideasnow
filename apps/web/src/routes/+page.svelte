@@ -39,7 +39,7 @@
         }
     ];
 
-    export let data: PageData;
+    // export let data: PageData;
 
     let searchQuery = "";
     let posts: SearchedPost[] = [];
@@ -48,16 +48,17 @@
         posts = [];
         isSearching = false;
     }
-    const search = debounce(async () => {
+
+    async function runSearch() {
         if (!searchQuery) {
             return;
         }
 
-        // Call TypeSense directly from the browser
         isSearching = true;
-        posts = await searchPosts(searchQuery);
+        posts = await searchPosts(searchQuery); // Call TypeSense directly from the browser
         isSearching = false;
-    }, 200);
+    }
+    const runSearchDebounced = debounce(runSearch, 200);
 
     let colorPalette = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
 </script>
@@ -87,14 +88,16 @@
     </a>
 
     <div class="flex items-center justify-center w-full gap-2">
+        <!-- svelte-ignore a11y-autofocus -->
         <input
+            id="search-bar"
             class="w-8 max-w-2xl px-3 py-2 text-lg text-center rounded-md shadow-sm grow md:w-auto outline-none"
             placeholder="🔍 Search"
             autocapitalize="off"
             spellcheck="false"
             autofocus
             bind:value={searchQuery}
-            on:input={search}
+            on:input={runSearchDebounced}
         />
         <div class="relative w-0">
             {#if isSearching}
@@ -109,7 +112,10 @@
                 class="px-2 py-1 text-lg bg-white rounded-md shadow-sm"
                 on:click={() => {
                     searchQuery = exampleSearchQuery.term;
-                    search();
+                    // trigger search without debounce
+                    runSearch();
+
+                    document.getElementById("search-bar")?.focus();
                 }}
             >
                 {exampleSearchQuery.emoji + " " + exampleSearchQuery.term}
