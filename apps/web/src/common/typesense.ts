@@ -14,13 +14,40 @@ export const typesense = new Typesense.Client({
     connectionTimeoutSeconds: 2
 });
 
-export async function searchPosts(query: string) {
-    const t0 = Date.now();
+export type SearchedPost = Post & {};
 
+export async function searchPosts(query: string): Promise<SearchedPost[]> {
     const searchResults = await typesense.collections<Post>("paragraphs").documents().search({
         q: query,
         query_by: "content,domain"
     });
 
-    return searchResults.hits?.map((hit) => hit.document) || [];
+    return (
+        searchResults.hits?.map((hit) => {
+            // Highlight search matches
+            let htmlContent = hit.document.content;
+            hit.highlights?.forEach((highlight) => {
+                if (highlight.field !== "content") {
+                    return;
+                }
+
+                highlight.matched_tokens?.forEach((token) => {
+                    if (typeof token !== "string") {
+                        return;
+                    }
+
+                    htmlContent = htmlContent.replace(
+                        token,
+                        `<span class="highlight">${token}</span>`
+                    );
+                });
+            });
+
+            return {
+                ...hit.document,
+                updatedAt: new Date(hit.document.updatedAt),
+                content: htmlContent
+            };
+        }) || []
+    );
 }

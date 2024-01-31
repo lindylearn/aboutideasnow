@@ -1,6 +1,7 @@
 <script lang="ts">
-    import type { Post } from "@repo/core/generated/prisma-client";
-    export let post: Post;
+    import type { SearchedPost } from "../common/typesense";
+
+    export let post: SearchedPost;
     export let color: string;
 
     const date = post.updatedAt ? new Date(post.updatedAt) : undefined;
@@ -45,7 +46,9 @@
                     year: "numeric"
                 }).format(date)}
                 <br /><br />{/if}
-            {post.content}
+
+            <!-- Use HTML to easily style search highlights -->
+            {@html post.content}
             <div
                 class="absolute bottom-0 w-full h-16 pointer-events-none bg-gradient-to-t from-white via-white via-30%"
             ></div>

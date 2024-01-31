@@ -33,3 +33,7 @@
         @apply ml-6 list-decimal list-outside;
     }
 }
+
+.highlight {
+    @apply bg-yellow-200 font-bold;
+}

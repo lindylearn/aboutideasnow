@@ -1,8 +1,7 @@
 <script lang="ts">
-    import { searchPosts } from "../common/typesense";
+    import { searchPosts, type SearchedPost } from "../common/typesense";
     import IdeaCard from "../components/IdeaCard.svelte";
     import type { PageData } from "./$types";
-    import type { Post } from "@repo/core/generated/prisma-client";
     import debounce from "lodash/debounce";
 
     let exampleSearchQueries = [
@@ -43,18 +42,13 @@
     export let data: PageData;
 
     let searchQuery = "";
-    let isLoading = false;
-    let posts: Post[] = data.posts;
+    let posts: SearchedPost[] = [];
     $: if (!searchQuery) {
         posts = data.posts;
-        isLoading = false;
     }
     const search = debounce(async () => {
-        isLoading = true;
-
         // Call TypeSense directly from the browser
         posts = await searchPosts(searchQuery);
-        isLoading = false;
     }, 100);
 
     let colorPalette = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
@@ -114,7 +108,7 @@
     <div
         class="flex flex-col items-center justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
     >
-        {#each posts as post, index}
+        {#each posts as post, index (post.url)}
             <IdeaCard {post} color={colorPalette[index % colorPalette.length]}></IdeaCard>
         {/each}
     </div>
