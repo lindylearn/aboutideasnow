@@ -4,29 +4,29 @@
     let colorPalette = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
 </script>
 
-<div
-    class="flex flex-col items-center min-h-screen p-5 overflow-hidden sm:pt-10 bg-slate-100 font-text text-text"
->
-    <header class="flex flex-col items-center justify-center h-auto mb-8">
+<div class="flex flex-col items-center min-h-screen p-5 sm:pt-10 bg-slate-100 font-text text-text">
+    <a class="flex flex-col items-center justify-center h-auto mb-5" href="/">
         <h1 class="text-4xl font-bold leading-relaxed text-center md:text-5xl font-title">
             <span class="px-2 text-white bg-green-500 rounded-md shadow-sm">about</span>
             <span class="px-2 text-white bg-yellow-500 rounded-md shadow-sm">ideas</span>
             <span class="px-2 text-white bg-red-500 rounded-md">now</span>
         </h1>
-    </header>
+    </a>
 
     <div class="w-full grow">
         <slot />
     </div>
 
-    <footer class="flex flex-col items-center my-8">
+    <!-- Putting this on the manifest page may be enough? -->
+    <!-- <footer class="flex flex-col items-center mt-10">
         <p>
-            Made with 💡 by
+            Made by
             <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>
             and
-            <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>.
+            <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>. Add
+            your site <a class="font-bold" href="/manifesto">here</a>.
         </p>
-        <p class="mt-2 text-sm">
+        <p>
             Contribute on
             <a
                 class="font-bold"
@@ -37,5 +37,5 @@
             </a>
             to add your name here!
         </p>
-    </footer>
+    </footer> -->
 </div>

@@ -1,43 +1,9 @@
 <script lang="ts">
+    import { exampleSearchQueries } from "../common/constants";
     import { searchPosts, type SearchedPost } from "../common/typesense";
     import IdeaCard from "../components/IdeaCard.svelte";
     import type { PageData } from "./$types";
     import debounce from "lodash/debounce";
-
-    let exampleSearchQueries = [
-        {
-            term: "writing",
-            emoji: "🖊️"
-        },
-        {
-            term: "design",
-            emoji: "✍️"
-        },
-        {
-            term: "art",
-            emoji: "🎨"
-        },
-        {
-            term: "apps",
-            emoji: "📱"
-        },
-        {
-            term: "coding",
-            emoji: "👩‍💻"
-        },
-        {
-            term: "sport",
-            emoji: "🏓"
-        },
-        {
-            term: "meeting people",
-            emoji: "🤼"
-        },
-        {
-            term: "productivity",
-            emoji: "📈"
-        }
-    ];
 
     // export let data: PageData;
 
@@ -64,13 +30,7 @@
 </script>
 
 <main class="flex flex-col items-center gap-3 md:gap-7">
-    <main class="flex flex-col items-center max-w-xl gap-3 text-lg text-center">
-        <!-- <p>
-            Social media is not good at creating authentic human connections.
-            <br />
-            But how can you find people on the internet without it?
-        </p> -->
-        <!-- <p>Browsing personal websites is the best way to get to know people on the internet.</p> -->
+    <main class="flex flex-col items-center max-w-2xl gap-2 text-lg text-center">
         <p>
             Find people to talk to or collaborate with by searching across the
             <span class="px-2 py-1 font-bold bg-green-200 rounded-md">/about</span>,
@@ -78,21 +38,16 @@
             <span class="px-2 py-1 font-bold bg-red-200 rounded-md">/now</span>
             pages of 1000s of personal websites.
         </p>
+
+        <a class="text-lg font-bold" href="/manifesto">Read the /ideas manifesto</a>
     </main>
 
-    <a
-        class="px-6 py-4 mb-4 text-lg text-white bg-blue-400 rounded-md shadow-lg hover:bg-blue-600 w-max"
-        href="/manifesto"
-    >
-        Read the manifesto
-    </a>
-
-    <div class="flex items-center justify-center w-full gap-2">
+    <div class="flex items-center justify-center w-full gap-2 max-w-3xl mt-5">
         <!-- svelte-ignore a11y-autofocus -->
         <input
             id="search-bar"
-            class="w-8 max-w-2xl px-3 py-2 text-lg text-center rounded-md shadow-sm grow md:w-auto outline-none"
-            placeholder="🔍 Search"
+            class="w-8 px-3 py-2 text-lg text-center rounded-md shadow grow md:w-auto outline-none"
+            placeholder="Search for anything that people are doing"
             autocapitalize="off"
             spellcheck="false"
             autofocus
@@ -106,7 +61,7 @@
         </div>
     </div>
 
-    <div class="flex flex-wrap justify-center max-w-2xl gap-2 mb-8">
+    <div class="flex flex-wrap justify-center max-w-4xl gap-2 mb-8 -mt-2">
         {#each exampleSearchQueries as exampleSearchQuery}
             <button
                 class="px-2 py-1 text-lg bg-white rounded-md shadow-sm"
@@ -129,5 +84,20 @@
         {#each posts as post, index (post.id)}
             <IdeaCard {post} color={colorPalette[index % colorPalette.length]}></IdeaCard>
         {/each}
+        {#if posts.length}
+            <IdeaCard
+                post={{
+                    domain: "ideasideasideas.io",
+                    // @ts-ignore
+                    type: "ABOUT",
+                    content:
+                        "Something missing?\n\nSubmit your website to ideasideasideas so that others can find you and reach out!",
+                    url: "https://ideasideasideas.io/manifesto",
+                    // @ts-ignore
+                    updatedAt: undefined
+                }}
+                color="#ffb3ba"
+            />
+        {/if}
     </div>
 </main>

@@ -24,10 +24,12 @@ export async function searchPosts(query: string): Promise<SearchedPost[]> {
         .documents()
         .search({
             q: query,
-            // query_by: "embedding",
-            query_by: "embedding,content,domain",
-            // exclude_fields: "embedding",
-            prefix: false, // required for embeddings
+            query_by: "embedding",
+            // query_by: "embedding,content,domain",
+
+            // required for embeddings
+            exclude_fields: "embedding",
+            prefix: false,
 
             // group by domain to return only best paragraph
             group_by: "domain",
@@ -35,6 +37,7 @@ export async function searchPosts(query: string): Promise<SearchedPost[]> {
         });
 
     const hits = searchResults.grouped_hits?.map((hit) => hit.hits[0]) || [];
+    console.log(hits);
     return (
         hits.map((hit) => {
             // Highlight search matches
