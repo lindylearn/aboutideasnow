@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { searchPosts } from "../common/typesense";
     import IdeaCard from "../components/IdeaCard.svelte";
     import type { PageData } from "./$types";
     import type { Post } from "@repo/core/generated/prisma-client";
@@ -50,12 +51,11 @@
     }
     const search = debounce(async () => {
         isLoading = true;
-        const res = await fetch(`/api/search?query=${searchQuery}`);
-        const json = await res.json();
 
-        posts = json.posts;
+        // Call TypeSense directly from the browser
+        posts = await searchPosts(searchQuery);
         isLoading = false;
-    }, 500);
+    }, 100);
 
     let colorPalette = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
 </script>
@@ -111,15 +111,11 @@
         {/each}
     </div>
 
-    {#if isLoading}
-        <div class="text-center">Loading...</div>
-    {:else}
-        <div
-            class="flex flex-col items-center justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
-        >
-            {#each posts as post, index}
-                <IdeaCard {post} color={colorPalette[index % colorPalette.length]}></IdeaCard>
-            {/each}
-        </div>
-    {/if}
+    <div
+        class="flex flex-col items-center justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+    >
+        {#each posts as post, index}
+            <IdeaCard {post} color={colorPalette[index % colorPalette.length]}></IdeaCard>
+        {/each}
+    </div>
 </main>
