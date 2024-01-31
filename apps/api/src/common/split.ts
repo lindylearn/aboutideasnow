@@ -6,11 +6,15 @@ const splitter = new MarkdownTextSplitter({
 });
 
 export async function getPostParagraphs(text: string) {
-    // const paragraphs = text
-    //     .split("\n\n")
-    //     .map((p) => p.trim())
-    //     .filter((p) => p.length > 10)
-    //     .slice(0, 50);
+    // Exclude heading lines
+    const lines = text.trim().split("\n");
+    // console.log(lines.slice(0, 10));
+    while (lines[0] && lines[0].length < 100) {
+        lines.shift();
+    }
+    text = lines.join("\n");
+
+    // console.log(lines.slice(0, 10));
 
     return await splitter.splitText(text);
 }

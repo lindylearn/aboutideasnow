@@ -38,6 +38,7 @@ export async function indexPost(post: Post) {
     //     console.log(`- ${p}\n`);
     // }
     // console.log(`\n\n`);
+    // return;
 
     // Delete existing paragraphs for this post (the number might have changed)
     await typesense

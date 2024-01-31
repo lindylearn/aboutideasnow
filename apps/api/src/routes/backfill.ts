@@ -3,7 +3,7 @@ import { db } from "../common/db.js";
 import { indexPost } from "../common/typesense.js";
 
 export async function runBackfill(req: Request, res: Response) {
-    const limit = parseInt(req.query.limit as string) || 100;
+    const limit = parseInt(req.query.limit as string) || 10000;
 
     const posts = await db.post.findMany({
         orderBy: { updatedAt: "desc" },
@@ -12,7 +12,7 @@ export async function runBackfill(req: Request, res: Response) {
 
     let index = 1;
     for (const post of posts) {
-        console.log(`Backfilling post ${index}/${posts.length}`);
+        console.log(`(${index}/${posts.length}) Backfilling post ${post.url}`);
 
         await indexPost(post);
 
