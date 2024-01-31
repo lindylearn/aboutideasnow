@@ -77,6 +77,14 @@ router.addHandler("document", async ({ $, request, log }) => {
     const html = $.html();
     const content = await getPageContent(url, html);
     const wordCount = content?.split(/\s+/).length || 0;
+
+    // Check if content has changed
+    const existingPost = await db.post.findFirst({ where: { url } });
+    if (existingPost?.content === content) {
+        log.info(`skipping ${url} (content unchanged)`);
+        return;
+    }
+
     const meta = await getMeta(url, html, content);
 
     // Log debug stats
