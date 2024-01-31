@@ -5,7 +5,7 @@ import { getPageContent } from "../common/content.js";
 import { PostType, ScrapeStatus } from "@repo/core/generated/prisma-client";
 import { db } from "../common/db.js";
 import { isExcludedPage } from "../common/filter.js";
-import { generateEmbedding } from "../common/openai.js";
+import { indexPost } from "../common/typesense.js";
 
 export const router = createCheerioRouter();
 
@@ -123,10 +123,8 @@ router.addHandler("document", async ({ $, request, log }) => {
         update: post
     });
 
-    // Generate embedding
-    const embedding = await generateEmbedding(content);
-    // Need raw query because the Prisma client doesn't support vector columns
-    await db.$executeRaw`UPDATE "Post" SET "embedding" = ${embedding} WHERE "url" = ${url}`;
+    // Index for search async
+    indexPost(post);
 
     // Save scrape success
     const scrapeState = {

@@ -21,7 +21,8 @@
         "metascraper-date": "^5.43.4",
         "normalize-url": "^8.0.0",
         "openai": "^4.26.0",
-        "turndown": "^7.1.2"
+        "turndown": "^7.1.2",
+        "typesense": "^1.7.2"
     },
     "devDependencies": {
         "@flydotio/dockerfile": "^0.4.11",

@@ -1,21 +1,24 @@
 import type { Request, Response } from "express";
 import { db } from "../common/db.js";
-import { generateEmbedding } from "../common/openai.js";
-import { Post } from "@repo/core/generated/prisma-client";
+import { indexPost } from "../common/typesense.js";
 
 export async function runBackfill(req: Request, res: Response) {
-    const posts: Post[] =
-        await db.$queryRaw`SELECT "url", "content" FROM "Post" WHERE "embedding" IS NULL`;
+    const limit = parseInt(req.query.limit as string) || 100;
 
-    console.log(`Backfilling ${posts.length} posts`);
+    const posts = await db.post.findMany({
+        orderBy: { updatedAt: "desc" },
+        take: limit
+    });
 
     let index = 1;
     for (const post of posts) {
         console.log(`Backfilling post ${index}/${posts.length}`);
 
-        const embedding = await generateEmbedding(post.content.slice(0, 1000));
-        await db.$executeRaw`UPDATE "Post" SET "embedding" = ${embedding} WHERE "url" = ${post.url}`;
+        await indexPost(post);
 
         index++;
     }
+
+    console.log(`Backfill complete`);
+    return res.json({ success: true });
 }
