@@ -30,7 +30,14 @@ export const typesense = new Typesense.Client({
 
 export async function indexPost(post: Post) {
     const t0 = Date.now();
-    const paragraphs = getPostParagraphs(post.content);
+    const paragraphs = await getPostParagraphs(post.content);
+
+    // Paragraph splitting debug
+    // console.log(`# ${post.url}\n`);
+    // for (const p of paragraphs) {
+    //     console.log(`- ${p}\n`);
+    // }
+    // console.log(`\n\n`);
 
     // Delete existing paragraphs for this post (the number might have changed)
     await typesense
