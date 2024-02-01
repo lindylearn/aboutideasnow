@@ -36,11 +36,11 @@
     <a class="text-lg font-semibold" href="/manifesto">Read the /ideas manifesto</a>
 </main>
 
-<div class="flex items-center justify-center w-full gap-2 max-w-4xl">
+<div class="flex items-center justify-center w-full max-w-4xl gap-2">
     <!-- svelte-ignore a11y-autofocus -->
     <input
         id="search-bar"
-        class="w-8 px-3 py-2 text-lg text-center shadow-md rounded-xl grow md:w-auto outline-none bg-light placeholder:text-text/30 border border-border"
+        class="w-8 px-3 py-2 text-lg text-center border shadow-md outline-none rounded-xl grow md:w-auto bg-light placeholder:text-text/30 border-border"
         placeholder="Search for anything that people are doing"
         autocapitalize="off"
         spellcheck="false"
@@ -48,12 +48,12 @@
         bind:value={searchQuery}
         on:input={runSearchDebounced}
     />
-    <div class="relative w-0 flex items-center">
+    <div class="relative flex items-center w-0">
         {#if isSearching}
             <div class="loader -ml-11 animate-fadein" />
         {:else if searchQuery}
             <button
-                class="-ml-12 hover:text-text/30 p-1 rounded-full transition-colors animate-fadein"
+                class="p-1 -ml-12 transition-colors rounded-full hover:text-text/30 animate-fadein"
                 on:click={() => {
                     searchQuery = "";
                     document.getElementById("search-bar")?.focus();
@@ -85,7 +85,7 @@
                 // @ts-ignore
                 updatedAt: undefined
             }}
-            color="#ffb3ba"
+            color={colorPalette[0]}
         />
     </div>
 {:else}

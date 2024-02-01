@@ -6,11 +6,11 @@
 </script>
 
 <div
-    class="flex flex-col gap-5 md:gap-10 items-center min-h-screen p-5 bg-background font-text text-text"
+    class="flex flex-col items-center min-h-screen gap-5 p-5 md:gap-10 bg-background font-text text-text"
 >
     <h1>
         <a
-            class="text-4xl font-bold leading-relaxed text-center md:text-5xl font-title flex shadow rounded-2xl"
+            class="flex text-4xl font-bold leading-relaxed text-center shadow md:text-5xl font-title rounded-2xl"
             href="/"
         >
             {#each ["about", "ideas", "now"] as word, i}

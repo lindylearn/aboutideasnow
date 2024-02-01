@@ -9,22 +9,22 @@
 
 <a
     href={post.url}
-    class="flex flex-col w-full h-max transition-all rounded-xl shadow-sm border-border border bg-light overflow-hidden relative"
+    class="relative flex flex-col w-full overflow-hidden transition-all border shadow-sm h-max rounded-xl border-border bg-light"
     target="_blank"
 >
-    <div class="flex p-2 gap-2" style:background-color={color}>
-        <div class="flex flex-1 rounded-lg bg-light px-2 gap-2">
+    <div class="flex gap-2 p-2" style:background-color={color}>
+        <div class="flex flex-1 gap-2 px-2 rounded-lg bg-light">
             <img
                 alt={post.domain}
                 class="w-5 h-5 my-2"
                 src="https://www.google.com/s2/favicons?sz=256&domain_url={post.domain}"
             />
-            <div class="flex flex-row items-center gap-2 grow shrink overflow-hidden">
-                <h2 class="font-bold font-title shrink overflow-hidden text-ellipsis">
+            <div class="flex flex-row items-center gap-2 overflow-hidden grow shrink">
+                <h2 class="overflow-hidden font-bold font-title shrink text-ellipsis">
                     {post.domain}
                 </h2>
                 <div
-                    class="w-auto px-2 py-1 rounded-lg font-mono text-sm"
+                    class="w-auto px-2 py-1 font-mono text-sm rounded-lg"
                     style:background-color={color}
                 >
                     /{post.type.toLowerCase()}
@@ -33,7 +33,7 @@
         </div>
         <!-- <div class="flex items-center gap-1">
             {#each Array(3) as _}
-                <div class="w-3 h-3 bg-light rounded-full" />
+                <div class="w-3 h-3 rounded-full bg-light" />
             {/each}
         </div> -->
     </div>
