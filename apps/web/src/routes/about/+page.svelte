@@ -13,32 +13,10 @@
         <!-- <h2>Okay, so what is this?</h2> -->
         <p>
             1000s of personal websites exist on the internet, created by creators, thinkers, and
-            doers of all sorts. They are much more interesting than social media profiles, but hard
-            to find.
+            doers of all sorts.
+            <span class="font-bold">aboutideasnow.com</span> exist to help you find those people, and
+            help them find you.
         </p>
-        <!-- <ul>
-            <li>
-                <span class="px-2 py-1 font-bold bg-green-200 rounded-md">about</span> themselves
-            </li>
-            <li>
-                Their <span class="px-2 py-1 font-bold bg-yellow-200 rounded-md">ideas</span>
-            </li>
-            <li>
-                What they're up to <span class="px-2 py-1 font-bold bg-red-200 rounded-md">
-                    now
-                </span>
-            </li>
-        </ul> -->
-
-        <p>
-            <span class="font-bold">aboutideasnow.com</span> and
-            <span class="font-bold">/ideas pages</span>
-            exist to help you find those websites / people, and help them find you.
-        </p>
-        <!-- <ol>
-            <li>Find interesting people</li>
-            <li>Help other people find you</li>
-        </ol> -->
     </section>
 
     <section>
@@ -55,9 +33,10 @@
     <section>
         <h2>Help other people find me</h2>
         <p>
-            You can also help other people reach out to you. For that, add at least one of these
-            pages to your website:
+            But having other people reach out to you seems even better right?
+            <!-- This is where /about, /ideas, and /now pages come in. -->
         </p>
+        <p>Add at least one of these pages to your website:</p>
         <ul>
             <li>
                 <span
@@ -79,7 +58,7 @@
             </li>
         </ul>
 
-        <p>Then submit your website here:</p>
+        <p>And then submit your website here:</p>
 
         <div class="flex flex-col items-center mt-4 text-center">
             {#if form?.addedDomain === false}
