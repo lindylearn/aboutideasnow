@@ -4,6 +4,7 @@
     import IdeaCard from "../components/IdeaCard.svelte";
     import type { PageData } from "./$types";
     import debounce from "lodash/debounce";
+    import XIcon from "../components/icons/x.svelte";
 
     // export let data: PageData;
 
@@ -49,9 +50,18 @@
             bind:value={searchQuery}
             on:input={runSearchDebounced}
         />
-        <div class="relative w-0">
+        <div class="relative w-0 flex items-center">
             {#if isSearching}
-                <div class="loader -ml-10" />
+                <div class="loader -ml-11 animate-fadein" />
+            {:else if searchQuery}
+                <button
+                    class="-ml-12 hover:text-text/50 p-1 rounded-full transition-colors animate-fadein"
+                    on:click={() => {
+                        searchQuery = "";
+                    }}
+                >
+                    <XIcon />
+                </button>
             {/if}
         </div>
     </div>
