@@ -19,8 +19,8 @@
                 class="w-5 h-5 my-2"
                 src="https://www.google.com/s2/favicons?sz=256&domain_url={post.domain}"
             />
-            <div class="flex flex-row items-center gap-2 grow">
-                <h2 class="font-bold font-title">
+            <div class="flex flex-row items-center gap-2 grow shrink overflow-hidden">
+                <h2 class="font-bold font-title shrink overflow-hidden text-ellipsis">
                     {post.domain}
                 </h2>
                 <div

@@ -34,7 +34,7 @@
             /now pages of 1000s of personal websites.
         </p>
 
-        <a class="text-lg font-bold" href="/manifesto">Read the /ideas manifesto</a>
+        <a class="text-lg font-semibold" href="/manifesto">Read the /ideas manifesto</a>
     </main>
 
     <div class="flex items-center justify-center w-full gap-2 max-w-4xl mt-0">
