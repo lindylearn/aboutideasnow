@@ -33,7 +33,7 @@
 }
 
 .highlight {
-    @apply bg-yellow-200 font-bold;
+    @apply font-bold bg-yellow-200;
 }
 
 .loader {
@@ -80,9 +80,7 @@
 @font-face {
     font-family: "Reckless";
     font-display: block;
-    src:
-        local("Reckless"),
-        url(./fonts/Reckless-VariableFont.woff2) format("woff2");
+    src: url(/fonts/Reckless-VariableFont.woff2) format("woff2");
 }
 
 @font-face {
