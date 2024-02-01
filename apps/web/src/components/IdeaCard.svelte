@@ -41,7 +41,9 @@
         </div> -->
     </div>
     <div class="p-4">
-        <div class="text-sm whitespace-pre-wrap overflow-hidden line-clamp-[10] font-mono">
+        <div
+            class="text-sm whitespace-pre-wrap overflow-hidden line-clamp-[10] font-mono font-normal"
+        >
             {#if date && date.getFullYear() !== 1970}
                 Updated {new Intl.DateTimeFormat("en-US", {
                     month: "long",

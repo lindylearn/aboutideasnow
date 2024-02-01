@@ -4,7 +4,7 @@
 
 @layer base {
     h2 {
-        @apply mb-4 text-3xl font-bold text-center;
+        @apply mb-4 text-3xl font-bold text-center font-title;
     }
     p {
         @apply mb-2;
@@ -79,12 +79,14 @@
 
 @font-face {
     font-family: "Reckless";
+    font-weight: 100 1000;
     font-display: block;
     src: url(/fonts/Reckless-VariableFont.woff2) format("woff2");
 }
 
 @font-face {
     font-family: "DM Sans";
+    font-weight: 100 1000;
     font-display: block;
     src:
         local("DM Sans"),
