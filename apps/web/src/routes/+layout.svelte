@@ -37,7 +37,7 @@
             <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>
             and
             <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>. Add
-            your site <a class="font-bold" href="/manifesto">here</a>.
+            your site <a class="font-bold" href="/about">here</a>.
         </p>
         <p>
             Contribute on

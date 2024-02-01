@@ -33,7 +33,7 @@
         Find people to talk to or collaborate with by searching across the /about, /ideas and /now
         pages of 1000s of personal websites.
     </p>
-    <a class="text-lg font-semibold transition-all hover:text-text/50" href="/manifesto"
+    <a class="text-lg font-semibold transition-all hover:text-text/50" href="/about"
         >Read the /ideas manifesto</a
     >
 </main>
@@ -83,7 +83,7 @@
                 type: "ABOUT",
                 content:
                     "Something missing?\n\nSubmit your website to ideasideasideas so that others can find you and reach out!",
-                url: "https://ideasideasideas.io/manifesto",
+                url: "https://ideasideasideas.io/about",
                 // @ts-ignore
                 updatedAt: undefined
             }}
