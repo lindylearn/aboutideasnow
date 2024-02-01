@@ -71,7 +71,7 @@
         class="flex flex-col items-start justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
     >
         {#each posts as post, index (post.id)}
-            <IdeaCard {post} color={colorPalette[index % colorPalette.length]}></IdeaCard>
+            <IdeaCard {post} listIndex={index}></IdeaCard>
         {/each}
 
         <IdeaCard
@@ -85,11 +85,10 @@
                 // @ts-ignore
                 updatedAt: undefined
             }}
-            color={colorPalette[0]}
         />
     </div>
 {:else}
-    <div id="example-searches" class="flex flex-wrap justify-center max-w-4xl gap-2">
+    <div id="example-searches" class="flex flex-wrap justify-center max-w-4xl gap-2 animate-fadein">
         {#each exampleSearchQueries as exampleSearchQuery}
             <button
                 class="px-2 py-1 font-mono"

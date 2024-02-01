@@ -6,7 +6,7 @@
 </script>
 
 <div
-    class="flex flex-col items-center min-h-screen gap-5 p-5 md:gap-10 bg-background font-text text-text"
+    class="flex flex-col items-center min-h-screen gap-5 p-5 md:gap-10 bg-background font-text text-text animate-fadein"
 >
     <h1>
         <a

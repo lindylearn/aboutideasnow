@@ -22,14 +22,14 @@ export default {
                     "0%": { opacity: "0" },
                     "100%": { opacity: "1" }
                 },
-                fadeout: {
-                    "0%": { opacity: "1" },
-                    "100%": { opacity: "0" }
+                cardFadein: {
+                    "0%": { opacity: "0", transform: "translateY(5px)" },
+                    "100%": { opacity: "1", transform: "translateY(0)" }
                 }
             },
             animation: {
                 fadein: "fadein 200ms ease-out backwards",
-                fadeout: "fadeout 200ms ease-in forwards"
+                cardFadein: "cardFadein 600ms cubic-bezier(0.16, 1, 0.3, 1) backwards"
             }
         }
     }

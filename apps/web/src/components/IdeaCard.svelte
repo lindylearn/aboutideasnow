@@ -1,16 +1,19 @@
 <script lang="ts">
+    import { colorPalette } from "../common/constants";
     import type { SearchedPost } from "../common/typesense";
 
     export let post: SearchedPost;
-    export let color: string;
+    export let listIndex = 0;
 
+    const color = colorPalette[listIndex % colorPalette.length];
     const date = post.updatedAt ? new Date(post.updatedAt) : undefined;
 </script>
 
 <a
     href={post.url}
-    class="relative flex flex-col w-full overflow-hidden transition-all border shadow-sm h-max rounded-xl border-border bg-light"
+    class="relative flex flex-col w-full overflow-hidden transition-all border shadow-sm h-max rounded-xl border-border bg-light animate-cardFadein"
     target="_blank"
+    style:animation-delay={`${Math.random() * 200}ms`}
 >
     <div class="flex gap-2 p-2" style:background-color={color}>
         <div class="flex flex-1 gap-2 px-2 rounded-lg bg-light">
