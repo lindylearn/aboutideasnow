@@ -33,7 +33,9 @@
         Find people to talk to or collaborate with by searching across the /about, /ideas and /now
         pages of 1000s of personal websites.
     </p>
-    <a class="text-lg font-semibold" href="/manifesto">Read the /ideas manifesto</a>
+    <a class="text-lg font-semibold transition-all hover:text-text/50" href="/manifesto"
+        >Read the /ideas manifesto</a
+    >
 </main>
 
 <div class="flex items-center justify-center w-full max-w-4xl gap-2">
@@ -53,7 +55,7 @@
             <div class="loader -ml-11 animate-fadein" />
         {:else if searchQuery}
             <button
-                class="p-1 -ml-12 transition-colors rounded-full hover:text-text/30 animate-fadein"
+                class="p-1 -ml-12 transition-colors rounded-full hover:text-text/50 animate-fadein"
                 on:click={() => {
                     searchQuery = "";
                     document.getElementById("search-bar")?.focus();
@@ -91,7 +93,7 @@
     <div id="example-searches" class="flex flex-wrap justify-center max-w-4xl gap-2 animate-fadein">
         {#each exampleSearchQueries as exampleSearchQuery}
             <button
-                class="px-2 py-1 font-mono"
+                class="px-2 py-1 font-mono transition-colors hover:text-text/50"
                 on:click={() => {
                     searchQuery = exampleSearchQuery.term;
                     // trigger search without debounce

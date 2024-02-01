@@ -10,7 +10,7 @@
 >
     <h1>
         <a
-            class="flex text-4xl font-bold leading-relaxed text-center shadow md:text-5xl font-title rounded-2xl"
+            class="flex text-4xl font-bold leading-relaxed text-center transition-shadow shadow md:text-5xl font-title rounded-2xl hover:shadow-lg"
             href="/"
         >
             {#each ["about", "ideas", "now"] as word, i}
