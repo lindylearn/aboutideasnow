@@ -7,9 +7,9 @@
     let isAddingDomain = false;
 </script>
 
-<main class="flex flex-col items-center gap-3 md:gap-7">
+<main class="flex flex-col items-center gap-2 md:gap-8">
     <p class="mb-4 text-lg">Thousands of personal sites. One directory.</p>
-    <main class="flex flex-col max-w-xl gap-3 text-lg text-left items-left">
+    <main class="flex flex-col max-w-xl gap-2 text-lg text-left items-left">
         <h1 class="mt-8">
             What is <span class="px-2 py-1 bg-green-200 rounded-md">about</span>
             <span class="px-2 py-1 bg-yellow-200 rounded-md">ideas</span>

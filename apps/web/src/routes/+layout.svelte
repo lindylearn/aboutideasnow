@@ -5,10 +5,13 @@
     import "../app.css";
 </script>
 
-<div class="flex flex-col items-center min-h-screen p-5 sm:pt-5 bg-background font-text text-text">
-    <a class="flex flex-col items-center justify-center h-auto mb-5" href="/">
-        <h1
+<div
+    class="flex flex-col gap-5 md:gap-10 items-center min-h-screen p-5 bg-background font-text text-text"
+>
+    <h1>
+        <a
             class="text-4xl font-bold leading-relaxed text-center md:text-5xl font-title flex shadow rounded-2xl"
+            href="/"
         >
             {#each ["about", "ideas", "now"] as word, i}
                 <div
@@ -22,12 +25,10 @@
                     {word}
                 </div>
             {/each}
-        </h1>
-    </a>
+        </a>
+    </h1>
 
-    <div class="w-full grow">
-        <slot />
-    </div>
+    <slot />
 
     <!-- Putting this on the manifest page may be enough? -->
     <!-- <footer class="flex flex-col items-center mt-10">

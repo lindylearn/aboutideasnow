@@ -25,10 +25,10 @@
         @apply ml-6 list-disc list-outside;
     }
     li {
-        @apply mb-3;
+        @apply mb-2;
     }
     ol {
-        @apply ml-6 list-decimal list-outside;
+        @apply ml-4 list-decimal list-outside;
     }
 }
 
