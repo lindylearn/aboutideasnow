@@ -3,32 +3,32 @@
 @tailwind utilities;
 
 @layer base {
-    h1 {
-        @apply text-2xl font-bold;
-    }
     h2 {
-        @apply text-xl;
+        @apply mb-5 text-3xl font-bold text-center;
     }
-
     p {
-        @apply mb-1;
+        @apply mb-2;
+    }
+    a {
+        @apply font-bold;
+    }
+    a:not(.post),
+    button {
+        @apply transition-all hover:text-text/50;
     }
 
-    h3 {
-        @apply text-lg;
+    ul,
+    ol {
+        @apply ml-10 list-outside w-max;
     }
-    /* a {
-        @apply text-blue-600 underline;
-    } */
-
     ul {
-        @apply ml-6 list-disc list-outside;
+        @apply list-disc;
+    }
+    ol {
+        @apply list-decimal;
     }
     li {
         @apply mb-2;
-    }
-    ol {
-        @apply ml-4 list-decimal list-outside;
     }
 }
 

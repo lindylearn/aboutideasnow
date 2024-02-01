@@ -33,16 +33,14 @@
         Find people to talk to or collaborate with by searching across the /about, /ideas and /now
         pages of 1000s of personal websites.
     </p>
-    <a class="text-lg font-semibold transition-all hover:text-text/50" href="/about"
-        >Read the /ideas manifesto</a
-    >
+    <a class="text-lg" href="/about">Read the /ideas manifesto</a>
 </main>
 
 <div class="flex items-center justify-center w-full max-w-4xl gap-2">
     <!-- svelte-ignore a11y-autofocus -->
     <input
         id="search-bar"
-        class="w-8 px-3 py-2 text-lg text-center border shadow-md outline-none rounded-xl grow md:w-auto bg-light placeholder:text-text/30 border-border"
+        class="px-3 py-2 text-lg text-center border shadow-md outline-none rounded-xl grow md:w-auto bg-light placeholder:text-text/30 border-border"
         placeholder="Search for anything that people are doing"
         autocapitalize="off"
         spellcheck="false"
@@ -55,7 +53,7 @@
             <div class="loader -ml-11 animate-fadein" />
         {:else if searchQuery}
             <button
-                class="p-1 -ml-12 transition-colors rounded-full hover:text-text/50 animate-fadein"
+                class="p-1 -ml-12 font-normal rounded-full animate-fadein"
                 on:click={() => {
                     searchQuery = "";
                     document.getElementById("search-bar")?.focus();

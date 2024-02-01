@@ -11,7 +11,7 @@
 
 <a
     href={post.url}
-    class="relative flex flex-col w-full overflow-hidden transition-all border shadow-sm h-max rounded-xl border-border bg-light animate-cardFadein will-change-transform hover:shadow hover:rotate-1"
+    class="relative flex flex-col w-full overflow-hidden transition-all border shadow-sm post h-max rounded-xl border-border bg-light animate-cardFadein will-change-transform hover:shadow hover:rotate-1"
     target="_blank"
     style:animation-delay={`${Math.random() * 200}ms`}
 >
@@ -23,9 +23,9 @@
                 src="https://www.google.com/s2/favicons?sz=256&domain_url={post.domain}"
             />
             <div class="flex flex-row items-center gap-2 overflow-hidden grow shrink">
-                <h2 class="overflow-hidden font-bold font-title shrink text-ellipsis">
+                <h3 class="overflow-hidden text-xl font-bold font-title shrink text-ellipsis">
                     {post.domain}
-                </h2>
+                </h3>
                 <div
                     class="w-auto px-2 py-1 font-mono text-sm rounded-lg"
                     style:background-color={color}
