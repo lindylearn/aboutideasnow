@@ -1,15 +1,27 @@
 <script>
-    import "../app.css";
+    import clsx from "clsx";
+    import { colorPalette } from "../common/constants";
 
-    let colorPalette = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
+    import "../app.css";
 </script>
 
-<div class="flex flex-col items-center min-h-screen p-5 sm:pt-10 bg-slate-100 font-text text-text">
+<div class="flex flex-col items-center min-h-screen p-5 sm:pt-5 bg-background font-text text-text">
     <a class="flex flex-col items-center justify-center h-auto mb-5" href="/">
-        <h1 class="text-4xl font-bold leading-relaxed text-center md:text-5xl font-title">
-            <span class="px-2 text-white bg-green-500 rounded-md shadow-sm">about</span>
-            <span class="px-2 text-white bg-yellow-500 rounded-md shadow-sm">ideas</span>
-            <span class="px-2 text-white bg-red-500 rounded-md">now</span>
+        <h1
+            class="text-4xl font-bold leading-relaxed text-center md:text-5xl font-title flex shadow rounded-2xl"
+        >
+            {#each ["about", "ideas", "now"] as word, i}
+                <div
+                    class={clsx(
+                        "bg-light h-full py-3 px-4 border border-border",
+                        i === 0 && "rounded-l-2xl",
+                        i === 2 && "rounded-r-2xl"
+                    )}
+                    style:background-color={colorPalette[i]}
+                >
+                    {word}
+                </div>
+            {/each}
         </h1>
     </a>
 

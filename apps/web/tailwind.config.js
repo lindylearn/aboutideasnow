@@ -6,15 +6,16 @@ export default {
     theme: {
         extend: {
             colors: {
-                background: "#ededed",
-                light: "white",
-                bold: "#ffb200",
-                text: "#351e30"
+                background: "#fafafa",
+                light: "rgba(255, 255, 255, 0.32)",
+                border: "rgba(33, 35, 36, 0.04)",
+                bold: "rgb(213, 199, 162)",
+                text: "#2c2c2c"
             },
             fontFamily: {
-                title: ["Inter", "serif"],
-                text: ["Inter", "sans-serif"],
-                mono: ["Roboto Mono", "monospace"]
+                title: ["Reckless", "serif"],
+                text: ["DM Sans", "sans-serif"],
+                mono: ["PT Mono", "monospace"]
             },
             keyframes: {
                 fadein: {

@@ -1,3 +1,5 @@
+export const colorPalette = ["#ce7e8f", "#ebbe6b", "#F9B09A", "#8e79af", "#6eaecf", "#479A70"];
+
 export const exampleSearchQueries = [
     {
         term: "writing a book",
@@ -28,7 +30,7 @@ export const exampleSearchQueries = [
         emoji: "📚"
     },
     {
-        term: "family time",
+        term: "enjoying family time",
         emoji: "👨‍👩‍👧‍👦"
     },
     {
@@ -36,7 +38,7 @@ export const exampleSearchQueries = [
         emoji: "🏢"
     },
     {
-        term: "enjoying life",
+        term: "living life",
         emoji: "🌞"
     },
     {

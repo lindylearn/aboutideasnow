@@ -18,6 +18,7 @@
         "@repo/core": "workspace:*",
         "@supabase/supabase-js": "^2.39.3",
         "axios": "^1.6.7",
+        "clsx": "^2.1.0",
         "cohere-ai": "^7.7.3",
         "lodash": "^4.17.21",
         "loglevel": "^1.9.1",

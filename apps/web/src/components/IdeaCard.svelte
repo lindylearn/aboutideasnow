@@ -9,35 +9,36 @@
 
 <a
     href={post.url}
-    class="flex flex-col w-full h-max font-mono transition-all rounded-md shadow-sm bg-light overflow-hidden relative"
+    class="flex flex-col w-full h-max transition-all rounded-xl shadow-sm border-border border bg-light overflow-hidden relative"
     target="_blank"
 >
-    <div class="flex p-2" style="background-color: {color}">
-        <div class="flex flex-1 rounded-md bg-light">
+    <div class="flex p-2 gap-2" style:background-color={color}>
+        <div class="flex flex-1 rounded-lg bg-light px-2 gap-2">
             <img
                 alt={post.domain}
-                class="w-5 h-5 m-2"
+                class="w-5 h-5 my-2"
                 src="https://www.google.com/s2/favicons?sz=256&domain_url={post.domain}"
             />
-            <div class="flex flex-row items-center justify-center gap-2">
-                <h2 class="mr-0 font-bold font-title text-slate-700">
+            <div class="flex flex-row items-center gap-2 grow">
+                <h2 class="font-bold font-title">
                     {post.domain}
                 </h2>
-                <div class="flex gap-2">
-                    {#if post.type === "NOW"}
-                        <div class="w-auto px-2 py-1 text-sm bg-red-200 rounded-md">/now</div>
-                    {/if}
+                <div
+                    class="w-auto px-2 py-1 rounded-lg font-mono text-sm"
+                    style:background-color={color}
+                >
+                    /{post.type.toLowerCase()}
                 </div>
             </div>
         </div>
-        <div class="flex items-center ml-2">
-            <div class="w-3 h-3 ml-1 mr-2 bg-red-400 rounded-full"></div>
-            <div class="w-3 h-3 mr-2 bg-yellow-400 rounded-full"></div>
-            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
-        </div>
+        <!-- <div class="flex items-center gap-1">
+            {#each Array(3) as _}
+                <div class="w-3 h-3 bg-light rounded-full" />
+            {/each}
+        </div> -->
     </div>
     <div class="p-4">
-        <div class="text-sm whitespace-pre-wrap rounded-b-md overflow-hidden line-clamp-[10]">
+        <div class="text-sm whitespace-pre-wrap overflow-hidden line-clamp-[10] font-mono">
             {#if date && date.getFullYear() !== 1970}
                 Updated {new Intl.DateTimeFormat("en-US", {
                     month: "long",
