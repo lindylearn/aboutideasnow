@@ -10,46 +10,43 @@
 
 <main class="flex flex-col max-w-xl gap-5 text-lg text-justify md:gap-10 items-left">
     <section>
-        <!-- <h2>Okay, so what is this?</h2> -->
         <p>
             1000s of personal websites exist on the internet, created by creators, thinkers, and
             doers of all sorts.
             <span class="font-bold">aboutideasnow.com</span> exist to help you find your people, and
             help them find you.
         </p>
+
+        <p>The search indexes the /about, /ideas, and /now pages of each site.</p>
     </section>
 
     <section>
-        <h2>Finding interesting people</h2>
+        <h2>The /ideas manifesto</h2>
         <p>
-            Search for any topic, project, or feeling that you're thinking about on <span
-                class="font-bold">aboutideasnow.com</span
-            >. Then visit people's websites to learn more about them.
+            <span class="font-bold">/about</span> pages are about the past: how you see yourself and
+            what brought you here. <span class="font-bold">/now</span> is a more personal look at what
+            you're doing now and what you care about. What's missing is the future.
         </p>
         <p>
-            Maybe you can exchange ideas or work together! All the best things in life happen
-            through collaboration.
+            All the great things in life happen in collaboration. By writing about what you want to
+            do, people who have similar ideas can find you and reach out. Who know what will happen
+            then?
+        </p>
+        <p>
+            So <span class="font-bold">/ideas</span> is a space to write about the crazy things you always
+            wanted to make, concepts you're thinking about, or projects you're looking collaborators
+            for. Anything in the future really.
         </p>
     </section>
 
     <section>
         <h2>Help other people find me</h2>
         <p>
-            <span class="font-bold">aboutideasnow.com</span> indexes the /about, /ideas, and /now pages
-            of personal websites. If you want other people to find you, you need to create at least one
-            of these pages and submit your site here.
+            You can add your website to the <span class="font-bold"> aboutideasnow.com </span> search
+            index if it's not included already. For this you need to create either an /about, /ideas,
+            or /now page - or all three.
         </p>
-        <p>
-            <span class="font-bold">/about</span> to describe yourself with whatever you want to share.
-        </p>
-        <p>
-            <span class="font-bold">/ideas</span> with what you want to work on in the future, what you're
-            frequently thinking about, or projects you're looking collaborators for.
-        </p>
-        <p>
-            <span class="font-bold">/now</span> with what you're up to right now.
-        </p>
-
+        <p>The more you write, the more likely it's that people can find you.</p>
         <div class="flex flex-col items-center mt-4 text-center">
             {#if form?.addedDomain === false}
                 Error indexing your domain :(<br />We will take a look and add your site as soon as
@@ -102,11 +99,11 @@
     </section>
 
     <section>
-        <h2>About this website</h2>
+        <h2>Who built this?</h2>
         <p>
             <span class="font-bold"> aboutideasnow.com </span> is a decentralized solution on the increasingly
-            centralized web. It exists only to direct you to people's personal websites and take it from
-            there.
+            centralized web. It exists only to direct you to people's personal websites and to take it
+            from there.
         </p>
         <p>
             <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>
