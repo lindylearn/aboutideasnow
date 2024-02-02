@@ -14,7 +14,7 @@
         <p>
             1000s of personal websites exist on the internet, created by creators, thinkers, and
             doers of all sorts.
-            <span class="font-bold">aboutideasnow.com</span> exist to help you find those people, and
+            <span class="font-bold">aboutideasnow.com</span> exist to help you find your people, and
             help them find you.
         </p>
     </section>
@@ -22,43 +22,33 @@
     <section>
         <h2>Finding interesting people</h2>
         <p>
-            Search for any topic, project, or feeling that you're dealing with on <span
+            Search for any topic, project, or feeling that you're thinking about on <span
                 class="font-bold">aboutideasnow.com</span
-            >. Then visit people's websites to learn more about them. Maybe you can exchange ideas
-            or work together!
+            >. Then visit people's websites to learn more about them.
         </p>
-        <p>Basically everyone replies to emails if you have something interesting to talk about.</p>
+        <p>
+            Maybe you can exchange ideas or work together! All the best things in life happen
+            through collaboration.
+        </p>
     </section>
 
     <section>
         <h2>Help other people find me</h2>
         <p>
-            But having other people reach out to you seems even better right?
-            <!-- This is where /about, /ideas, and /now pages come in. -->
+            <span class="font-bold">aboutideasnow.com</span> indexes the /about, /ideas, and /now pages
+            of personal websites. If you want other people to find you, you need to create at least one
+            of these pages and submit your site here.
         </p>
-        <p>Add at least one of these pages to your website:</p>
-        <ul>
-            <li>
-                <span
-                    class="px-2 py-1 font-bold rounded-md"
-                    style:background-color={colorPalette[0]}>/about</span
-                > to describe yourself
-            </li>
-            <li>
-                <span
-                    class="px-2 py-1 font-bold rounded-md"
-                    style:background-color={colorPalette[1]}>/ideas</span
-                > with what you want to do
-            </li>
-            <li>
-                <span
-                    class="px-2 py-1 font-bold rounded-md"
-                    style:background-color={colorPalette[2]}>/now</span
-                > with what you're up to right now
-            </li>
-        </ul>
-
-        <p>And then submit your website here:</p>
+        <p>
+            <span class="font-bold">/about</span> to describe yourself with whatever you want to share.
+        </p>
+        <p>
+            <span class="font-bold">/ideas</span> with what you want to work on in the future, what you're
+            frequently thinking about, or projects you're looking collaborators for.
+        </p>
+        <p>
+            <span class="font-bold">/now</span> with what you're up to right now.
+        </p>
 
         <div class="flex flex-col items-center mt-4 text-center">
             {#if form?.addedDomain === false}
