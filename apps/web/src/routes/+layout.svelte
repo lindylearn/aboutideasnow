@@ -10,13 +10,13 @@
 >
     <h1>
         <a
-            class="flex text-4xl font-bold leading-relaxed text-center transition-all shadow md:text-5xl font-title rounded-2xl hover:shadow-lg"
+            class="flex text-2xl font-bold leading-relaxed text-center transition-all shadow md:text-5xl font-title rounded-2xl hover:shadow-lg"
             href="/"
         >
             {#each ["about", "ideas", "now"] as word, i}
                 <div
                     class={clsx(
-                        "bg-light h-full py-3 px-4 border border-border",
+                        "bg-light h-full py-1 md:py-3  px-2 md:px-4 border border-border",
                         i === 0 && "rounded-l-2xl",
                         i === 2 && "rounded-r-2xl"
                     )}
