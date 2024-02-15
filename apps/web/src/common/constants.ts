@@ -1,4 +1,4 @@
-export const colorPalette = ["#ce7e8f", "#ebbe6b", "#F9B09A", "#8e79af", "#6eaecf", "#479A70"];
+export const colorPalette = ["#ce7e8f", "#ebbe6b", "#6eaecf", "#F9B09A", "#8e79af", "#479A70"];
 
 export const exampleSearchQueries = [
     {
