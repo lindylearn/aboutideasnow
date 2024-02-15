@@ -8,7 +8,7 @@
     let isAddingDomain = false;
 </script>
 
-<main class="flex flex-col max-w-xl gap-5 text-lg text-justify md:gap-10 items-left">
+<main class="flex flex-col w-full max-w-xl gap-5 text-lg md:gap-10 items-left">
     <section>
         <p>
             1000s of personal websites exist on the internet, created by creators, thinkers, and
