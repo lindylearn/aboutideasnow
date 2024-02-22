@@ -1,21 +1,21 @@
 <script lang="ts">
     import { colorPalette, exampleSearchQueries } from "../common/constants";
-    import { searchPosts, type SearchedPost } from "../common/typesense";
+    import { searchPosts } from "../common/typesense";
     import IdeaCard from "../components/IdeaCard.svelte";
     import type { PageData } from "./$types";
     import debounce from "lodash/debounce";
     import XIcon from "../components/icons/x.svelte";
-    import type { PostType } from "@repo/core/generated/prisma-client";
+    import type { Post, PostType } from "@repo/core/generated/prisma-client";
 
-    // export let data: PageData;
+    export let data: PageData;
 
     let searchQuery = "";
     let postTypeFilter: PostType | undefined = "IDEAS";
 
-    let posts: SearchedPost[] = [];
+    let searchedPosts: Post[] = [];
     let isSearching = false;
     $: if (!searchQuery) {
-        posts = [];
+        searchedPosts = [];
         isSearching = false;
     }
 
@@ -25,7 +25,7 @@
         }
 
         isSearching = true;
-        posts = await searchPosts(searchQuery, postTypeFilter); // Call TypeSense directly from the browser
+        searchedPosts = await searchPosts(searchQuery, postTypeFilter); // Call TypeSense directly from the browser
         isSearching = false;
     }
     const runSearchDebounced = debounce(runSearch, 200);
@@ -68,43 +68,28 @@
     </div>
 </div>
 
-{#if posts.length}
-    <div
-        id="search-results"
-        class="flex flex-col items-start justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
-    >
-        {#each posts as post, index (post.id)}
-            <IdeaCard {post} listIndex={index}></IdeaCard>
-        {/each}
+<div id="example-searches" class="flex flex-wrap justify-center max-w-4xl gap-2 animate-fadein">
+    {#each exampleSearchQueries as exampleSearchQuery}
+        <button
+            class="px-2 py-1 font-mono transition-colors hover:text-text/50"
+            on:click={() => {
+                searchQuery = exampleSearchQuery.term;
+                // trigger search without debounce
+                runSearch();
 
-        <IdeaCard
-            post={{
-                domain: "ideasideasideas.io",
-                // @ts-ignore
-                type: "ABOUT",
-                content:
-                    "Something missing?\n\nSubmit your website to ideasideasideas so that others can find you and reach out!",
-                url: "https://ideasideasideas.io/about",
-                // @ts-ignore
-                updatedAt: undefined
+                document.getElementById("search-bar")?.focus();
             }}
-        />
-    </div>
-{:else}
-    <div id="example-searches" class="flex flex-wrap justify-center max-w-4xl gap-2 animate-fadein">
-        {#each exampleSearchQueries as exampleSearchQuery}
-            <button
-                class="px-2 py-1 font-mono transition-colors hover:text-text/50"
-                on:click={() => {
-                    searchQuery = exampleSearchQuery.term;
-                    // trigger search without debounce
-                    runSearch();
+        >
+            {exampleSearchQuery.emoji + " " + exampleSearchQuery.term}
+        </button>
+    {/each}
+</div>
 
-                    document.getElementById("search-bar")?.focus();
-                }}
-            >
-                {exampleSearchQuery.emoji + " " + exampleSearchQuery.term}
-            </button>
-        {/each}
-    </div>
-{/if}
+<div
+    id="search-results"
+    class="flex flex-col items-start justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+>
+    {#each searchedPosts.length ? searchedPosts : data.defaultPosts as post, index (post.url)}
+        <IdeaCard {post} listIndex={index}></IdeaCard>
+    {/each}
+</div>
