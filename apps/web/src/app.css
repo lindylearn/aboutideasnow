@@ -12,11 +12,6 @@
     a {
         @apply font-bold;
     }
-    a:not(.post),
-    /* button {
-        @apply transition-all hover:text-text/50;
-    } */
-
     ul,
     ol {
         @apply ml-10 list-outside w-max;
