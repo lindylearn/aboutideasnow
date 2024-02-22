@@ -1,11 +1,16 @@
 # About Ideas Now
 
-Find people to talk to or collaborate with by searching across the /about, /ideas and /now pages of 1000s of personal websites.
+aboutideasnow.com indexes the /about, /ideas, and /now pages of 1000s of personal websites, and lets you search across them.
+The purpose is to help you find interesting people and talk to them.
 
-This is a simple template for full-stack TypeScript projects. This repo includes:
+If you want to help improve the website, please open a Github issue!
 
--   `apps/api`: A Node.js server to run long-running backend tasks
--   `apps/web`: A SvelteKit web app (with Tailwind CSS for styling)
+## Code structure
+
+This project uses Turborepo with a number of packages:
+
+-   `apps/web`: A SvelteKit web app for the aboutideasnow.com website
+-   `apps/api`: A Node.js server to run periodic website scrapes
 -   `packages/core`: Shared util functions and the Prisma Postgres database config
 
 ## Installation
