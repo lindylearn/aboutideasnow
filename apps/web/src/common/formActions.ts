@@ -8,7 +8,8 @@ export async function handleSubmit(
 ): Promise<{ addedDomain: boolean; scrapedPosts?: Post[] }> {
     const data = await request.formData();
     const domain = data.get("domain");
-    const response = await fetch(`${INTERNAL_API_URL}/add-domain?url=${domain}`, {
+    const email = data.get("email");
+    const response = await fetch(`${INTERNAL_API_URL}/add-domain?url=${domain}&email=${email}`, {
         method: "POST"
     });
     if (!response.ok) {
