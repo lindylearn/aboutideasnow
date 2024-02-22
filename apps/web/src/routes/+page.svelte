@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { page, navigating } from "$app/stores";
+    import { goto } from "$app/navigation";
     import { colorPalette, exampleSearchQueries } from "../common/constants";
     import { searchPosts } from "../common/typesense";
     import IdeaCard from "../components/IdeaCard.svelte";
@@ -9,7 +11,7 @@
 
     export let data: PageData;
 
-    let searchQuery = "";
+    let searchQuery = $page.url.searchParams.get("q") || "";
     let postTypeFilter: PostType | undefined = "IDEAS";
 
     let searchedPosts: Post[] = [];
@@ -20,8 +22,22 @@
     }
 
     async function runSearch() {
+        // Update URL params
+        const searchParams = new URLSearchParams($page.url.searchParams.toString());
+        searchParams.set("filter", postTypeFilter?.toLowerCase() || "ideas");
+        if (searchQuery) {
+            searchParams.set("q", searchQuery);
+        } else {
+            searchParams.delete("q");
+        }
+
         if (!searchQuery) {
+            // Show most recent posts per type by reloading the page
+            goto(`?${searchParams.toString()}`);
             return;
+        } else {
+            // Update URL without reload
+            window.history.replaceState(history.state, "", `?${searchParams.toString()}`);
         }
 
         isSearching = true;
@@ -29,6 +45,11 @@
         isSearching = false;
     }
     const runSearchDebounced = debounce(runSearch, 200);
+
+    // Run search on page load
+    if (searchQuery && typeof window !== "undefined") {
+        runSearch();
+    }
 </script>
 
 <main class="flex flex-col items-center max-w-2xl gap-0 text-lg text-center">
@@ -71,13 +92,14 @@
         on:input={runSearchDebounced}
     />
     <div class="relative flex items-center w-0">
-        {#if isSearching}
+        {#if isSearching || $navigating}
             <div class="loader -ml-9 animate-fadein" />
         {:else if searchQuery}
             <button
                 class="p-1 -ml-10 font-normal rounded-full animate-fadein"
                 on:click={() => {
                     searchQuery = "";
+                    runSearch();
                     document.getElementById("search-bar")?.focus();
                 }}
             >
@@ -108,7 +130,7 @@
     id="search-results"
     class="flex flex-col items-start justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
 >
-    {#each searchedPosts.length ? searchedPosts : data.defaultPosts as post, index (post.url)}
+    {#each searchQuery ? searchedPosts : data.defaultPosts as post, index (post.url)}
         <IdeaCard {post} listIndex={index}></IdeaCard>
     {/each}
 </div>
