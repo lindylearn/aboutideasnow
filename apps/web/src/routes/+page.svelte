@@ -189,7 +189,7 @@
 {#if !isSearching || $navigating}
     <div
         style:background-color={color}
-        class="flex flex-col items-center justify-center p-4 rounded-3xl"
+        class="flex flex-col items-center justify-center p-4 mt-8 rounded-3xl"
     >
         <h1 class="text-2xl font-bold text-white font-title">✨ Add your site here!</h1>
         <Form {form} isClearBg={false} {isAddingDomain} />
