@@ -1,4 +1,6 @@
-# LindyLearn Project Template
+# About Ideas Now
+
+Find people to talk to or collaborate with by searching across the /about, /ideas and /now pages of 1000s of personal websites.
 
 This is a simple template for full-stack TypeScript projects. This repo includes:
 

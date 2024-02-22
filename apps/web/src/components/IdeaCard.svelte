@@ -1,8 +1,8 @@
 <script lang="ts">
+    import type { Post } from "@repo/core/generated/prisma-client";
     import { colorPalette } from "../common/constants";
-    import type { SearchedPost } from "../common/typesense";
 
-    export let post: SearchedPost;
+    export let post: Post;
     export let listIndex = 0;
 
     const color = colorPalette[listIndex % colorPalette.length];
