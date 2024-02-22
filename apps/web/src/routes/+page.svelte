@@ -9,7 +9,7 @@
     import XIcon from "../components/icons/x.svelte";
     import type { Post, PostType } from "@repo/core/generated/prisma-client";
     import clsx from "clsx"; // Choose random color from array
-    const color = colorPalette[0];
+    const color = colorPalette[4];
 
     // Filter showing variable
     let showFilter = false;
@@ -182,7 +182,7 @@
     class="flex flex-col items-start justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
 >
     {#each searchQuery ? searchedPosts : data.defaultPosts as post, index (post.url)}
-        <IdeaCard {post} listIndex={index}></IdeaCard>
+        <IdeaCard {post}></IdeaCard>
     {/each}
 </div>
 
