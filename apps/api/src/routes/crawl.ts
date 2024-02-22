@@ -5,7 +5,7 @@ import { db } from "../common/db.js";
 export async function periodicCrawl(req: Request, res: Response) {
     const limit = parseInt(req.query.limit as string) || 10_000;
 
-    // Re-scrape all previously scraped documents
+    // Re-scrape all previously scraped directories and domains
     const scrapeStates = await db.scrapeState.findMany({
         where: { status: { in: ["SCRAPED"] } },
         orderBy: { scapedAt: "asc" },
@@ -13,10 +13,15 @@ export async function periodicCrawl(req: Request, res: Response) {
     });
     const directories = scrapeStates
         .filter((s) => s.domainType === "DIRECTORY")
-        .map((s) => `https://${s.domain}/now`);
+        .map((s) => `https://${s.domain}`);
+
     const documents = scrapeStates
         .filter((s) => s.domainType === "INDIVIDUAL_SITE")
-        .map((s) => `https://${s.domain}/now`);
+        .flatMap((s) => [
+            `https://${s.domain}/about`,
+            `https://${s.domain}/now`,
+            `https://${s.domain}/ideas`
+        ]);
 
     // Don't await response
     runCrawler(directories, documents);

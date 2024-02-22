@@ -5,13 +5,15 @@ export function isExcludedPage(domain: string, title: string, content?: string) 
         return true;
     }
 
-    // Check words in title
+    // Check words in title & content
     const wordBlocklist = [
         "404",
-        "page not found",
-        "couldn't find the page",
-        "no page found",
-        "private site"
+        "oops",
+        "not found",
+        "couldn't find",
+        "no page",
+        "private site",
+        "you're lost"
     ];
     if (
         wordBlocklist.some(

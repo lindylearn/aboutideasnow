@@ -5,7 +5,7 @@ import { getPageContent } from "../common/content.js";
 import { PostType, ScrapeStatus } from "@repo/core/generated/prisma-client";
 import { db } from "../common/db.js";
 import { isExcludedPage } from "../common/filter.js";
-import { indexPost } from "../common/typesense.js";
+import { indexPost, unIndexPost } from "../common/typesense.js";
 
 export const router = createCheerioRouter();
 
@@ -37,7 +37,7 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
         .forEach((s) => excludedDomains.add(s.domain));
 
     const newLinks = nowLinks.filter((link) => !excludedDomains.has(getDomain(link)));
-    console.log(`Found ${newLinks.length} new links`);
+    log.info(`Found ${newLinks.length} new links`);
 
     await enqueueLinks({
         strategy: "all",
@@ -48,12 +48,17 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
 
 // Scrape an individual page
 router.addHandler("document", async ({ $, request, log }) => {
-    const originalUrl = normalizeUrl(request.url);
     const url = normalizeUrl(request.loadedUrl || request.url);
+    const domain = getDomain(url);
+    let pathname = new URL(url).pathname;
 
-    if (url !== originalUrl) {
-        // Save redirect state for original url
-        const originalDomain = getDomain(originalUrl);
+    const originalUrl = normalizeUrl(request.url);
+    const originalDomain = getDomain(originalUrl);
+    const originalPathname = new URL(originalUrl).pathname;
+
+    // Store domain redirects
+    if (domain !== originalDomain) {
+        log.info(`Redirected from ${originalDomain} to ${domain}`);
         const scrapeState = {
             domain: originalDomain,
             status: ScrapeStatus.REDIRECTED,
@@ -64,12 +69,25 @@ router.addHandler("document", async ({ $, request, log }) => {
             create: scrapeState,
             update: scrapeState
         });
+    }
 
-        // Skip if new page doesn't end with /now
-        if (!/\/now\/?$/.test(url)) {
-            log.info(`${originalUrl} redirected to non-now page`);
-            return;
-        }
+    // Allow /about redirect to /
+    if (originalPathname === "/about" && pathname === "/") {
+        log.info("Allowing /about redirect to /");
+        pathname = "/about";
+    }
+    // Skip if not /about, /now, or /ideas page
+    if (!["/about", "/now", "/ideas"].includes(pathname)) {
+        log.info(`${domain} ${pathname} skipped (not /about, /now, or /ideas)`);
+        return;
+    }
+    let postType: PostType;
+    if (pathname === "/about") {
+        postType = PostType.ABOUT;
+    } else if (pathname === "/now") {
+        postType = PostType.NOW;
+    } else {
+        postType = PostType.IDEAS;
     }
 
     // Extract content
@@ -95,20 +113,21 @@ router.addHandler("document", async ({ $, request, log }) => {
     if (!content || isExcludedPage(meta.domain, title, content)) {
         // save crawl exclude
         log.info("\texcluding page");
-        const scrapeState = {
-            domain: meta.domain,
-            status: ScrapeStatus.NO_CONTENT,
-            scapedAt: new Date()
-        };
-        await db.scrapeState.upsert({
-            where: { domain: meta.domain },
-            create: scrapeState,
-            update: scrapeState
-        });
+        // const scrapeState = {
+        //     domain: meta.domain,
+        //     status: ScrapeStatus.NO_CONTENT,
+        //     scapedAt: new Date()
+        // };
+        // await db.scrapeState.upsert({
+        //     where: { domain: meta.domain },
+        //     create: scrapeState,
+        //     update: scrapeState
+        // });
 
-        // Delete post if exists
+        // Delete post if existed before
         try {
             await db.post.delete({ where: { url } });
+            await unIndexPost(existingPost!);
         } catch {}
 
         return;
@@ -121,7 +140,7 @@ router.addHandler("document", async ({ $, request, log }) => {
     const post = {
         url,
         domain: meta.domain,
-        type: PostType.NOW,
+        type: postType,
         content,
         updatedAt: meta.date || new Date("1970-01-01")
     };
@@ -132,7 +151,7 @@ router.addHandler("document", async ({ $, request, log }) => {
     });
 
     // Index for search async
-    indexPost(post);
+    indexPost(post, log.info.bind(log));
 
     // Save scrape success
     const scrapeState = {

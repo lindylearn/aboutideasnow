@@ -55,16 +55,16 @@ export async function runCrawler(directoryUrls: string[], documentUrls: string[]
                 const domain = getDomain(url);
 
                 console.log(`Failed to crawl ${url}`);
-                const scrapeState = {
-                    domain,
-                    status: ScrapeStatus.UNAVAILABLE,
-                    scapedAt: new Date()
-                };
-                await db.scrapeState.upsert({
-                    where: { domain },
-                    create: scrapeState,
-                    update: scrapeState
-                });
+                // const scrapeState = {
+                //     domain,
+                //     status: ScrapeStatus.UNAVAILABLE,
+                //     scapedAt: new Date()
+                // };
+                // await db.scrapeState.upsert({
+                //     where: { domain },
+                //     create: scrapeState,
+                //     update: scrapeState
+                // });
             }
         },
         new Configuration({

@@ -20,13 +20,13 @@ model Post {
 }
 
 enum PostType {
+    ABOUT
     NOW
     IDEAS
 }
 
 model ScrapeState {
-    domain String  @id
-    url    String?
+    domain String @id
 
     domainType DomainType   @default(INDIVIDUAL_SITE)
     status     ScrapeStatus
@@ -42,5 +42,5 @@ enum ScrapeStatus {
     UNAVAILABLE
     NO_CONTENT
     REDIRECTED
-    SCRAPED
+    SCRAPED // at least one of the PostType's has been scraped
 }

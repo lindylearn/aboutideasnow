@@ -39,37 +39,45 @@ export const typesense = new Typesense.Client({
 //     default_sorting_field: "updatedAt"
 // });
 
-export async function indexPost(post: Post) {
-    const t0 = Date.now();
-    const paragraphs = await getPostParagraphs(post.content);
+export async function indexPost(post: Post, logger = console.log) {
+    try {
+        const t0 = Date.now();
+        const paragraphs = await getPostParagraphs(post.content);
 
-    // Paragraph splitting debug
-    // console.log(`# ${post.url}\n`);
-    // for (const p of paragraphs) {
-    //     console.log(`- ${p}\n`);
-    // }
-    // console.log(`\n\n`);
-    // return;
+        // Paragraph splitting debug
+        // logger(`# ${post.url}\n`);
+        // for (const p of paragraphs) {
+        //     logger(`- ${p}\n`);
+        // }
+        // logger(`\n\n`);
+        // return;
 
-    // Delete existing paragraphs for this post (the number might have changed)
+        // Delete existing paragraphs for this post (the number might have changed)
+        await unIndexPost(post);
+
+        await typesense
+            .collections("paragraphs")
+            .documents()
+            .import(
+                paragraphs.map((p, i) => ({
+                    // id: `${post.domain}-${post.type}-${i}`,
+                    url: post.url,
+                    domain: post.domain,
+                    type: post.type,
+                    content: p,
+                    updatedAt: post.updatedAt.getTime()
+                }))
+            );
+
+        logger(`Inserted ${paragraphs.length} paragraphs in ${Date.now() - t0}ms`);
+    } catch (e) {
+        logger(`Error indexing post ${post.url}: ${e}`);
+    }
+}
+
+export async function unIndexPost(post: Post) {
     await typesense
         .collections("paragraphs")
         .documents()
         .delete({ filter_by: `domain:${post.domain} && type:${post.type}` });
-
-    await typesense
-        .collections("paragraphs")
-        .documents()
-        .import(
-            paragraphs.map((p, i) => ({
-                // id: `${post.domain}-${post.type}-${i}`,
-                url: post.url,
-                domain: post.domain,
-                type: post.type,
-                content: p,
-                updatedAt: post.updatedAt.getTime()
-            }))
-        );
-
-    console.log(`Inserted ${paragraphs.length} paragraphs in ${Date.now() - t0}ms`);
 }
