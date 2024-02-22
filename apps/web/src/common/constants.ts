@@ -26,16 +26,16 @@ export const exampleSearchQueries = [
         emoji: "🤝"
     },
     {
-        term: "reading about the middle east",
+        term: "reading about history",
         emoji: "📚"
-    },
-    {
-        term: "enjoying family time",
-        emoji: "👨‍👩‍👧‍👦"
     },
     {
         term: "starting a company",
         emoji: "🏢"
+    },
+    {
+        term: "spending time with my kids",
+        emoji: "👨‍👩‍👧‍👦"
     },
     {
         term: "living life",
@@ -45,10 +45,13 @@ export const exampleSearchQueries = [
         term: "learning to code",
         emoji: "👨‍💻"
     },
-
     {
         term: "making music",
         emoji: "🎵"
+    },
+    {
+        term: "taking photos",
+        emoji: "📸"
     },
     {
         term: "volunteering",
