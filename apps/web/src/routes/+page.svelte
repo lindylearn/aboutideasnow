@@ -8,19 +8,15 @@
     import debounce from "lodash/debounce";
     import XIcon from "../components/icons/x.svelte";
     import type { Post, PostType } from "@repo/core/generated/prisma-client";
-    import clsx from "clsx"; // Choose random color from array
-    const color = colorPalette[4];
-
-    // Filter showing variable
-    let showFilter = false;
-
-    // Form variables
+    import clsx from "clsx";
     import Form from "../components/Form.svelte";
     import type { ActionData } from "./about/$types";
-    export let form: ActionData;
-    let isAddingDomain = false;
 
     export let data: PageData;
+    export let form: ActionData;
+
+    let showFilter = false;
+    let isAddingDomain = false;
 
     let searchQuery = $page.url.searchParams.get("q") || "";
     let postTypeFilter: PostType | undefined = "IDEAS";
@@ -194,8 +190,8 @@
 </div>
 
 <div
-    style:background-color={color}
-    class="flex flex-col items-center justify-center p-4 mt-8 rounded-3xl"
+    style:background-color={colorPalette[0]}
+    class="flex flex-col items-center justify-center p-4 rounded-xl"
 >
     <h1 class="text-2xl font-bold text-white font-title">✨ Add your site here!</h1>
     <Form {form} isClearBg={false} {isAddingDomain} />

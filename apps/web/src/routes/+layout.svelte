@@ -20,7 +20,7 @@
         width="80"
         height="80"
         viewBox="0 0 250 250"
-        style="fill:{colorPalette[3]}; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+        style="fill:{colorPalette[1]}; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
         aria-hidden="true"
         ><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path
             d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
@@ -36,7 +36,7 @@
 >
 
 <div
-    class="flex flex-col items-center min-h-screen gap-5 p-5 mb-5 md:gap-10 bg-background font-text text-text animate-fadein"
+    class="flex flex-col items-center min-h-screen gap-5 p-5 md:gap-10 bg-background font-text text-text animate-fadein"
 >
     <h1>
         <a
@@ -61,15 +61,15 @@
     <slot />
 
     {#if href !== "/"}
-        <footer class="flex flex-col items-center mt-10 text-center">
-            <p>
+        <footer class="flex flex-col items-center text-center">
+            <p class="mb-0">
                 Made with 💡 by <a class="font-bold" href="https://lindylearn.io" target="_blank"
                     >Peter Hagen</a
                 >
                 and
                 <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>.
             </p>
-            <p>
+            <p class="mb-0">
                 We're open source &#8212;
                 <a
                     class="font-bold"
