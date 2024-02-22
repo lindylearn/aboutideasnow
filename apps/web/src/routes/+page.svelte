@@ -61,8 +61,8 @@
     <a class="text-lg underline" href="/about">Read the manifesto</a>
 </main>
 
-<div class="flex items-center w-full max-w-4xl gap-4">
-    <div class="flex overflow-hidden shadow-md rounded-xl border-border">
+<div class="flex flex-col items-center w-full max-w-4xl gap-4 md:flex-row">
+    <div class="flex overflow-hidden border shadow-md rounded-xl border-border">
         {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
             <button
                 class={clsx(
@@ -83,7 +83,7 @@
 
     <div
         id="search-container"
-        class="flex items-stretch overflow-hidden text-lg bg-white border shadow-md grow rounded-xl border-border"
+        class="flex items-stretch self-stretch overflow-hidden text-lg bg-white border shadow-md grow rounded-xl border-border"
     >
         <!-- svelte-ignore a11y-autofocus -->
         <input
