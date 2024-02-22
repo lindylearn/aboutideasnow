@@ -99,7 +99,7 @@ router.addHandler("document", async ({ $, request, log }) => {
     const wordCount = content?.split(/\s+/).length || 0;
 
     // Check if should exclude / delete post
-    if (!content || isExcludedPage(domain, title, content)) {
+    if (!content || isExcludedPage(url, domain, title, pathname, content)) {
         log.info(`excluding ${url} (title: ${title})\n`);
 
         // Update scrape time if exists, otherwise save as no content

@@ -44,3 +44,11 @@ enum ScrapeStatus {
     REDIRECTED
     SCRAPED // at least one of the PostType's has been scraped
 }
+
+model SubmittedDomain {
+    domain String  @id
+    email  String?
+
+    success     Boolean
+    submittedAt DateTime
+}

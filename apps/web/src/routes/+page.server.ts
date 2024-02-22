@@ -12,7 +12,7 @@ export async function load({ url, setHeaders }) {
         orderBy: {
             updatedAt: "desc"
         },
-        take: 6
+        take: 9
     });
 
     // Cache for 1 hour
