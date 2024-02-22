@@ -4,6 +4,7 @@
     import type { ActionData } from "../routes/about/$types";
     export let form: ActionData;
     export let isAddingDomain: boolean;
+    export let isClearBg: boolean;
 </script>
 
 <div class="flex flex-col items-center mt-4 text-center">
@@ -32,22 +33,29 @@
         Indexing your domain...
     {:else}
         <form
-            class="flex flex-col items-center gap-2 w-96 md:w-full md:gap-4 md:flex-row"
+            class="flex flex-col items-center w-full gap-4 md:w-full"
             method="POST"
             use:enhance={() => {
                 // Show loading state until page data is reloaded
                 isAddingDomain = true;
             }}
         >
-            <input
-                class="px-3 py-2 text-lg border rounded-lg shadow-lg outline-none grow bg-light placeholder:text-text/30 border-border"
-                placeholder="mywebsite.com"
-                name="domain"
-                required
-            />
+            <div class="flex flex-col w-full gap-4 md:flex-row">
+                <input
+                    class="w-full px-3 py-2 text-lg bg-white border rounded-lg shadow-lg outline-none placeholder:text-text/30 border-border"
+                    placeholder="yourwebsite.com"
+                    name="domain"
+                    required
+                />
+                <input
+                    class="w-full px-3 py-2 text-lg bg-white border rounded-lg shadow-lg outline-none placeholder:text-text/30 border-border"
+                    placeholder="your@email.com"
+                    name="email"
+                />
+            </div>
             <button
-                class="px-3 py-2 font-bold text-white border rounded-lg shadow-lg border-border"
-                style:background-color={colorPalette[0]}
+                class="w-full px-3 py-2 font-bold text-white border rounded-lg shadow-lg border-border"
+                style:background-color={isClearBg ? colorPalette[0] : colorPalette[1]}
             >
                 Add my site
             </button>
