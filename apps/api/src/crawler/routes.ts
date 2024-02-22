@@ -78,7 +78,7 @@ router.addHandler("document", async ({ $, request, log }) => {
     }
     // Skip if not /about, /now, or /ideas page
     if (!["/about", "/now", "/ideas"].includes(pathname)) {
-        log.info(`${domain} ${pathname} skipped (not /about, /now, or /ideas)`);
+        log.info(`${domain} ${pathname} skipped (not /about, /now, or /ideas)\n`);
         return;
     }
     let postType: PostType;
@@ -99,7 +99,14 @@ router.addHandler("document", async ({ $, request, log }) => {
     // Check if content has changed
     const existingPost = await db.post.findFirst({ where: { url } });
     if (existingPost?.content === content) {
-        log.info(`skipping ${url} (content unchanged)`);
+        log.info(`skipping ${url} (content unchanged)\n`);
+
+        // Update scrape time
+        await db.scrapeState.update({
+            where: { domain },
+            data: { scapedAt: new Date() }
+        });
+
         return;
     }
 
@@ -107,22 +114,25 @@ router.addHandler("document", async ({ $, request, log }) => {
 
     // Log debug stats
     log.info(`scraped ${url}:`);
+    log.info(`\ttitle: ${title}`);
     log.info(`\twords: ${wordCount}`);
     log.info(`\tdate: ${meta.date?.toISOString().slice(0, 10)}`);
 
-    if (!content || isExcludedPage(meta.domain, title, content)) {
-        // save crawl exclude
-        log.info("\texcluding page");
-        // const scrapeState = {
-        //     domain: meta.domain,
-        //     status: ScrapeStatus.NO_CONTENT,
-        //     scapedAt: new Date()
-        // };
-        // await db.scrapeState.upsert({
-        //     where: { domain: meta.domain },
-        //     create: scrapeState,
-        //     update: scrapeState
-        // });
+    if (!content || isExcludedPage(domain, title, content)) {
+        log.info("excluding page\n");
+
+        // Update scrape time if exists, otherwise save as no content
+        await db.scrapeState.upsert({
+            where: { domain },
+            create: {
+                domain,
+                status: ScrapeStatus.NO_CONTENT,
+                scapedAt: new Date()
+            },
+            update: {
+                scapedAt: new Date()
+            }
+        });
 
         // Delete post if existed before
         try {
@@ -139,7 +149,7 @@ router.addHandler("document", async ({ $, request, log }) => {
     // Store post
     const post = {
         url,
-        domain: meta.domain,
+        domain,
         type: postType,
         content,
         updatedAt: meta.date || new Date("1970-01-01")
@@ -155,12 +165,12 @@ router.addHandler("document", async ({ $, request, log }) => {
 
     // Save scrape success
     const scrapeState = {
-        domain: meta.domain,
+        domain,
         status: ScrapeStatus.SCRAPED,
         scapedAt: new Date()
     };
     await db.scrapeState.upsert({
-        where: { domain: meta.domain },
+        where: { domain },
         create: scrapeState,
         update: scrapeState
     });

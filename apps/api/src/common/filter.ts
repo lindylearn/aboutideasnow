@@ -9,6 +9,7 @@ export function isExcludedPage(domain: string, title: string, content?: string) 
     const wordBlocklist = [
         "404",
         "oops",
+        "missing",
         "not found",
         "couldn't find",
         "no page",
@@ -17,7 +18,8 @@ export function isExcludedPage(domain: string, title: string, content?: string) 
     ];
     if (
         wordBlocklist.some(
-            (w) => title.toLowerCase().includes(w) || content.toLowerCase().includes(w)
+            (w) => title.toLowerCase().includes(w)
+            // || content.toLowerCase().includes(w)
         )
     ) {
         return true;

@@ -69,7 +69,7 @@ export async function indexPost(post: Post, logger = console.log) {
                 }))
             );
 
-        logger(`Inserted ${paragraphs.length} paragraphs in ${Date.now() - t0}ms`);
+        // logger(`Inserted ${paragraphs.length} paragraphs in ${Date.now() - t0}ms`);
     } catch (e) {
         logger(`Error indexing post ${post.url}: ${e}`);
     }

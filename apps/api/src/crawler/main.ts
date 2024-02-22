@@ -43,18 +43,18 @@ export async function runCrawler(directoryUrls: string[], documentUrls: string[]
             // additionalHttpErrorStatusCodes: [403, 444, 503],
 
             minConcurrency: 1,
-            maxConcurrency: 5,
+            maxConcurrency: 10,
             retryOnBlocked: false,
             maxRequestRetries: 1,
             maxRequestsPerMinute: 100,
-            sameDomainDelaySecs: 5,
+            sameDomainDelaySecs: 1,
 
             requestHandler: router,
-            failedRequestHandler: async ({ request }) => {
+            failedRequestHandler: async ({ request, log }) => {
                 const url = normalizeUrl(request.url);
                 const domain = getDomain(url);
 
-                console.log(`Failed to crawl ${url}`);
+                log.info(`Failed to crawl ${url}`);
                 // const scrapeState = {
                 //     domain,
                 //     status: ScrapeStatus.UNAVAILABLE,
