@@ -3,7 +3,6 @@
     import { colorPalette } from "../common/constants";
 
     export let post: Post;
-    export let listIndex = 0;
 
     const typeColors = {
         IDEAS: colorPalette[1],
