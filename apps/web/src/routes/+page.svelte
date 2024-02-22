@@ -12,7 +12,7 @@
     const color = colorPalette[0];
 
     // Filter showing variable
-    let showFilter = true;
+    let showFilter = false;
 
     // Form variables
     import Form from "../components/Form.svelte";
