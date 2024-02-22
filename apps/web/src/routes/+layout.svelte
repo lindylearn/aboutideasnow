@@ -18,6 +18,7 @@
     <a
         href="https://github.com/lindylearn/ideasideasideas"
         class="github-corner"
+        target="_blank"
         aria-label="View source on GitHub"
         ><svg
             width="80"
