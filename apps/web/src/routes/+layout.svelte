@@ -36,25 +36,25 @@
 
     <slot />
 
-    <!-- Putting this on the manifest page may be enough? -->
-    <!-- <footer class="flex flex-col items-center mt-10">
-        <p>
-            Made by
-            <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>
-            and
-            <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>. Add
-            your site <a class="font-bold" href="/about">here</a>.
-        </p>
-        <p>
-            Contribute on
-            <a
-                class="font-bold"
-                href="https://github.com/lindylearn/ideasideasideas"
-                target="_blank"
-            >
-                GitHub
-            </a>
-            to add your name here!
-        </p>
-    </footer> -->
+    {#if href === "/"}
+        <footer class="flex flex-col items-center mt-10">
+            <p>
+                Made by
+                <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>
+                and
+                <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>.
+            </p>
+            <p>
+                Contribute on
+                <a
+                    class="font-bold"
+                    href="https://github.com/lindylearn/ideasideasideas"
+                    target="_blank"
+                >
+                    GitHub
+                </a>
+                to add your name here!
+            </p>
+        </footer>
+    {/if}
 </div>
