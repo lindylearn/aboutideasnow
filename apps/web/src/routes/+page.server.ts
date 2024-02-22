@@ -13,7 +13,7 @@ export async function load({ url, setHeaders }) {
         orderBy: {
             updatedAt: "desc"
         },
-        take: 9
+        take: postTypeFilter ? 20 : 9
     });
 
     // Cache for 1 hour
