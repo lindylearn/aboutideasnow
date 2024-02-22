@@ -69,7 +69,7 @@
 </main>
 
 <div class="flex flex-col items-center w-full max-w-4xl gap-4 md:flex-row">
-    <div class="flex overflow-hidden border shadow-md rounded-xl border-border">
+    <!-- <div class="flex overflow-hidden border shadow-md rounded-xl border-border">
         {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
             <button
                 class={clsx(
@@ -86,7 +86,7 @@
                 /{word.toLowerCase()}
             </button>
         {/each}
-    </div>
+    </div> -->
 
     <div
         id="search-container"
