@@ -50,11 +50,11 @@
             index if it's not included already. For this you need to create an /about, /ideas, or /now
             page - or all three.
         </p>
-        <p>The more you write, the more likely people can find you.</p>
+        <p>The more you write, the more likely people can find you. Then, submit your site here:</p>
         <Form {form} isClearBg={true} {isAddingDomain} />
     </section>
 
-    <section>
+    <section class="mt-4">
         <h2>Who built this?</h2>
         <p>
             <span class="font-bold"> aboutideasnow.com </span> is a decentralized solution on the increasingly
