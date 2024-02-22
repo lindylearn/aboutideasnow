@@ -11,6 +11,9 @@
     import clsx from "clsx"; // Choose random color from array
     const color = colorPalette[0];
 
+    // Filter showing variable
+    let showFilter = true;
+
     // Form variables
     import Form from "../components/Form.svelte";
     import type { ActionData } from "./about/$types";
@@ -69,25 +72,6 @@
 </main>
 
 <div class="flex flex-col items-center w-full max-w-4xl gap-4 md:flex-row">
-    <div class="flex overflow-hidden border shadow-md rounded-xl border-border">
-        {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
-            <button
-                class={clsx(
-                    "h-full px-2 py-2 text-lg bg-white",
-                    postTypeFilter !== word && "text-text/30"
-                )}
-                style:background-color={postTypeFilter === word ? colorPalette[i] : undefined}
-                on:click={() => {
-                    // @ts-ignore
-                    postTypeFilter = word;
-                    runSearch();
-                }}
-            >
-                /{word.toLowerCase()}
-            </button>
-        {/each}
-    </div>
-
     <div
         id="search-container"
         class="flex items-stretch self-stretch overflow-hidden text-lg bg-white border shadow-md grow rounded-xl border-border"
@@ -120,7 +104,51 @@
             {/if}
         </div>
     </div>
+
+    <button
+        class="transition-opacity opacity-50 hover:opacity-100"
+        on:click={() => {
+            showFilter = !showFilter;
+        }}
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+            />
+        </svg>
+    </button>
 </div>
+
+{#if showFilter}
+    <div class="flex overflow-hidden font-title border-border">
+        {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
+            <button
+                class={clsx(
+                    "rounded-lg px-2 font-bold text-xl",
+                    postTypeFilter !== word &&
+                        "text-text/30 h-full px-2 py-2 text-lg font-sans font-normal"
+                )}
+                style:background-color={postTypeFilter === word ? colorPalette[i] : undefined}
+                on:click={() => {
+                    // @ts-ignore
+                    postTypeFilter = word;
+                    runSearch();
+                }}
+            >
+                /{word.toLowerCase()}
+            </button>
+        {/each}
+    </div>
+{/if}
 
 <div id="example-searches" class="flex flex-wrap justify-center max-w-4xl gap-2 animate-fadein">
     {#each exampleSearchQueries as exampleSearchQuery}
