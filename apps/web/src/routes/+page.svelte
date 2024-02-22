@@ -36,7 +36,7 @@
         Find people to talk to or collaborate with by searching across the /about, /ideas and /now
         pages of 1000s of personal websites.
     </p>
-    <a class="text-lg underline" href="/about">Read the /ideas manifesto</a>
+    <a class="text-lg underline" href="/about">Read the manifesto</a>
 </main>
 
 <div class="flex items-center justify-center w-full max-w-4xl gap-2">
