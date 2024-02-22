@@ -1,10 +1,13 @@
 import { getDatabaseClient } from "@repo/core/dist";
+import type { PostType } from "@repo/core/generated/prisma-client";
 
-export async function load({ setHeaders }) {
+export async function load({ url, setHeaders }) {
     const db = getDatabaseClient();
+
+    const postTypeFilter = (url.searchParams.get("filter")?.toUpperCase() as PostType) || "IDEAS";
     const defaultPosts = await db.post.findMany({
         where: {
-            type: "IDEAS"
+            type: postTypeFilter
         },
         orderBy: {
             updatedAt: "desc"
