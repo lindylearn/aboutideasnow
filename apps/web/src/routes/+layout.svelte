@@ -1,8 +1,14 @@
 <script>
     import clsx from "clsx";
     import { colorPalette } from "../common/constants";
-
     import "../app.css";
+    import { page } from "$app/stores";
+    let href = "/";
+    // Update href based on current page
+    $: {
+        const currentPath = $page.url.pathname;
+        href = currentPath === "/" ? "/about" : "/";
+    }
 </script>
 
 <div
@@ -11,7 +17,7 @@
     <h1>
         <a
             class="flex text-2xl font-bold leading-relaxed text-center transition-all shadow md:text-5xl font-title rounded-2xl hover:shadow-lg"
-            href="/"
+            {href}
         >
             {#each ["about", "ideas", "now"] as word, i}
                 <div
