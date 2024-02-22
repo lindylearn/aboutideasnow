@@ -8,6 +8,7 @@
     import debounce from "lodash/debounce";
     import XIcon from "../components/icons/x.svelte";
     import type { Post, PostType } from "@repo/core/generated/prisma-client";
+    import clsx from "clsx";
 
     export let data: PageData;
 
@@ -60,52 +61,57 @@
     <a class="text-lg underline" href="/about">Read the manifesto</a>
 </main>
 
-<div class="flex">
-    {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
-        <button
-            class="h-full px-2 py-2 font-mono"
-            style:background-color={postTypeFilter === word ? colorPalette[i] : undefined}
-            on:click={() => {
-                // @ts-ignore
-                postTypeFilter = word;
-                runSearch();
-            }}
-        >
-            /{word.toLowerCase()}
-        </button>
-    {/each}
-</div>
-
-<div
-    id="search-container"
-    class="flex items-stretch w-full max-w-4xl overflow-hidden text-lg bg-white border shadow-md rounded-xl border-border"
->
-    <!-- svelte-ignore a11y-autofocus -->
-    <input
-        id="search-bar"
-        class="px-3 py-2 text-center outline-none grow placeholder:text-text/30"
-        placeholder="Search for anything that people are doing"
-        autocapitalize="off"
-        spellcheck="false"
-        autofocus
-        bind:value={searchQuery}
-        on:input={runSearchDebounced}
-    />
-    <div class="relative flex items-center w-0">
-        {#if isSearching || $navigating}
-            <div class="loader -ml-9 animate-fadein" />
-        {:else if searchQuery}
+<div class="flex items-center w-full max-w-4xl gap-4">
+    <div class="flex overflow-hidden shadow-md rounded-xl border-border">
+        {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
             <button
-                class="p-1 -ml-10 font-normal rounded-full animate-fadein"
+                class={clsx(
+                    "h-full px-2 py-2 text-lg bg-white",
+                    postTypeFilter !== word && "text-text/30"
+                )}
+                style:background-color={postTypeFilter === word ? colorPalette[i] : undefined}
                 on:click={() => {
-                    searchQuery = "";
+                    // @ts-ignore
+                    postTypeFilter = word;
                     runSearch();
-                    document.getElementById("search-bar")?.focus();
                 }}
             >
-                <XIcon />
+                /{word.toLowerCase()}
             </button>
-        {/if}
+        {/each}
+    </div>
+
+    <div
+        id="search-container"
+        class="flex items-stretch overflow-hidden text-lg bg-white border shadow-md grow rounded-xl border-border"
+    >
+        <!-- svelte-ignore a11y-autofocus -->
+        <input
+            id="search-bar"
+            class="px-3 py-2 text-center outline-none grow placeholder:text-text/30"
+            placeholder="Search for anything that people are doing"
+            autocapitalize="off"
+            spellcheck="false"
+            autofocus
+            bind:value={searchQuery}
+            on:input={runSearchDebounced}
+        />
+        <div class="relative flex items-center w-0">
+            {#if isSearching || $navigating}
+                <div class="loader -ml-9 animate-fadein" />
+            {:else if searchQuery}
+                <button
+                    class="p-1 -ml-10 font-normal rounded-full animate-fadein"
+                    on:click={() => {
+                        searchQuery = "";
+                        runSearch();
+                        document.getElementById("search-bar")?.focus();
+                    }}
+                >
+                    <XIcon />
+                </button>
+            {/if}
+        </div>
     </div>
 </div>
 
