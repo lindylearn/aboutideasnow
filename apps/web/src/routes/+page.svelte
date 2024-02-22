@@ -36,7 +36,7 @@
         if (searchQuery) {
             postTypeFilter = undefined;
         } else {
-            postTypeFilter = "IDEAS";
+            // postTypeFilter = "IDEAS";
         }
 
         // Update URL params
@@ -62,6 +62,7 @@
         }
 
         isSearching = true;
+        showFilter = false;
         searchedPosts = await searchPosts(searchQuery, postTypeFilter); // Call TypeSense directly from the browser
         isSearching = false;
     }
@@ -81,7 +82,7 @@
     <a class="text-lg underline" href="/about">Read the manifesto</a>
 </main>
 
-<div class="flex flex-col items-center w-full max-w-4xl gap-4 md:flex-row">
+<div class="flex items-center w-full max-w-4xl gap-4">
     <div
         id="search-container"
         class="flex items-stretch self-stretch overflow-hidden text-lg bg-white border shadow-md grow rounded-xl border-border"
@@ -116,7 +117,10 @@
     </div>
 
     <button
-        class="transition-opacity opacity-50 hover:opacity-100"
+        class={clsx(
+            "transition-opacity text-text hover:opacity-100",
+            showFilter ? "opacity-100" : "opacity-30"
+        )}
         on:click={() => {
             showFilter = !showFilter;
         }}
@@ -139,18 +143,18 @@
 </div>
 
 {#if showFilter}
-    <div class="flex overflow-hidden font-title border-border">
+    <div class="flex gap-2 overflow-hidden font-title border-border md:-mt-5">
         {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
             <button
                 class={clsx(
-                    "rounded-lg px-2 font-bold text-xl",
-                    postTypeFilter !== word &&
-                        "text-text/30 h-full px-2 py-2 text-lg font-sans font-normal"
+                    "rounded-lg px-2 font-mono",
+                    postTypeFilter !== word && "text-text/30 h-full px-2 py-1"
                 )}
                 style:background-color={postTypeFilter === word ? colorPalette[i] : undefined}
                 on:click={() => {
                     // @ts-ignore
                     postTypeFilter = word;
+                    searchQuery = "";
                     runSearch();
                 }}
             >
@@ -160,7 +164,10 @@
     </div>
 {/if}
 
-<div id="example-searches" class="flex flex-wrap justify-center max-w-4xl gap-2 animate-fadein">
+<div
+    id="example-searches"
+    class="flex flex-wrap justify-center max-w-4xl gap-1 md:-mt-5 animate-fadein"
+>
     {#each exampleSearchQueries as exampleSearchQuery}
         <button
             class="px-2 py-1 font-mono transition-colors hover:text-text/50"
@@ -179,19 +186,17 @@
 
 <div
     id="search-results"
-    class="flex flex-col items-start justify-around w-full gap-8 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+    class="flex flex-col items-start justify-around w-full gap-8 mt-5 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
 >
-    {#each searchQuery ? searchedPosts : data.defaultPosts as post, index (post.url)}
+    {#each searchedPosts.length ? searchedPosts : data.defaultPosts as post, index (post.url)}
         <IdeaCard {post}></IdeaCard>
     {/each}
 </div>
 
-{#if !isSearching || $navigating}
-    <div
-        style:background-color={color}
-        class="flex flex-col items-center justify-center p-4 mt-8 rounded-3xl"
-    >
-        <h1 class="text-2xl font-bold text-white font-title">✨ Add your site here!</h1>
-        <Form {form} isClearBg={false} {isAddingDomain} />
-    </div>
-{/if}
+<div
+    style:background-color={color}
+    class="flex flex-col items-center justify-center p-4 mt-8 rounded-3xl"
+>
+    <h1 class="text-2xl font-bold text-white font-title">✨ Add your site here!</h1>
+    <Form {form} isClearBg={false} {isAddingDomain} />
+</div>
