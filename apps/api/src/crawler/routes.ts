@@ -90,36 +90,17 @@ router.addHandler("document", async ({ $, request, log }) => {
         postType = PostType.IDEAS;
     }
 
+    const existingPost = await db.post.findFirst({ where: { url } });
+
     // Extract content
     const title = $("title").text();
     const html = $.html();
     const content = await getPageContent(url, html);
     const wordCount = content?.split(/\s+/).length || 0;
 
-    // Check if content has changed
-    const existingPost = await db.post.findFirst({ where: { url } });
-    if (existingPost?.content === content) {
-        log.info(`skipping ${url} (content unchanged)\n`);
-
-        // Update scrape time
-        await db.scrapeState.update({
-            where: { domain },
-            data: { scapedAt: new Date() }
-        });
-
-        return;
-    }
-
-    const meta = await getMeta(url, html, content);
-
-    // Log debug stats
-    log.info(`scraped ${url}:`);
-    log.info(`\ttitle: ${title}`);
-    log.info(`\twords: ${wordCount}`);
-    log.info(`\tdate: ${meta.date?.toISOString().slice(0, 10)}`);
-
+    // Check if should exclude / delete post
     if (!content || isExcludedPage(domain, title, content)) {
-        log.info("excluding page\n");
+        log.info(`excluding ${url} (title: ${title})\n`);
 
         // Update scrape time if exists, otherwise save as no content
         await db.scrapeState.upsert({
@@ -135,15 +116,35 @@ router.addHandler("document", async ({ $, request, log }) => {
         });
 
         // Delete post if existed before
-        try {
-            await db.post.delete({ where: { url } });
-            await unIndexPost(existingPost!);
-        } catch {}
+        if (existingPost) {
+            try {
+                await db.post.delete({ where: { url } });
+                await unIndexPost(existingPost!);
+            } catch {}
+        }
 
         return;
     }
 
-    // Print newline
+    // Check if content has changed
+    if (existingPost?.content === content) {
+        log.info(`skipping ${url} (content unchanged)\n`);
+
+        // Update scrape time
+        await db.scrapeState.update({
+            where: { domain },
+            data: { scapedAt: new Date() }
+        });
+
+        return;
+    }
+
+    const meta = await getMeta(url, html, content);
+    // Log debug stats
+    log.info(`scraped ${url}:`);
+    log.info(`\ttitle: ${title}`);
+    log.info(`\twords: ${wordCount}`);
+    log.info(`\tdate: ${meta.date?.toISOString().slice(0, 10)}`);
     log.info(``);
 
     // Store post

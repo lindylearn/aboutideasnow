@@ -18,8 +18,7 @@ export function isExcludedPage(domain: string, title: string, content?: string) 
     ];
     if (
         wordBlocklist.some(
-            (w) => title.toLowerCase().includes(w)
-            // || content.toLowerCase().includes(w)
+            (w) => title.toLowerCase().includes(w) || content.toLowerCase().includes(w)
         )
     ) {
         return true;
