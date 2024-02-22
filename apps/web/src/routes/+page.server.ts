@@ -13,9 +13,9 @@ export async function load({ setHeaders }) {
     });
 
     // Cache for 1 hour
-    setHeaders({
-        "Cache-Control": "max-age=0, s-max-age=3600"
-    });
+    // setHeaders({
+    //     "Cache-Control": "max-age=0, s-max-age=3600"
+    // });
 
     return { defaultPosts };
 }

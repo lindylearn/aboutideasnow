@@ -39,11 +39,30 @@
     <a class="text-lg underline" href="/about">Read the manifesto</a>
 </main>
 
-<div class="flex items-center justify-center w-full max-w-4xl gap-2">
+<div class="flex">
+    {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
+        <button
+            class="h-full px-2 py-2 font-mono"
+            style:background-color={postTypeFilter === word ? colorPalette[i] : undefined}
+            on:click={() => {
+                // @ts-ignore
+                postTypeFilter = word;
+                runSearch();
+            }}
+        >
+            /{word.toLowerCase()}
+        </button>
+    {/each}
+</div>
+
+<div
+    id="search-container"
+    class="flex items-stretch w-full max-w-4xl overflow-hidden text-lg bg-white border shadow-md rounded-xl border-border"
+>
     <!-- svelte-ignore a11y-autofocus -->
     <input
         id="search-bar"
-        class="px-3 py-2 text-lg text-center border shadow-md outline-none rounded-xl grow md:w-auto bg-light placeholder:text-text/30 border-border"
+        class="px-3 py-2 text-center outline-none grow placeholder:text-text/30"
         placeholder="Search for anything that people are doing"
         autocapitalize="off"
         spellcheck="false"
@@ -53,10 +72,10 @@
     />
     <div class="relative flex items-center w-0">
         {#if isSearching}
-            <div class="loader -ml-11 animate-fadein" />
+            <div class="loader -ml-9 animate-fadein" />
         {:else if searchQuery}
             <button
-                class="p-1 -ml-12 font-normal rounded-full animate-fadein"
+                class="p-1 -ml-10 font-normal rounded-full animate-fadein"
                 on:click={() => {
                     searchQuery = "";
                     document.getElementById("search-bar")?.focus();
