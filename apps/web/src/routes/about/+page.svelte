@@ -51,7 +51,7 @@
             page - or all three.
         </p>
         <p>The more you write, the more likely people can find you.</p>
-        <Form {form} {isAddingDomain} />
+        <Form {form} isClearBg={true} {isAddingDomain} />
     </section>
 
     <section>
