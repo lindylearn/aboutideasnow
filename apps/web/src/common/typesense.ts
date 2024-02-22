@@ -1,5 +1,5 @@
 import { PUBLIC_TYPESENSE_SEARCH_API_KEY, PUBLIC_TYPESENSE_URL } from "$env/static/public";
-import type { Post } from "@repo/core/generated/prisma-client";
+import type { Post, PostType } from "@repo/core/generated/prisma-client";
 import Typesense from "typesense";
 
 export const typesense = new Typesense.Client({
@@ -18,7 +18,7 @@ export type SearchedPost = Post & {
     id: number;
 };
 
-export async function searchPosts(query: string): Promise<SearchedPost[]> {
+export async function searchPosts(query: string, postType?: PostType): Promise<SearchedPost[]> {
     const searchResults = await typesense
         .collections<Post & { id: number }>("paragraphs")
         .documents()
@@ -26,6 +26,8 @@ export async function searchPosts(query: string): Promise<SearchedPost[]> {
             q: query,
             query_by: "embedding",
             // query_by: "embedding,content,domain",
+
+            filter_by: postType ? `type:${postType}` : undefined,
 
             // required for embeddings
             exclude_fields: "embedding",

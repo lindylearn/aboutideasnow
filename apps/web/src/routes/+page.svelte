@@ -5,10 +5,13 @@
     import type { PageData } from "./$types";
     import debounce from "lodash/debounce";
     import XIcon from "../components/icons/x.svelte";
+    import type { PostType } from "@repo/core/generated/prisma-client";
 
     // export let data: PageData;
 
     let searchQuery = "";
+    let postTypeFilter: PostType | undefined = "IDEAS";
+
     let posts: SearchedPost[] = [];
     let isSearching = false;
     $: if (!searchQuery) {
@@ -22,7 +25,7 @@
         }
 
         isSearching = true;
-        posts = await searchPosts(searchQuery); // Call TypeSense directly from the browser
+        posts = await searchPosts(searchQuery, postTypeFilter); // Call TypeSense directly from the browser
         isSearching = false;
     }
     const runSearchDebounced = debounce(runSearch, 200);
