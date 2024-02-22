@@ -13,9 +13,9 @@
         @apply font-bold;
     }
     a:not(.post),
-    button {
+    /* button {
         @apply transition-all hover:text-text/50;
-    }
+    } */
 
     ul,
     ol {
