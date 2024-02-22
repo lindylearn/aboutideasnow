@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(router);
 
 // Start server
-const PORT: number = parseInt(process.env.PORT as string, 10) || 5235;
+const PORT: number = parseInt(process.env.PORT as string, 10) || 7101;
 app.listen(PORT, () => {
     console.log(`API listening on port ${PORT}`);
 });

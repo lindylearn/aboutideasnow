@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "dev": "PORT=7101 nodemon src/index.ts",
+        "dev": "nodemon src/index.ts",
         "build": "tsc"
     },
     "dependencies": {
