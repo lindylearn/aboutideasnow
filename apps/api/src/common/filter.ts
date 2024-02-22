@@ -11,6 +11,7 @@ export function isExcludedPage(domain: string, title: string, content?: string) 
         "oops",
         "missing",
         "not found",
+        "cannot find",
         "couldn't find",
         "no page",
         "private site",
@@ -25,7 +26,7 @@ export function isExcludedPage(domain: string, title: string, content?: string) 
     }
 
     // Broken platform links such as https://hiradnotes.substack.com/now
-    if (domain.includes("substack")) {
+    if (domain.includes("substack") || ["soundcloud.com"].includes(domain)) {
         return true;
     }
 
