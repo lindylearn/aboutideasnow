@@ -1,5 +1,6 @@
 import { getDatabaseClient } from "@repo/core/dist";
 import type { PostType } from "@repo/core/generated/prisma-client";
+import { handleSubmit } from "../common/formActions.js";
 
 export async function load({ url, setHeaders }) {
     const db = getDatabaseClient();
@@ -22,3 +23,9 @@ export async function load({ url, setHeaders }) {
 
     return { defaultPosts };
 }
+
+export const actions = {
+    default: async ({ request }) => {
+        return await handleSubmit(request);
+    }
+};
