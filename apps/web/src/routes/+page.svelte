@@ -33,9 +33,19 @@
     }
 
     async function runSearch() {
+        if (searchQuery) {
+            postTypeFilter = undefined;
+        } else {
+            postTypeFilter = "IDEAS";
+        }
+
         // Update URL params
         const searchParams = new URLSearchParams($page.url.searchParams.toString());
-        searchParams.set("filter", postTypeFilter?.toLowerCase() || "ideas");
+        if (postTypeFilter) {
+            searchParams.set("filter", postTypeFilter?.toLowerCase() || "ideas");
+        } else {
+            searchParams.delete("filter");
+        }
         if (searchQuery) {
             searchParams.set("q", searchQuery);
         } else {
@@ -175,10 +185,13 @@
         <IdeaCard {post} listIndex={index}></IdeaCard>
     {/each}
 </div>
-<div
-    style:background-color={color}
-    class="flex flex-col items-center justify-center p-4 rounded-3xl"
->
-    <h1 class="text-2xl font-bold text-white font-title">✨ Add your site here!</h1>
-    <Form {form} isClearBg={false} {isAddingDomain} />
-</div>
+
+{#if !isSearching || $navigating}
+    <div
+        style:background-color={color}
+        class="flex flex-col items-center justify-center p-4 rounded-3xl"
+    >
+        <h1 class="text-2xl font-bold text-white font-title">✨ Add your site here!</h1>
+        <Form {form} isClearBg={false} {isAddingDomain} />
+    </div>
+{/if}
