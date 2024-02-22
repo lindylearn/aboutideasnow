@@ -13,40 +13,47 @@
         <p>
             1000s of personal websites exist on the internet, created by creators, thinkers, and
             doers of all sorts.
-            <span class="font-bold">aboutideasnow.com</span> exist to help you find your people, and
-            help them find you.
+        </p>
+        <p>
+            <span class="font-bold">aboutideasnow.com</span> exists to bring these sites together in
+            one place &#8212; to help you find your people, and help them find you.
         </p>
 
-        <p>The search indexes the /about, /ideas, and /now pages of each site.</p>
+        <p>
+            We index the /about, /ideas, and /now pages of these sites, and give you a handy way to
+            search through them.
+        </p>
     </section>
 
     <section>
-        <h2>The /ideas manifesto</h2>
+        <h2>The manifesto</h2>
         <p>
             <span class="font-bold">/about</span> pages are about the past: how you see yourself and
-            what brought you here. <span class="font-bold">/now</span> is a more personal look at what
-            you're doing now and what you care about. What's missing is the future.
+            what brought you here.
         </p>
         <p>
-            All the great things in life happen in collaboration. By writing about what you want to
-            do, people who have similar ideas can find you and reach out. Who know what will happen
-            then?
+            <span class="font-bold">/now</span> is a more personal look at what you're doing now and
+            what you care about.
+        </p>
+        <p>
+            But there's something missing in both &#8212; the future. By writing your ideas of what
+            you want to do next, people with similar ideas can find you and reach out.
         </p>
         <p>
             So <span class="font-bold">/ideas</span> is a space to write about the crazy things you always
-            wanted to make, concepts you're thinking about, or projects you're looking collaborators
-            for. Anything in the future really.
+            wanted to make, concepts you're mulling over, or projects you're looking to find collaborators
+            for.
         </p>
     </section>
 
     <section>
-        <h2>Help other people find me</h2>
+        <h2>Help other people find you</h2>
         <p>
             You can add your website to the <span class="font-bold"> aboutideasnow.com </span> search
-            index if it's not included already. For this you need to create either an /about, /ideas,
-            or /now page - or all three.
+            index if it's not included already. For this you need to create an /about, /ideas, or /now
+            page - or all three.
         </p>
-        <p>The more you write, the more likely it's that people can find you.</p>
+        <p>The more you write, the more likely people can find you.</p>
         <div class="flex flex-col items-center mt-4 text-center">
             {#if form?.addedDomain === false}
                 Error indexing your domain :(<br />We will take a look and add your site as soon as
@@ -88,7 +95,7 @@
                         required
                     />
                     <button
-                        class="px-3 py-2 font-bold border rounded-lg shadow-lg border-border"
+                        class="px-3 py-2 font-bold text-white border rounded-lg shadow-lg border-border"
                         style:background-color={colorPalette[0]}
                     >
                         Add my site
@@ -102,7 +109,7 @@
         <h2>Who built this?</h2>
         <p>
             <span class="font-bold"> aboutideasnow.com </span> is a decentralized solution on the increasingly
-            centralized web. It exists only to direct you to people's personal websites and to take it
+            centralized web. We exist to direct you to people's personal websites &#8212; you take it
             from there.
         </p>
         <p>
