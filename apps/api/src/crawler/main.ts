@@ -47,7 +47,7 @@ export async function runCrawler(directoryUrls: string[], documentUrls: string[]
             retryOnBlocked: false,
             maxRequestRetries: 1,
             maxRequestsPerMinute: 100,
-            sameDomainDelaySecs: 1,
+            sameDomainDelaySecs: 0,
 
             requestHandler: router,
             failedRequestHandler: async ({ request, log }) => {

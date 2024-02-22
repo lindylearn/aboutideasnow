@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import { runCrawler } from "../crawler/main.js";
 import { db } from "../common/db.js";
 import { getDomain } from "../common/meta.js";
+import { SubmittedDomain } from "@repo/core/generated/prisma-client";
 
 export async function addDirectory(req: Request, res: Response) {
     const url = parseUrl(req);
@@ -16,24 +17,48 @@ export async function addDirectory(req: Request, res: Response) {
 }
 
 export async function addDomain(req: Request, res: Response) {
+    // Parse params
     let url = parseUrl(req);
     if (!url) {
         return res.status(400).json({ message: "Missing url" });
     }
+    const domain = getDomain(url);
+    let email = (req.query.email as string) || null;
 
-    if (!url.endsWith("/now")) {
-        url = `${url}/now`;
+    // Scrape website
+    let success = true;
+    try {
+        await runCrawler(
+            [],
+            [`https://${domain}/about`, `https://${domain}/now`, `https://${domain}/ideas`]
+        );
+    } catch (err) {
+        success = false;
     }
 
-    await runCrawler([], [url]);
-
-    // Return scraped content
-    const domain = getDomain(url);
-    const posts = await db.post.findMany({
-        where: { domain }
+    // Save status
+    const submittedDomain: SubmittedDomain = {
+        domain,
+        email,
+        success,
+        submittedAt: new Date()
+    };
+    await db.submittedDomain.upsert({
+        where: { domain },
+        update: submittedDomain,
+        create: submittedDomain
     });
 
-    return res.json(posts);
+    // Return results
+    if (success) {
+        const posts = await db.post.findMany({
+            where: { domain },
+            orderBy: { updatedAt: "desc" }
+        });
+        return res.json(posts);
+    } else {
+        return res.status(500).json({ message: "Failed to scrape website :(" });
+    }
 }
 
 function parseUrl(req: Request) {
