@@ -35,7 +35,9 @@ export async function searchPosts(query: string, postType?: PostType): Promise<S
 
             // group by domain to return only best paragraph
             group_by: "domain",
-            group_limit: 1
+            group_limit: 1,
+
+            limit: 20
         });
 
     const hits = searchResults.grouped_hits?.map((hit) => hit.hits[0]) || [];
