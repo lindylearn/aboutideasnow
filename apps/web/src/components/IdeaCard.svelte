@@ -5,7 +5,14 @@
     export let post: Post;
     export let listIndex = 0;
 
-    const color = colorPalette[listIndex % colorPalette.length];
+    const typeColors = {
+        IDEAS: colorPalette[1],
+        ABOUT: colorPalette[0],
+        NOW: colorPalette[2]
+    };
+
+    const color = typeColors[post.type];
+    // const color = colorPalette[listIndex % colorPalette.length];
     const date = post.updatedAt ? new Date(post.updatedAt) : undefined;
 </script>
 
