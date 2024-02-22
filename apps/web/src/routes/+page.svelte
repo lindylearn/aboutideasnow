@@ -6,6 +6,16 @@
     import debounce from "lodash/debounce";
     import XIcon from "../components/icons/x.svelte";
     import type { Post, PostType } from "@repo/core/generated/prisma-client";
+    import type { ActionData } from "./$types";
+
+    // import { actions } from "../common/form";
+
+    // export let form = actions;
+    // let isAddingDomain = false;
+
+    const randomIndex = Math.floor(Math.random() * colorPalette.length);
+    // Choose random color from array
+    const color = colorPalette[randomIndex];
 
     export let data: PageData;
 
@@ -93,3 +103,57 @@
         <IdeaCard {post} listIndex={index}></IdeaCard>
     {/each}
 </div>
+<!-- 
+<div style:background-color={color}>
+    Submit your page
+
+    <div class="flex flex-col items-center mt-4 text-center">
+        {#if form?.addedDomain === false}
+            Error indexing your domain :(<br />We will take a look and add your site as soon as
+            possible!
+        {:else if form?.scrapedPosts}
+            {#if form?.scrapedPosts.length === 0}
+                We didn't find a /now, /about, or /ideas page on your website. Add one and try
+                again!
+            {:else}
+                Indexed your website successfully! Found posts:
+                <ul class="list-disc">
+                    {#each form.scrapedPosts as post}
+                        <li>
+                            {post.url}
+                            last updated at {new Intl.DateTimeFormat("en-US", {
+                                month: "long",
+                                day: "numeric",
+                                year: "numeric"
+                            }).format(new Date(post.updatedAt))}
+                        </li>
+                    {/each}
+                </ul>
+            {/if}
+        {:else if isAddingDomain}
+            Indexing your domain...
+        {:else}
+            <form
+                class="flex flex-col items-center gap-2 w-96 md:w-full md:gap-4 md:flex-row"
+                method="POST"
+                use:enhance={() => {
+                    // Show loading state until page data is reloaded
+                    isAddingDomain = true;
+                }}
+            >
+                <input
+                    class="px-3 py-2 text-lg border rounded-lg shadow-lg outline-none grow bg-light placeholder:text-text/30 border-border"
+                    placeholder="mywebsite.com"
+                    name="domain"
+                    required
+                />
+                <button
+                    class="px-3 py-2 font-bold text-white border rounded-lg shadow-lg border-border"
+                    style:background-color={colorPalette[0]}
+                >
+                    Add my site
+                </button>
+            </form>
+        {/if}
+    </div> -->
+<!-- </div> -->
