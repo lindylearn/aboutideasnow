@@ -5,52 +5,58 @@
     export let form: ActionData;
 </script>
 
-<main class="flex flex-col w-full max-w-xl gap-5 text-lg md:gap-10 items-left">
+<main class="flex flex-col w-full max-w-xl gap-5 mb-10 text-lg md:gap-10 items-left">
     <section id="intro">
         <p>
-            1000s of personal websites exist on the internet, created by creators, thinkers, and
-            doers of all sorts.
+            <span class="font-bold">aboutideasnow.com</span> exists to help you find your people.
         </p>
         <p>
-            <span class="font-bold">aboutideasnow.com</span> exists to bring these sites together in
-            one place &#8212; to help you find your people, and help them find you.
+            Outside of social media norms, 1000s of personal websites exist on the internet &#8212;
+            created by creators, thinkers, and doers of all sorts.
         </p>
-
         <p>
-            We index the /about, /ideas, and /now pages of these sites, and give you a handy way to
-            search through them.
+            We index the /about, /ideas, and /now pages of small independent websites to give you a
+            handy way of searching through them.
         </p>
     </section>
 
     <section id="manifesto">
-        <h2>The manifesto</h2>
+        <h2>What's /ideas?</h2>
         <p>
-            <span class="font-bold">/about</span> pages are about the past: how you see yourself and
-            what brought you here.
+            The way we see it, the /about, /ideas, and /now pages on websites each have a different
+            purpose. And all three should be there.
         </p>
+        <ul class="w-full">
+            <li>
+                <span class="font-bold">/about</span> pages are about the past: how people see themselves
+                and what brought them there. That's useful as a general overview.
+            </li>
+            <li>
+                <span class="font-bold">/now</span> is a much more personal look at what people are doing
+                right now, what they care about, and what they could use help with.
+            </li>
+            <li>
+                <span class="font-bold">/ideas</span> should be about the future: the crazy things people
+                always wanted to make, concepts they're mulling over, or planned projects.
+            </li>
+        </ul>
         <p>
-            <span class="font-bold">/now</span> is a more personal look at what you're doing now and
-            what you care about.
-        </p>
-        <p>
-            But there's something missing in both &#8212; the future. By writing your ideas of what
-            you want to do next, people with similar ideas can find you and reach out.
-        </p>
-        <p>
-            So <span class="font-bold">/ideas</span> is a space to write about the crazy things you always
-            wanted to make, concepts you're mulling over, or projects you're looking to find collaborators
-            for.
+            If you create an <span class="font-bold">/ideas</span> page on your website, people who are
+            looking for collaborators are much more likely to find you.
         </p>
     </section>
 
     <section id="submit">
-        <h2>Help other people find you</h2>
+        <h2>Add your website</h2>
+        <p>Create any of the above mentioned pages on your website.</p>
         <p>
-            You can add your website to the <span class="font-bold"> aboutideasnow.com </span> search
-            index if it's not included already. For this you need to create an /about, /ideas, or /now
-            page - or all three.
+            Then submit your website here to add it to
+            <span class="font-bold">aboutideasnow.com</span>.
         </p>
-        <p>The more you write, the more likely people can find you. Then, submit your site here:</p>
+        <p>
+            If you enter your email address, we'll let you know if someone mentions similar ideas as
+            you on their website.
+        </p>
         <Form {form} isClearBg={true} {isAddingDomain} />
     </section>
 
@@ -58,8 +64,8 @@
         <h2>Who built this?</h2>
         <p>
             <span class="font-bold"> aboutideasnow.com </span> is a decentralized solution on the increasingly
-            centralized web. We exist to direct you to people's personal websites &#8212; you take it
-            from there.
+            centralized web. We exist only to direct you to people's personal websites. You take it from
+            there.
         </p>
         <p>
             <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>

@@ -55,7 +55,7 @@
             </div>
             <button
                 class="w-full px-3 py-2 font-bold text-white border rounded-lg shadow-lg border-border"
-                style:background-color={isClearBg ? colorPalette[0] : colorPalette[1]}
+                style:background-color={isClearBg ? colorPalette[0] : colorPalette[0]}
             >
                 Add my site
             </button>

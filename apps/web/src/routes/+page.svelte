@@ -192,9 +192,13 @@
 </div>
 
 <div
-    style:background-color={colorPalette[0]}
-    class="flex flex-col items-center justify-center p-4 rounded-xl"
+    class="flex flex-col items-center max-w-lg p-4 bg-white border shadow-md rounded-xl border-border"
+    style:background-color={colorPalette[1]}
 >
-    <h1 class="text-2xl font-bold text-white font-title">✨ Add your site here!</h1>
+    <h1 class="mb-2 text-2xl font-bold font-title">Add your site here!</h1>
+    <p class="text-center">
+        Help other people find you by adding your website to aboutideasnow.com.
+        <a class="font-bold" href="/about#submit">Learn more</a>
+    </p>
     <Form {form} isClearBg={false} {isAddingDomain} />
 </div>
