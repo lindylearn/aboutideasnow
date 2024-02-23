@@ -144,8 +144,9 @@
         {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
             <button
                 class={clsx(
-                    "rounded-lg px-2 font-mono",
-                    postTypeFilter !== word && "text-text/30 h-full px-2 py-1"
+                    "rounded-lg px-2 text-text font-mono",
+                    postTypeFilter !== word &&
+                        "transition-opacity opacity-30 h-full px-2 py-1 hover:opacity-100"
                 )}
                 style:background-color={postTypeFilter === word ? colorPalette[i] : undefined}
                 on:click={() => {

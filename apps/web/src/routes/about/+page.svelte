@@ -6,7 +6,7 @@
 </script>
 
 <main class="flex flex-col w-full max-w-xl gap-5 text-lg md:gap-10 items-left">
-    <section>
+    <section id="intro">
         <p>
             1000s of personal websites exist on the internet, created by creators, thinkers, and
             doers of all sorts.
@@ -22,7 +22,7 @@
         </p>
     </section>
 
-    <section>
+    <section id="manifesto">
         <h2>The manifesto</h2>
         <p>
             <span class="font-bold">/about</span> pages are about the past: how you see yourself and
@@ -43,7 +43,7 @@
         </p>
     </section>
 
-    <section>
+    <section id="submit">
         <h2>Help other people find you</h2>
         <p>
             You can add your website to the <span class="font-bold"> aboutideasnow.com </span> search
@@ -54,7 +54,7 @@
         <Form {form} isClearBg={true} {isAddingDomain} />
     </section>
 
-    <section class="mt-4">
+    <section id="authors" class="mt-4">
         <h2>Who built this?</h2>
         <p>
             <span class="font-bold"> aboutideasnow.com </span> is a decentralized solution on the increasingly
@@ -65,7 +65,7 @@
             <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>
             and
             <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a> built this
-            website in January 2024.
+            website in February 2024.
         </p>
         <p>
             <a class="font-bold" href="https://agentcooper.io/about" target="_blank">Artem Tyurin</a
