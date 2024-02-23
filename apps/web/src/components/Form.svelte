@@ -7,7 +7,7 @@
     export let isClearBg: boolean;
 </script>
 
-<div class="flex flex-col items-center mt-4 text-center">
+<div class="flex flex-col mt-4 text-left">
     {#if form?.addedDomain === false}
         Error indexing your domain :(<br />We will take a look and add your site as soon as
         possible!
@@ -19,12 +19,18 @@
             <ul class="list-disc">
                 {#each form.scrapedPosts as post}
                     <li>
-                        {post.url}
-                        last updated at {new Intl.DateTimeFormat("en-US", {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric"
-                        }).format(new Date(post.updatedAt))}
+                        <span class="font-bold">
+                            {new URL(post.url).hostname}{new URL(post.url).pathname}
+                        </span>
+                        {#if post.updatedAt && new Date(post.updatedAt).getFullYear() !== 1970}
+                            last updated at {new Intl.DateTimeFormat("en-US", {
+                                month: "long",
+                                day: "numeric",
+                                year: "numeric"
+                            }).format(new Date(post.updatedAt))}
+                        {:else}
+                            without update time
+                        {/if}
                     </li>
                 {/each}
             </ul>
