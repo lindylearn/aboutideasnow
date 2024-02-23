@@ -16,12 +16,18 @@ export async function load({ url, setHeaders }) {
         take: postTypeFilter ? 20 : 9
     });
 
+    const websiteCount = await db.scrapeState.count({
+        where: {
+            status: "SCRAPED"
+        }
+    });
+
     // Cache for 1 hour
     setHeaders({
         "Cache-Control": "max-age=0, s-max-age=3600"
     });
 
-    return { defaultPosts };
+    return { websiteCount, defaultPosts };
 }
 
 export const actions = {

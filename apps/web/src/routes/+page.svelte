@@ -70,10 +70,11 @@
     }
 </script>
 
-<main class="flex flex-col items-center max-w-2xl gap-0 text-lg text-center">
+<main class="flex flex-col items-center max-w-xl gap-0 text-lg text-center">
     <p>
         Find people to talk to or collaborate with by searching across the /about, /ideas and /now
-        pages of 1000s of personal websites.
+        pages of {data.websiteCount}
+        personal websites.
     </p>
     <a class="text-lg underline" href="/about">Read the manifesto</a>
 </main>
