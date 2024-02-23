@@ -51,11 +51,20 @@ export async function runCrawler(directoryUrls: string[], documentUrls: string[]
             sameDomainDelaySecs: 0,
 
             requestHandler: router,
-            failedRequestHandler: async ({ request, log }) => {
+            failedRequestHandler: async ({ request, log, pushData }) => {
                 const url = normalizeUrl(request.url);
                 const domain = getDomain(url);
                 const pathname = new URL(url).pathname;
                 const postType = getPostType(pathname);
+
+                if (pathname === "/about") {
+                    log.info(`Trying / instead of /about for ${domain}`);
+                    pushData({
+                        url: `https://${domain}/`,
+                        label: "document"
+                    });
+                    return;
+                }
 
                 log.info(`Failed to crawl ${url} (${postType})`);
                 if (!postType) {

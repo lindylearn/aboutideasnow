@@ -1,8 +1,8 @@
 import { PostType } from "@repo/core/generated/prisma-client";
 
-export function getPostType(pathname: string, originalPathname?: string) {
-    // Allow /about redirect to /
-    if (originalPathname === "/about" && pathname === "/") {
+export function getPostType(pathname: string) {
+    // Treat / as /about
+    if (pathname === "/") {
         pathname = "/about";
     }
 

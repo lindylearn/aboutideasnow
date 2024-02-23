@@ -16,7 +16,7 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
     const domain = getDomain(url);
     log.info(`crawling directory: ${url}`);
 
-    // Extract links
+    // Extract /now links
     const links = $("a[href]")
         .map((_, el) => $(el).attr("href"))
         .get()
@@ -46,17 +46,16 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
 });
 
 // Scrape an individual page
-router.addHandler("document", async ({ $, request, log }) => {
+router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
     const url = normalizeUrl(request.loadedUrl || request.url);
     const domain = getDomain(url);
     const pathname = new URL(url).pathname;
 
     const originalUrl = normalizeUrl(request.url);
     const originalDomain = getDomain(originalUrl);
-    const originalPathname = new URL(originalUrl).pathname;
 
     // Detect post type
-    const postType = getPostType(pathname, originalPathname);
+    const postType = getPostType(pathname);
     if (!postType) {
         log.info(`${domain} ${pathname} skipped (not /about, /now, or /ideas)\n`);
         return;
@@ -90,6 +89,15 @@ router.addHandler("document", async ({ $, request, log }) => {
 
     // Check if should exclude / delete post
     if (!content || isExcludedPage(url, domain, title, pathname, content)) {
+        if (pathname === "/about") {
+            log.info(`Trying / instead of /about for ${domain}\n`);
+            enqueueLinks({
+                strategy: "all",
+                label: "document",
+                urls: [`https://${domain}/`]
+            });
+            return;
+        }
         log.info(`excluding ${url} (title: ${title})\n`);
 
         // Update scrape time if exists, otherwise save as no content
