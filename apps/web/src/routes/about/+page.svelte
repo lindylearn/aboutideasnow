@@ -48,7 +48,10 @@
 
     <section id="submit">
         <h2>Add your website</h2>
-        <p>Create any of the above mentioned pages on your website.</p>
+        <p>
+            Create any of the above pages on your website. Mention when you've updated each page so
+            people know it's out of date.
+        </p>
         <p>
             Then submit your website here to add it to
             <span class="font-bold">aboutideasnow.com</span>.
