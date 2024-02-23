@@ -13,6 +13,19 @@ export async function addDirectory(req: Request, res: Response) {
     // Don't await
     runCrawler([url], []);
 
+    const domain = getDomain(url);
+    await db.scrapeState.upsert({
+        where: { domain_type: { domain, type: "ABOUT" } },
+        create: {
+            domain,
+            domainType: "DIRECTORY",
+            type: "ABOUT",
+            status: "SCRAPED",
+            scapedAt: new Date()
+        },
+        update: { scapedAt: new Date() }
+    });
+
     return res.json({ message: "Pending" });
 }
 

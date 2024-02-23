@@ -35,7 +35,12 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
     });
     scrapeStates.forEach((s) => excludedDomains.add(s.domain));
 
-    const newLinks = nowLinks.filter((link) => !excludedDomains.has(getDomain(link)));
+    const newLinks = nowLinks
+        .filter((link) => !excludedDomains.has(getDomain(link)))
+        .flatMap((url) => {
+            const domain = getDomain(url);
+            return [`https://${domain}/about`, `https://${domain}/now`, `https://${domain}/ideas`];
+        });
     log.info(`Found ${newLinks.length} new links`);
 
     await enqueueLinks({
