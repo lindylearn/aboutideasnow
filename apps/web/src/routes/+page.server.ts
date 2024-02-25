@@ -18,7 +18,8 @@ export async function load({ url, setHeaders }) {
 
     const websiteCount = await db.scrapeState.count({
         where: {
-            status: "SCRAPED"
+            status: "SCRAPED",
+            type: "ABOUT"
         }
     });
 
