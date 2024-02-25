@@ -16,7 +16,7 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
     const domain = getDomain(url);
     log.info(`crawling directory: ${url}`);
 
-    // Extract /now links
+    // Extract links
     const links = $("a[href]")
         .map((_, el) => $(el).attr("href"))
         .get()
@@ -26,27 +26,27 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
         .filter((url) => url.hostname !== domain)
         // map back to strings
         .map((url) => url.toString());
-    const nowLinks = links.filter((link) => link.endsWith("/now"));
 
     // Exclude already checked links
     const excludedDomains = new Set();
     const scrapeStates = await db.scrapeState.findMany({
-        where: { domain: { in: nowLinks.map(getDomain) } }
+        where: { domain: { in: links.map(getDomain) } }
     });
     scrapeStates.forEach((s) => excludedDomains.add(s.domain));
-
-    const newLinks = nowLinks
-        .filter((link) => !excludedDomains.has(getDomain(link)))
-        .flatMap((url) => {
-            const domain = getDomain(url);
-            return [`https://${domain}/about`, `https://${domain}/now`, `https://${domain}/ideas`];
-        });
+    const newLinks = links.filter((link) => !excludedDomains.has(getDomain(link)));
     log.info(`Found ${newLinks.length} new links`);
 
+    // Randomize order to work around network errors
+    newLinks.sort(() => Math.random() - 0.5);
+
+    // Scrape new links
     await enqueueLinks({
         strategy: "all",
         label: "document",
-        urls: newLinks
+        urls: newLinks.flatMap((url) => {
+            const domain = getDomain(url);
+            return [`https://${domain}/about`, `https://${domain}/now`, `https://${domain}/ideas`];
+        })
     });
 });
 
