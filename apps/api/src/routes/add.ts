@@ -29,6 +29,17 @@ export async function addDirectory(req: Request, res: Response) {
     return res.json({ message: "Pending" });
 }
 
+export async function addBatchDomains(req: Request, res: Response) {
+    const domains = req.body.domains as string[];
+    const urls = domains
+        .filter((domain) => domain.includes("."))
+        .map((domain) => `https://${domain}`);
+
+    runCrawler([], urls);
+
+    return res.json({ message: "Pending" });
+}
+
 export async function addDomain(req: Request, res: Response) {
     // Parse params
     let url = parseUrl(req);
