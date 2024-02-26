@@ -39,7 +39,7 @@
 >
     <h1>
         <a
-            class="flex text-3xl font-bold leading-relaxed text-center transition-all shadow md:text-6xl font-title rounded-2xl hover:shadow-lg"
+            class="flex text-3xl font-bold leading-relaxed text-center transition-all shadow md:text-6xl font-title rounded-2xl hover:opacity-75 hover:shadow-lg"
             {href}
         >
             {#each ["about", "ideas", "now"] as word, i}

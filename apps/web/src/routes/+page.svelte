@@ -76,7 +76,9 @@
         pages of {data.websiteCount}
         personal websites.
     </p>
-    <a class="underline md:text-lg" href="/about">Read the manifesto</a>
+    <a class="underline transition-opacity md:text-lg hover:opacity-50" href="/about"
+        >Read the manifesto</a
+    >
 </main>
 
 <div class="flex items-center w-full max-w-4xl gap-4">

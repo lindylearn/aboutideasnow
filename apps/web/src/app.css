@@ -10,7 +10,7 @@
         @apply mb-2;
     }
     a {
-        @apply font-bold;
+        @apply font-bold transition-opacity hover:opacity-50;
     }
     ul,
     ol {
