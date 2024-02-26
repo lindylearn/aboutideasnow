@@ -106,7 +106,7 @@
                     on:click={() => {
                         searchQuery = "";
                         runSearch();
-                        document.getElementById("search-bar")?.focus();
+                        // document.getElementById("search-bar")?.focus();
                     }}
                 >
                     <XIcon />
