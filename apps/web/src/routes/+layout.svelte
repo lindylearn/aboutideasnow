@@ -6,9 +6,12 @@
     import { inject } from "@vercel/analytics";
     import posthog from "posthog-js";
     import "../app.css";
+    import { onMount } from "svelte";
 
-    posthog.init("phc_5EmEbNdMFGqalcMQIfLDl9m2CqOIOAwUffQCWyN40ty", {
-        api_host: "https://eu.posthog.com"
+    onMount(() => {
+        posthog.init("phc_5EmEbNdMFGqalcMQIfLDl9m2CqOIOAwUffQCWyN40ty", {
+            api_host: "https://eu.posthog.com"
+        });
     });
 
     let href = "/";
