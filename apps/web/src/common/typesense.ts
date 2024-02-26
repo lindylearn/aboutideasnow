@@ -51,16 +51,24 @@ export async function searchPosts(query: string, postType?: PostType): Promise<S
                     return;
                 }
 
-                highlight.matched_tokens?.forEach((token) => {
-                    if (typeof token !== "string" || token.length <= 3) {
-                        return;
-                    }
-
-                    htmlContent = htmlContent.replace(
-                        token,
-                        `<span class="highlight">${token}</span>`
+                // Prefer the Typesense-generated snippet if available
+                if (highlight.snippet) {
+                    htmlContent = highlight?.snippet.replaceAll(
+                        "<mark>",
+                        '<mark class="highlight">'
                     );
-                });
+                } else {
+                    highlight.matched_tokens?.forEach((token) => {
+                        if (typeof token !== "string" || token.length <= 3) {
+                            return;
+                        }
+
+                        htmlContent = htmlContent.replace(
+                            token,
+                            `<span class="highlight">${token}</span>`
+                        );
+                    });
+                }
             });
 
             return {
