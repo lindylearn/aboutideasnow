@@ -87,7 +87,7 @@
         <input
             id="search-bar"
             class="px-3 py-2 text-center outline-none grow placeholder:text-text/30"
-            placeholder="Search for anything that people are doing"
+            placeholder="Search"
             autocapitalize="off"
             spellcheck="false"
             autofocus
