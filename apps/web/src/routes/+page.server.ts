@@ -3,9 +3,9 @@ import type { PostType } from "@repo/core/generated/prisma-client";
 import { handleSubmit } from "../common/formActions.js";
 
 export async function load({ url, setHeaders }) {
-    const db = getDatabaseClient();
-
     try {
+        const db = getDatabaseClient();
+
         const postTypeFilter =
             (url.searchParams.get("filter")?.toUpperCase() as PostType) || "IDEAS";
         const defaultPosts = await db.post.findMany({
