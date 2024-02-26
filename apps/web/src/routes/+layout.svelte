@@ -15,6 +15,7 @@
 <a
     href="https://github.com/lindylearn/aboutideasnow"
     class="github-corner"
+    target="_blank"
     aria-label="View source on GitHub"
     ><svg
         class="w-16 h-16 md:w-20 md:h-20"
