@@ -17,7 +17,7 @@ export async function getMeta(url: string, html: string, content?: string) {
     if (content) {
         date = await findDateUsingGPT(content.slice(0, 2000));
         // Don't trust future dates, e.g. on https://kunalmarwaha.com/now
-        if (date && date.toISOString().slice(0, 10) >= new Date().toISOString().slice(0, 10)) {
+        if (date && date.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10)) {
             date = undefined;
         }
     }
@@ -25,8 +25,9 @@ export async function getMeta(url: string, html: string, content?: string) {
     if (!date) {
         // Try using metadata data instead
         date = meta.date ? new Date(meta.date) : undefined;
-        // Don't trust current or future dates, e.g. on https://francescasciandra.art/now
-        if (date && date.toISOString().slice(0, 10) >= new Date().toISOString().slice(0, 10)) {
+        // Don't trust future dates, e.g. on https://francescasciandra.art/now
+        // Include the current date in case people create their now page before submitting it
+        if (date && date.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10)) {
             date = undefined;
         }
     }
