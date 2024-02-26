@@ -10,11 +10,18 @@ export async function load({ url, setHeaders }) {
         where: {
             type: postTypeFilter
         },
-        orderBy: {
-            updatedAt: "desc"
-        },
-        take: postTypeFilter ? 20 : 9
+        orderBy: [
+            {
+                updatedAt: "desc"
+            },
+            {
+                domain: "desc"
+            }
+        ],
+        take: postTypeFilter ? 15 : 9
     });
+
+    console.log(defaultPosts.length);
 
     const websiteCount = await db.scrapeState.count({
         where: {
