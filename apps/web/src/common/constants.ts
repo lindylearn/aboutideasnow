@@ -9,10 +9,10 @@ export const exampleSearchQueries = [
         term: "building a community",
         emoji: "🌞"
     },
-    {
-        term: "looking for a cofounder",
-        emoji: "🤝"
-    },
+    // {
+    //     term: "looking for a cofounder",
+    //     emoji: "🤝"
+    // },
     {
         term: "starting a company",
         emoji: "🏢"
