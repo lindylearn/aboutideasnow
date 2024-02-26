@@ -28,3 +28,5 @@ This project uses Turborepo with a number of packages:
 -   Create a Postgres database (e.g. via Supabase), and use its connection string as the `DATABASE_URL` secret in the following deployments.
 -   Deploy the web app JavaScript build. If using Vercel, you'll have to override the CI/CD install command with `pnpm install --unsafe-perm` so it runs the `packages/core` postinstall step. It correctly fills in all other steps automatically.
 -   Deploy the api app using Docker (from the root monorepo context). This repo already has a Github action to automatically deploy to fly.io.
+
+1
