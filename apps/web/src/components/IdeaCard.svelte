@@ -17,7 +17,7 @@
 
 <a
     href={post.url}
-    class="relative flex flex-col w-full overflow-hidden transition-all border shadow-sm post h-max rounded-xl border-border bg-light animate-cardFadein will-change-transform hover:shadow hover:rotate-1"
+    class="relative flex flex-col w-full overflow-hidden transition-all border shadow-sm post h-max rounded-xl border-border bg-light animate-cardFadein will-change-transform hover:shadow md:hover:rotate-1"
     target="_blank"
     style:animation-delay={`${Math.random() * 200}ms`}
 >

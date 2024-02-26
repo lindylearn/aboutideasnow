@@ -70,19 +70,19 @@
     }
 </script>
 
-<main class="flex flex-col items-center max-w-xl gap-0 text-lg text-center">
+<main class="flex flex-col items-center max-w-xl gap-0 text-center md:text-lg">
     <p>
         Find people to talk to or collaborate with by searching across the /about, /ideas and /now
         pages of {data.websiteCount}
         personal websites.
     </p>
-    <a class="text-lg underline" href="/about">Read the manifesto</a>
+    <a class="underline md:text-lg" href="/about">Read the manifesto</a>
 </main>
 
 <div class="flex items-center w-full max-w-4xl gap-4">
     <div
         id="search-container"
-        class="flex items-stretch self-stretch overflow-hidden text-lg bg-white border shadow-md grow rounded-xl border-border"
+        class="flex items-stretch self-stretch overflow-hidden bg-white border shadow-md md:text-lg grow rounded-xl border-border"
     >
         <!-- svelte-ignore a11y-autofocus -->
         <input
@@ -115,7 +115,7 @@
 
     <button
         class={clsx(
-            "transition-opacity text-text hover:opacity-100",
+            "hidden md:block transition-opacity text-text hover:opacity-100",
             showFilter ? "opacity-100" : "opacity-30"
         )}
         on:click={() => {
@@ -164,7 +164,7 @@
 
 <div
     id="example-searches"
-    class="flex flex-wrap justify-center max-w-4xl gap-1 md:-mt-5 animate-fadein"
+    class="flex flex-wrap justify-center max-w-4xl gap-1 -mx-5 -mt-2 text-sm md:text-base md:mx-0 md:justify-center md:-mt-5"
 >
     {#each exampleSearchQueries as exampleSearchQuery}
         <button
@@ -184,7 +184,7 @@
 
 <div
     id="search-results"
-    class="flex flex-col items-start justify-around w-full gap-8 mt-5 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+    class="flex flex-col items-start justify-around w-full gap-8 mt-2 md:mt-5 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
 >
     {#each searchedPosts.length ? searchedPosts : data.defaultPosts as post, index (post.url)}
         <IdeaCard {post}></IdeaCard>

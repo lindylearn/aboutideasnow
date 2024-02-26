@@ -14,7 +14,7 @@
     }
     ul,
     ol {
-        @apply ml-10 list-outside w-max;
+        @apply pr-5 ml-5 list-outside w-max;
     }
     ul {
         @apply list-disc;
@@ -24,6 +24,13 @@
     }
     li {
         @apply mb-2;
+    }
+}
+
+@media (min-width: 768px) {
+    ul,
+    ol {
+        @apply pr-0 ml-10;
     }
 }
 
