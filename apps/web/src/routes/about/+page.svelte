@@ -11,11 +11,11 @@
             <span class="font-bold">aboutideasnow.com</span> exists to help you find your people.
         </p>
         <p>
-            Outside of social media norms, 1000s of personal websites exist on the internet &#8212;
+            1000s of personal websites exist on the internet, outside of social media &#8212;
             created by creators, thinkers, and doers of all sorts.
         </p>
         <p>
-            We index the /about, /ideas, and /now pages of small independent websites to give you a
+            We index the /about, /ideas, and /now pages of these independent sites to give you a
             handy way of searching through them.
         </p>
     </section>
@@ -32,7 +32,7 @@
                 and what brought them there. That's useful as a general overview.
             </li>
             <li>
-                <span class="font-bold">/now</span> is a much more personal look at what people are doing
+                <span class="font-bold">/now</span> is a more personal look at what people are doing
                 right now, what they care about, and what they could use help with.
             </li>
             <li>
@@ -49,15 +49,15 @@
     <section id="submit">
         <h2>Add your website</h2>
         <p>
-            Create any of the above pages on your website. Mention when you've updated each page so
-            people know it's out of date.
+            Create any of the above pages on your website. Mention when you last updated each page
+            so people know it's fresh.
         </p>
         <p>
             Then submit your website here to add it to
             <span class="font-bold">aboutideasnow.com</span>.
         </p>
         <p>
-            If you enter your email address, we'll let you know if someone mentions similar ideas as
+            If you enter your email address, we'll let you know if someone mentions similar ideas to
             you on their website.
         </p>
         <Form {form} isClearBg={true} {isAddingDomain} />
