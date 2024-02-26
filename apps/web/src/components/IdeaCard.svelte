@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Post } from "@repo/core/generated/prisma-client";
+    import posthog from "posthog-js";
     import { colorPalette } from "../common/constants";
 
     export let post: Post;
@@ -20,6 +21,9 @@
     class="relative flex flex-col w-full overflow-hidden transition-all border shadow-sm post h-max rounded-xl border-border bg-light animate-cardFadein will-change-transform hover:shadow md:hover:rotate-1 md:hover:opacity-75"
     target="_blank"
     style:animation-delay={`${Math.random() * 200}ms`}
+    on:click={() => {
+        posthog.capture("postClicked");
+    }}
 >
     <div class="flex gap-2 p-2" style:background-color={color}>
         <div class="flex flex-1 gap-2 px-2 rounded-lg bg-light">

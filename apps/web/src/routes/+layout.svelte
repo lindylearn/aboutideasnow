@@ -4,7 +4,12 @@
     import { colorPalette } from "../common/constants";
     import { page } from "$app/stores";
     import { inject } from "@vercel/analytics";
+    import posthog from "posthog-js";
     import "../app.css";
+
+    posthog.init("phc_5EmEbNdMFGqalcMQIfLDl9m2CqOIOAwUffQCWyN40ty", {
+        api_host: "https://eu.posthog.com"
+    });
 
     let href = "/";
     // Update href based on current page

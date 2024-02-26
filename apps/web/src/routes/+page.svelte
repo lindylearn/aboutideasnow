@@ -11,6 +11,7 @@
     import clsx from "clsx";
     import Form from "../components/Form.svelte";
     import type { ActionData } from "./about/$types";
+    import posthog from "posthog-js";
 
     export let data: PageData;
     export let form: ActionData;
@@ -61,6 +62,8 @@
         showFilter = false;
         searchedPosts = await searchPosts(searchQuery, postTypeFilter); // Call TypeSense directly from the browser
         isSearching = false;
+
+        posthog.capture("search");
     }
     const runSearchDebounced = debounce(runSearch, 200);
 

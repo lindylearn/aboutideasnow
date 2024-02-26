@@ -135,6 +135,9 @@ importers:
       openai:
         specifier: ^4.26.0
         version: 4.26.0
+      posthog-js:
+        specifier: ^1.108.3
+        version: 1.108.3
       typesense:
         specifier: ^1.7.2
         version: 1.7.2(@babel/runtime@7.23.2)
@@ -4973,6 +4976,10 @@ packages:
       reusify: 1.0.4
     dev: true
 
+  /fflate@0.4.8:
+    resolution: {integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==}
+    dev: false
+
   /figlet@1.7.0:
     resolution: {integrity: sha512-gO8l3wvqo0V7wEFLXPbkX83b7MVjRrk1oRLfYlZXol8nEpb/ON9pcKLI4qpBv5YtOTfrINtqb7b40iYY2FTWFg==}
     engines: {node: '>= 0.4.0'}
@@ -7764,6 +7771,13 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
+  /posthog-js@1.108.3:
+    resolution: {integrity: sha512-Vi9lX/MhovsKIEdj2aJ5ioku9U/eMGY8/DzKf4EpyrElxPPdabAdCDRUa81eAqxC6npkOpkHskawUPLg20le4Q==}
+    dependencies:
+      fflate: 0.4.8
+      preact: 10.19.6
+    dev: false
+
   /postman-request@2.88.1-postman.33:
     resolution: {integrity: sha512-uL9sCML4gPH6Z4hreDWbeinKU0p0Ke261nU7OvII95NU22HN6Dk7T/SaVPaj6T4TsQqGKIFw6/woLZnH7ugFNA==}
     engines: {node: '>= 6'}
@@ -7790,6 +7804,10 @@ packages:
       safe-buffer: 5.2.1
       stream-length: 1.0.2
       uuid: 8.3.2
+    dev: false
+
+  /preact@10.19.6:
+    resolution: {integrity: sha512-gympg+T2Z1fG1unB8NH29yHJwnEaCH37Z32diPDku316OTnRPeMbiRV9kTrfZpocXjdfnWuFUl/Mj4BHaf6gnw==}
     dev: false
 
   /prelude-ls@1.2.1:

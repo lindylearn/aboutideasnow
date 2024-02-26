@@ -2,6 +2,8 @@
     import { enhance } from "$app/forms";
     import { colorPalette } from "../common/constants"; // Adjust the import path as necessary
     import type { ActionData } from "../routes/about/$types";
+    import posthog from "posthog-js";
+
     export let form: ActionData;
     export let isAddingDomain: boolean;
     export let isClearBg: boolean;
@@ -44,6 +46,8 @@
             use:enhance={() => {
                 // Show loading state until page data is reloaded
                 isAddingDomain = true;
+
+                posthog.capture("siteAdded");
             }}
         >
             <div class="flex flex-col w-full gap-4 md:flex-row">

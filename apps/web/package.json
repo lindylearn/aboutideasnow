@@ -24,6 +24,7 @@
         "lodash": "^4.17.21",
         "loglevel": "^1.9.1",
         "openai": "^4.26.0",
+        "posthog-js": "^1.108.3",
         "typesense": "^1.7.2"
     },
     "devDependencies": {
