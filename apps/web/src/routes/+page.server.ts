@@ -12,8 +12,7 @@ export async function load({ url, setHeaders }): Promise<{
     try {
         const db = getDatabaseClient();
 
-        const postTypeFilter =
-            (url.searchParams.get("filter")?.toUpperCase() as PostType) || "IDEAS";
+        const postTypeFilter = (url.searchParams.get("filter")?.toUpperCase() as PostType) || "IDEAS";
 
         defaultPosts = await db.post.findMany({
             where: {
@@ -47,10 +46,7 @@ export async function load({ url, setHeaders }): Promise<{
         "Cache-Control": "max-age=0, s-max-age=3600"
     });
 
-    return {
-        websiteCount,
-        defaultPosts
-    };
+    return { websiteCount, defaultPosts };
 }
 
 export const actions = {
