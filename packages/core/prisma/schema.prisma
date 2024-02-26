@@ -25,12 +25,16 @@ enum PostType {
     IDEAS
 }
 
+// Separate scrape status from posts to track failures
 model ScrapeState {
-    domain String @id
+    domain String
+    type   PostType
 
     domainType DomainType   @default(INDIVIDUAL_SITE)
     status     ScrapeStatus
     scapedAt   DateTime?
+
+    @@id([domain, type])
 }
 
 enum DomainType {
@@ -42,7 +46,7 @@ enum ScrapeStatus {
     UNAVAILABLE
     NO_CONTENT
     REDIRECTED
-    SCRAPED // at least one of the PostType's has been scraped
+    SCRAPED
 }
 
 model SubmittedDomain {

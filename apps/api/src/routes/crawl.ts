@@ -5,27 +5,25 @@ import { db } from "../common/db.js";
 export async function periodicCrawl(req: Request, res: Response) {
     const limit = parseInt(req.query.limit as string) || 10_000;
 
-    // Re-scrape all previously scraped directories and domains
+    // Check all directories for new links
+    const directoryScrapes = await db.scrapeState.findMany({
+        where: { domainType: "DIRECTORY" }
+    });
+    const directories = directoryScrapes.map((s) => `https://${s.domain}`);
+
+    // Re-scrape all indexed pages
     const scrapeStates = await db.scrapeState.findMany({
-        where: { status: { in: ["SCRAPED"] } },
+        where: { status: "SCRAPED", domainType: "INDIVIDUAL_SITE" },
         orderBy: { scapedAt: "asc" },
         take: limit
     });
-    const directories = scrapeStates
-        .filter((s) => s.domainType === "DIRECTORY")
-        .map((s) => `https://${s.domain}`);
-
-    const documents = scrapeStates
-        .filter((s) => s.domainType === "INDIVIDUAL_SITE")
-        .flatMap((s) => [
-            `https://${s.domain}/about`,
-            `https://${s.domain}/now`,
-            `https://${s.domain}/ideas`
-        ]);
+    const documents = scrapeStates.map((s) => `https://${s.domain}/${s.type.toLowerCase()}`);
 
     // const docs = await db.post.findMany({
-    //     where: { type: "IDEAS" },
-    //     select: { url: true }
+    //     where: { type: "ABOUT" },
+    //     orderBy: { updatedAt: "asc" },
+    //     select: { url: true },
+    //     take: limit
     // });
     // const documents = docs.map((d) => d.url);
 

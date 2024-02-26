@@ -8,7 +8,7 @@ const app: Application = express();
 
 // Process middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "5mb" }));
 
 // Handle requests
 app.use(router);

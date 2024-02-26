@@ -13,7 +13,7 @@
 
 <!-- Very ugly piece of code here for GitHub corner, but it's quick and dirty -->
 <a
-    href="https://github.com/lindylearn/ideasideasideas"
+    href="https://github.com/lindylearn/aboutideasnow"
     class="github-corner"
     aria-label="View source on GitHub"
     ><svg
@@ -63,17 +63,16 @@
     {#if href !== "/"}
         <footer class="flex flex-col items-center text-center">
             <p class="mb-0">
-                Made with 💡 by <a class="font-bold" href="https://lindylearn.io" target="_blank"
+                Made by <a class="font-bold" href="https://lindylearn.io" target="_blank"
                     >Peter Hagen</a
-                >
-                and
-                <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>.
+                >, <a class="font-bold" href="https://louis.work" target="_blank">Louis Barclay</a>,
+                and <a class="font-bold" href="/about#authors">others</a>.
             </p>
             <p class="mb-0">
                 We're open source &#8212;
                 <a
                     class="font-bold"
-                    href="https://github.com/lindylearn/ideasideasideas"
+                    href="https://github.com/lindylearn/aboutideasnow"
                     target="_blank"
                 >
                     contribute on GitHub

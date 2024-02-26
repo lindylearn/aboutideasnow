@@ -23,7 +23,8 @@ export function isExcludedPage(
         "private site",
         "you're lost",
         "this website uses cookies",
-        "error"
+        "error",
+        "does not exist"
     ];
     if (
         wordBlocklist.some(

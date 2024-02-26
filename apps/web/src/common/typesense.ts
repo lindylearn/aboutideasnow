@@ -34,7 +34,7 @@ export async function searchPosts(query: string, postType?: PostType): Promise<S
             prefix: false,
 
             // group by domain to return only best paragraph
-            group_by: "domain",
+            group_by: "domain,type",
             group_limit: 1,
 
             limit: 20

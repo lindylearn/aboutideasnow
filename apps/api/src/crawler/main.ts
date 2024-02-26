@@ -13,6 +13,7 @@ import normalizeUrl from "normalize-url";
 import { db } from "../common/db.js";
 import { getDomain } from "../common/meta.js";
 import { ScrapeStatus } from "@repo/core/generated/prisma-client";
+import { getPostType } from "../common/postType.js";
 
 export async function runCrawler(directoryUrls: string[], documentUrls: string[]) {
     // Seed URLs
@@ -50,21 +51,38 @@ export async function runCrawler(directoryUrls: string[], documentUrls: string[]
             sameDomainDelaySecs: 0,
 
             requestHandler: router,
-            failedRequestHandler: async ({ request, log }) => {
+            failedRequestHandler: async ({ request, log, pushData }) => {
                 const url = normalizeUrl(request.url);
                 const domain = getDomain(url);
+                const pathname = new URL(url).pathname;
+                const postType = getPostType(pathname);
 
-                log.info(`Failed to crawl ${url}`);
-                // const scrapeState = {
-                //     domain,
-                //     status: ScrapeStatus.UNAVAILABLE,
-                //     scapedAt: new Date()
-                // };
-                // await db.scrapeState.upsert({
-                //     where: { domain },
-                //     create: scrapeState,
-                //     update: scrapeState
-                // });
+                if (pathname === "/about") {
+                    log.info(`Trying / instead of /about for ${domain}`);
+                    pushData({
+                        url: `https://${domain}/`,
+                        label: "document"
+                    });
+                    return;
+                }
+
+                log.info(`Failed to crawl ${url} (${postType})`);
+                if (!postType) {
+                    return;
+                }
+                await db.scrapeState.upsert({
+                    where: { domain_type: { domain, type: postType } },
+                    create: {
+                        domain,
+                        type: postType,
+                        status: ScrapeStatus.UNAVAILABLE,
+                        scapedAt: new Date()
+                    },
+                    update: {
+                        status: ScrapeStatus.UNAVAILABLE,
+                        scapedAt: new Date()
+                    }
+                });
             }
         },
         new Configuration({

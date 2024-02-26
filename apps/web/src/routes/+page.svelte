@@ -70,10 +70,11 @@
     }
 </script>
 
-<main class="flex flex-col items-center max-w-2xl gap-0 text-lg text-center">
+<main class="flex flex-col items-center max-w-xl gap-0 text-lg text-center">
     <p>
         Find people to talk to or collaborate with by searching across the /about, /ideas and /now
-        pages of 1000s of personal websites.
+        pages of {data.websiteCount}
+        personal websites.
     </p>
     <a class="text-lg underline" href="/about">Read the manifesto</a>
 </main>
@@ -143,8 +144,9 @@
         {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
             <button
                 class={clsx(
-                    "rounded-lg px-2 font-mono",
-                    postTypeFilter !== word && "text-text/30 h-full px-2 py-1"
+                    "rounded-lg px-2 text-text font-mono",
+                    postTypeFilter !== word &&
+                        "transition-opacity opacity-30 h-full px-2 py-1 hover:opacity-100"
                 )}
                 style:background-color={postTypeFilter === word ? colorPalette[i] : undefined}
                 on:click={() => {
@@ -190,9 +192,13 @@
 </div>
 
 <div
-    style:background-color={colorPalette[0]}
-    class="flex flex-col items-center justify-center p-4 rounded-xl"
+    class="flex flex-col items-center max-w-lg p-4 bg-white border shadow-md rounded-xl border-border"
+    style:background-color={colorPalette[1]}
 >
-    <h1 class="text-2xl font-bold text-white font-title">✨ Add your site here!</h1>
+    <h1 class="mb-2 text-2xl font-bold font-title">Add your site here!</h1>
+    <p class="text-center">
+        Help other people find you by adding your website to aboutideasnow.com.
+        <a class="font-bold" href="/about#submit">Learn more</a>
+    </p>
     <Form {form} isClearBg={false} {isAddingDomain} />
 </div>
