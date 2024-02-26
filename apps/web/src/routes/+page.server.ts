@@ -32,6 +32,8 @@ export async function load({ url, setHeaders }) {
             }
         });
 
+        db.$disconnect();
+
         // Cache for 1 hour
         setHeaders({
             "Cache-Control": "max-age=0, s-max-age=3600"
