@@ -1,14 +1,19 @@
 <script>
+    import { dev } from "$app/environment";
     import clsx from "clsx";
     import { colorPalette } from "../common/constants";
-    import "../app.css";
     import { page } from "$app/stores";
+    import { inject } from "@vercel/analytics";
+    import "../app.css";
+
     let href = "/";
     // Update href based on current page
     $: {
         const currentPath = $page.url.pathname;
         href = currentPath === "/" ? "/about" : "/";
     }
+
+    inject({ mode: dev ? "development" : "production" });
 </script>
 
 <!-- Very ugly piece of code here for GitHub corner, but it's quick and dirty -->
