@@ -66,9 +66,8 @@
     <section id="authors" class="mt-4">
         <h2>Who built this?</h2>
         <p>
-            <span class="font-bold"> aboutideasnow.com </span> is a decentralized solution on the increasingly
-            centralized web. We exist only to direct you to people's personal websites. You take it from
-            there.
+            aboutideasnow.com is a decentralized solution on the increasingly centralized web. We
+            exist only to direct you to people's personal websites. You take it from there.
         </p>
         <p>
             <a class="font-bold" href="https://lindylearn.io" target="_blank">Peter Hagen</a>

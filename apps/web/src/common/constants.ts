@@ -6,36 +6,40 @@ export const exampleSearchQueries = [
         emoji: "📖"
     },
     {
-        term: "building a community",
-        emoji: "🌞"
+        term: "starting a community",
+        emoji: "👥"
     },
     // {
     //     term: "looking for a cofounder",
     //     emoji: "🤝"
     // },
     {
-        term: "starting a company",
+        term: "founding a company",
         emoji: "🏢"
     },
     {
         term: "writing a book",
         emoji: "🖊️"
     },
+    {
+        term: "building an app",
+        emoji: "📱"
+    },
+    {
+        term: "quitting social media",
+        emoji: "📵"
+    },
     // {
     //     term: "taking a break",
     //     emoji: "🏖️"
     // },
     {
-        term: "building an app",
-        emoji: "📱"
-    },
-    // {
-    //     term: "quitting social media",
-    //     emoji: "📵"
-    // },
-    {
         term: "traveling the world",
         emoji: "🌎"
+    },
+    {
+        term: "taking photos",
+        emoji: "📸"
     },
     // {
     //     term: "spending time with my kids",
@@ -48,10 +52,6 @@ export const exampleSearchQueries = [
     {
         term: "making music",
         emoji: "🎵"
-    },
-    {
-        term: "taking photos",
-        emoji: "📸"
     },
     {
         term: "volunteering",

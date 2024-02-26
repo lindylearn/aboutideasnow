@@ -92,7 +92,7 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
         });
     }
 
-    const existingPost = await db.post.findFirst({ where: { url } });
+    const existingPost = await db.post.findFirst({ where: { domain, type: postType } });
 
     // Extract content
     const title = $("title").text();
@@ -130,7 +130,7 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
         // Delete post if existed before
         if (existingPost) {
             try {
-                await db.post.delete({ where: { url } });
+                await db.post.deleteMany({ where: { domain, type: existingPost.type } });
                 await unIndexPost(existingPost!);
             } catch {}
         }
