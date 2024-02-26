@@ -3,9 +3,10 @@ import { runCrawler } from "../crawler/main.js";
 import { db } from "../common/db.js";
 import { getDomain } from "../common/meta.js";
 import { SubmittedDomain } from "@repo/core/generated/prisma-client";
+import { unIndexPost } from "../common/typesense.js";
 
 export async function addDirectory(req: Request, res: Response) {
-    const url = parseUrl(req);
+    const url = req.query.url as string | undefined;
     if (!url) {
         return res.status(400).json({ message: "Missing url" });
     }
@@ -30,12 +31,25 @@ export async function addDirectory(req: Request, res: Response) {
 }
 
 export async function addBatchDomains(req: Request, res: Response) {
-    const domains = req.body.domains as string[];
-    const urls = domains
-        .filter((domain) => domain.includes("."))
-        .map((domain) => `https://${domain}`);
+    let domains = req.body.domains as string[];
+    domains = domains.filter((domain) => domain.includes("."));
 
-    runCrawler([], urls);
+    const links = domains.flatMap((domain) => [
+        `https://${domain}/about`,
+        `https://${domain}/now`,
+        `https://${domain}/ideas`
+    ]);
+
+    // Exclude existing domains
+    const excludedDomains = new Set();
+    const scrapeStates = await db.scrapeState.findMany({
+        where: { domain: { in: links.map(getDomain) } }
+    });
+    scrapeStates.forEach((s) => excludedDomains.add(s.domain));
+    const newLinks = links.filter((link) => !excludedDomains.has(getDomain(link)));
+    console.log(`Found ${newLinks.length} new links`);
+
+    runCrawler([], links);
 
     return res.json({ message: "Pending" });
 }

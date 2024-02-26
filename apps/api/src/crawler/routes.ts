@@ -21,11 +21,19 @@ router.addHandler("directory", async ({ $, request, enqueueLinks, log }) => {
         .map((_, el) => $(el).attr("href"))
         .get()
         // map to absolute urls
-        .map((link) => new URL(link, url))
-        // filter out current-domain links
-        .filter((url) => url.hostname !== domain)
-        // map back to strings
-        .map((url) => url.toString());
+        .map((link) => {
+            try {
+                const obj = new URL(link, url);
+                // filter out current-domain links
+                if (obj.hostname === domain) {
+                    return null;
+                }
+                return obj.toString();
+            } catch {
+                return null;
+            }
+        })
+        .filter((link) => link !== null) as string[];
 
     // Exclude already checked links
     const excludedDomains = new Set();
