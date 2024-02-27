@@ -20,10 +20,8 @@ export async function load({ url, setHeaders }) {
                     domain: "desc"
                 }
             ],
-            take: postTypeFilter ? 15 : 9
+            take: 12
         });
-
-        console.log(defaultPosts.length);
 
         const websiteCount = await db.scrapeState.count({
             where: {

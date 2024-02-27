@@ -112,7 +112,7 @@
         <input
             id="search-bar"
             class="px-3 py-2 text-center outline-none grow placeholder:text-text/30"
-            placeholder="Search people"
+            placeholder="Search for people"
             autocapitalize="off"
             spellcheck="false"
             autofocus
@@ -217,7 +217,7 @@
 
 <section class="flex flex-col items-center max-w-xl gap-0 text-center md:text-lg">
     <p>
-        Find more posts by searching!<br />Or click the AboutIdeasNow logo to show only a specific
+        Find more posts by searching!<br />Or click the AboutIdeasNow logo to filter by a specific
         post type.
     </p>
 </section>
