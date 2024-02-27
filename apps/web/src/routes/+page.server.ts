@@ -7,11 +7,11 @@ export async function load({ url, setHeaders }) {
         const db = getDatabaseClient();
 
         const postTypeFilter =
-            (url.searchParams.get("filter")?.toUpperCase() as PostType) || "IDEAS";
+            (url.searchParams.get("filter")?.toUpperCase() as PostType) || undefined;
         const defaultPosts = await db.post.findMany({
-            // where: {
-            //     type: postTypeFilter
-            // },
+            where: {
+                type: postTypeFilter
+            },
             orderBy: [
                 {
                     updatedAt: "desc"
