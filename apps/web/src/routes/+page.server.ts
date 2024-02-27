@@ -9,9 +9,9 @@ export async function load({ url, setHeaders }) {
         const postTypeFilter =
             (url.searchParams.get("filter")?.toUpperCase() as PostType) || "IDEAS";
         const defaultPosts = await db.post.findMany({
-            where: {
-                type: postTypeFilter
-            },
+            // where: {
+            //     type: postTypeFilter
+            // },
             orderBy: [
                 {
                     updatedAt: "desc"

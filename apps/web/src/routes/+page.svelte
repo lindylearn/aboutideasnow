@@ -20,7 +20,7 @@
     let isAddingDomain = false;
 
     let searchQuery = $page.url.searchParams.get("q") || "";
-    let postTypeFilter: PostType | undefined = "IDEAS";
+    let postTypeFilter: PostType | undefined = undefined;
 
     let searchedPosts: Post[] = [];
     let isSearching = false;
