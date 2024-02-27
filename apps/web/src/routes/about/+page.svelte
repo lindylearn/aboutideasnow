@@ -1,9 +1,18 @@
 <script lang="ts">
     import type { ActionData } from "./$types";
     import Form from "../../components/Form.svelte";
-    let isAddingDomain = false;
+    import Header from "../../components/Header.svelte";
+
     export let form: ActionData;
+
+    let isAddingDomain = false;
 </script>
+
+<Header
+    onClick={() => {
+        window.location.href = "/";
+    }}
+/>
 
 <main class="flex flex-col w-full max-w-xl gap-5 mb-10 text-lg md:gap-10 items-left">
     <section id="intro">

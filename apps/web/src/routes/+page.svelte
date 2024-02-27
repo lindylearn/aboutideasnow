@@ -12,6 +12,7 @@
     import Form from "../components/Form.svelte";
     import type { ActionData } from "./about/$types";
     import posthog from "posthog-js";
+    import Header from "../components/Header.svelte";
 
     export let data: PageData;
     export let form: ActionData;
@@ -20,7 +21,23 @@
     let isAddingDomain = false;
 
     let searchQuery = $page.url.searchParams.get("q") || "";
-    let postTypeFilter: PostType | undefined = "IDEAS";
+    let postTypeFilter: PostType | undefined = $page.url.searchParams
+        .get("filter")
+        ?.toUpperCase() as PostType;
+
+    function toggleFilter() {
+        if (postTypeFilter === undefined) {
+            postTypeFilter = "ABOUT";
+        } else if (postTypeFilter === "ABOUT") {
+            postTypeFilter = "IDEAS";
+        } else if (postTypeFilter === "IDEAS") {
+            postTypeFilter = "NOW";
+        } else {
+            postTypeFilter = undefined;
+        }
+
+        runSearch();
+    }
 
     let searchedPosts: Post[] = [];
     let isSearching = false;
@@ -73,6 +90,8 @@
     }
 </script>
 
+<Header activeTag={postTypeFilter} onClick={toggleFilter} />
+
 <main class="flex flex-col items-center max-w-xl gap-0 text-center md:text-lg">
     <p>
         Find people to talk to or collaborate with by searching across the /about, /ideas and /now
@@ -93,7 +112,7 @@
         <input
             id="search-bar"
             class="px-3 py-2 text-center outline-none grow placeholder:text-text/30"
-            placeholder="Search"
+            placeholder="Search for anything that interests you"
             autocapitalize="off"
             spellcheck="false"
             autofocus
@@ -118,7 +137,7 @@
         </div>
     </div>
 
-    <button
+    <!-- <button
         class={clsx(
             "hidden md:block transition-opacity text-text hover:opacity-100",
             showFilter ? "opacity-100" : "opacity-30"
@@ -141,10 +160,10 @@
                 d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
             />
         </svg>
-    </button>
+    </button> -->
 </div>
 
-{#if showFilter}
+<!-- {#if showFilter}
     <div class="flex gap-2 overflow-hidden font-title border-border md:-mt-5">
         {#each ["ABOUT", "IDEAS", "NOW"] as word, i}
             <button
@@ -165,7 +184,7 @@
             </button>
         {/each}
     </div>
-{/if}
+{/if} -->
 
 <div
     id="example-searches"
@@ -189,12 +208,19 @@
 
 <div
     id="search-results"
-    class="flex flex-col items-start justify-around w-full gap-8 mt-2 md:mt-5 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+    class="flex flex-col items-start justify-around w-full gap-8 mt-2 mb-5 md:mt-5 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
 >
     {#each searchedPosts.length ? searchedPosts : data.defaultPosts as post, index (post.url)}
         <IdeaCard {post}></IdeaCard>
     {/each}
 </div>
+
+<section class="flex flex-col items-center max-w-xl gap-0 text-center md:text-lg">
+    <p>
+        Find more posts by searching for things you're interested in!<br />Or click the
+        AboutIdeasNow logo to filter by a specific post type.
+    </p>
+</section>
 
 <div
     class="flex flex-col items-center max-w-lg p-4 bg-white border shadow-md rounded-xl border-border"

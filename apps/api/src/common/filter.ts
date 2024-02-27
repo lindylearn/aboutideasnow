@@ -26,7 +26,6 @@ export function isExcludedPage(
         "private site",
         "you're lost",
         "this website uses cookies",
-        "error",
         "does not exist",
         "you need to enable javascript",
         "server error",

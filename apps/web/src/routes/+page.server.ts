@@ -7,7 +7,7 @@ export async function load({ url, setHeaders }) {
         const db = getDatabaseClient();
 
         const postTypeFilter =
-            (url.searchParams.get("filter")?.toUpperCase() as PostType) || "IDEAS";
+            (url.searchParams.get("filter")?.toUpperCase() as PostType) || undefined;
         const defaultPosts = await db.post.findMany({
             where: {
                 type: postTypeFilter
@@ -20,10 +20,8 @@ export async function load({ url, setHeaders }) {
                     domain: "desc"
                 }
             ],
-            take: postTypeFilter ? 15 : 9
+            take: 12
         });
-
-        console.log(defaultPosts.length);
 
         const websiteCount = await db.scrapeState.count({
             where: {
