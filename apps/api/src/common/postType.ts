@@ -10,6 +10,10 @@ export function getPostType(pathname: string) {
     if (pathname === "") {
         pathname = "/about";
     }
+    // Allow /about variants like /about-me but not article slugs
+    if (pathname.includes("about") && pathname.length <= 20) {
+        pathname = "/about";
+    }
 
     if (pathname === "/about") {
         return PostType.ABOUT;
