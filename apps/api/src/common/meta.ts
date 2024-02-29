@@ -16,9 +16,13 @@ export async function getMeta(url: string, html: string, content?: string, log =
     // Use GPT date parse by default as it's the most reliable
     if (content) {
         date = await findDateUsingGPT(content.slice(0, 2000));
+        if (!date && content.length > 2000) {
+            // Try end of large pages
+            date = await findDateUsingGPT(content.slice(-1000));
+        }
 
-        // console.log(`GPT date: ${date?.toISOString().slice(0, 10)}`);
-        // console.log(`meta date: ${meta.date}`);
+        console.log(`GPT date: ${date?.toISOString().slice(0, 10)}`);
+        console.log(`meta date: ${meta.date}`);
     }
 
     if (!date) {

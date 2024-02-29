@@ -3,11 +3,12 @@ export function isExcludedPage(
     domain: string,
     title: string,
     pathname: string,
-    content?: string
+    rawContent: string,
+    articleContent?: string
 ) {
-    // Missing content
-    const wordCount = content?.split(/\s+/).length || 0;
-    if (!content || wordCount < 10) {
+    // Missing article content
+    const wordCount = articleContent?.split(/\s+/).length || 0;
+    if (!articleContent || wordCount < 10) {
         return true;
     }
 
@@ -34,7 +35,7 @@ export function isExcludedPage(
     ];
     if (
         wordBlocklist.some(
-            (w) => title.toLowerCase().includes(w) || content.toLowerCase().includes(w)
+            (w) => title.toLowerCase().includes(w) || rawContent.toLowerCase().includes(w)
         )
     ) {
         return true;
@@ -48,7 +49,7 @@ export function isExcludedPage(
     // Ensure /ideas pages actually talk about ideas (and are not fallback pages)
     if (
         pathname === "/ideas" &&
-        !(title.toLowerCase().includes("idea") || content.toLowerCase().includes("idea"))
+        !(title.toLowerCase().includes("idea") || rawContent.toLowerCase().includes("idea"))
     ) {
         return true;
     }

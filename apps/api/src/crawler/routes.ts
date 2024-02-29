@@ -98,11 +98,14 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
     // Extract content
     const title = $("title").text();
     const html = $.html();
-    const content = await getPageContent(url, html);
-    const wordCount = content?.split(/\s+/).length || 0;
+    const { rawContent, articleContent } = await getPageContent(url, html);
+    const wordCount = articleContent?.split(/\s+/).length || 0;
 
     // Check if should exclude / delete post
-    if (!content || isExcludedPage(url, domain, title, pathname, content)) {
+    if (
+        !articleContent ||
+        isExcludedPage(url, domain, title, pathname, rawContent, articleContent)
+    ) {
         if (pathname === "/about") {
             log.info(`Trying / instead of /about for ${domain}\n`);
             enqueueLinks({
@@ -137,7 +140,9 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
     }
 
     // Always scrape the metadata for now to improve the date extraction
-    const meta = await getMeta(url, html, content, log.info.bind(log));
+    // Use rawContent in case date is outside main text (e.g. on https://alexcarpenter.me/now)
+    const meta = await getMeta(url, html, rawContent, log.info.bind(log));
+
     // Log debug stats
     log.info(`scraped ${url}:`);
     log.info(`\ttitle: ${title}`);
@@ -147,7 +152,7 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
     // Check if content has changed
     if (
         existingPost &&
-        existingPost.content === content &&
+        existingPost.content === articleContent &&
         existingPost.updatedAt?.toISOString() === meta.date?.toISOString()
     ) {
         log.info(`skipping ${url} (content unchanged)\n`);
@@ -176,7 +181,7 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
         url,
         domain,
         type: postType,
-        content,
+        content: articleContent,
         updatedAt: meta.date || new Date("1970-01-01")
     };
     await db.post.upsert({
