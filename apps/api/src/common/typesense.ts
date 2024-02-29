@@ -1,6 +1,6 @@
 import Typesense from "typesense";
 import { getPostParagraphs } from "./split.js";
-import { Post } from "@repo/core/generated/prisma-client";
+import type { Post, PostType } from "@repo/core/generated/prisma-client";
 import { env } from "process";
 
 export const typesense = new Typesense.Client({
@@ -53,7 +53,7 @@ export async function indexPost(post: Post, logger = console.log) {
         // return;
 
         // Delete existing paragraphs for this post (the number might have changed)
-        await unIndexPost(post);
+        await unIndexPost(post.domain, post.type);
 
         await typesense
             .collections("paragraphs")
@@ -75,9 +75,9 @@ export async function indexPost(post: Post, logger = console.log) {
     }
 }
 
-export async function unIndexPost(post: Post) {
+export async function unIndexPost(domain: string, postType: PostType) {
     await typesense
         .collections("paragraphs")
         .documents()
-        .delete({ filter_by: `domain:${post.domain} && type:${post.type}` });
+        .delete({ filter_by: `domain:${domain} && type:${postType}` });
 }

@@ -3,7 +3,7 @@ import { getDomain, getMeta } from "../common/meta.js";
 import normalizeUrl from "normalize-url";
 import { getPageContent } from "../common/content.js";
 import { PostType, ScrapeStatus } from "@repo/core/generated/prisma-client";
-import { db } from "../common/db.js";
+import { db, deletePost } from "../common/db.js";
 import { isExcludedPage } from "../common/filter.js";
 import { indexPost, unIndexPost } from "../common/typesense.js";
 import { getPostType } from "../common/postType.js";
@@ -79,7 +79,7 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
     if (domain !== originalDomain) {
         log.info(`Redirected from ${originalDomain} to ${domain}`);
         await db.scrapeState.upsert({
-            where: { domain_type: { domain, type: postType } },
+            where: { domain_type: { domain: originalDomain, type: postType } },
             create: {
                 domain: originalDomain,
                 type: postType,
@@ -130,10 +130,7 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
 
         // Delete post if existed before
         if (existingPost) {
-            try {
-                await db.post.deleteMany({ where: { domain, type: existingPost.type } });
-                await unIndexPost(existingPost!);
-            } catch {}
+            await deletePost(domain, postType);
         }
 
         return;
