@@ -66,9 +66,10 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
 
     const originalUrl = normalizeUrl(request.url);
     const originalDomain = getDomain(originalUrl);
+    const originalPathname = new URL(originalUrl).pathname;
 
     // Detect post type
-    const postType = getPostType(pathname);
+    const postType = getPostType(pathname) || getPostType(originalPathname);
     if (!postType) {
         log.info(`${domain} ${pathname} skipped (not /about, /now, or /ideas)\n`);
         return;
