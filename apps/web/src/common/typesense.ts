@@ -53,14 +53,16 @@ export async function searchPosts(query: string, postType?: PostType): Promise<S
                     return;
                 }
 
-                // Prefer the Typesense-generated snippet if available
                 if (highlight.snippet) {
+                    // Use TypeSense snippet to avoid highlighting small words in random places
+                    // However this shrinks the displayed paragraph :(
                     htmlContent = highlight?.snippet.replaceAll(
                         "<mark>",
                         '<mark class="highlight">'
                     );
                 } else {
                     highlight.matched_tokens?.forEach((token) => {
+                        // Exclude small words like "an"
                         if (typeof token !== "string" || token.length <= 3) {
                             return;
                         }
