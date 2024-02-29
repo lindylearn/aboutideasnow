@@ -2,7 +2,10 @@ import { getDatabaseClient } from "@repo/core/dist";
 import type { PostType } from "@repo/core/generated/prisma-client";
 import { handleSubmit } from "../common/formActions.js";
 
-export async function load({ url, setHeaders }) {
+export async function load({ url, setHeaders }): Promise<{
+    websiteCount: number;
+    defaultPosts: Post[];
+}> {
     try {
         const db = getDatabaseClient();
 
@@ -38,8 +41,10 @@ export async function load({ url, setHeaders }) {
         });
 
         return { websiteCount, defaultPosts };
-    } catch {
-        return { websiteCount: 7400, defaultPosts: [] };
+    } catch (err) {
+        console.error(`load() function failed: ${err}`);
+
+        return { websiteCount: 7591, defaultPosts: [] };
     }
 }
 
