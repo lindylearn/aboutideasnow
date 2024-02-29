@@ -7,7 +7,7 @@ export function getPostType(pathname: string) {
     }
 
     // Treat / as /about
-    if (pathname === "/") {
+    if (pathname === "") {
         pathname = "/about";
     }
 
