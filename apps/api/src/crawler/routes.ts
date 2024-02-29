@@ -138,14 +138,32 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
         return;
     }
 
+    // Always scrape the metadata for now to improve the date extraction
+    const meta = await getMeta(url, html, content);
+    // Log debug stats
+    log.info(`scraped ${url}:`);
+    log.info(`\ttitle: ${title}`);
+    log.info(`\twords: ${wordCount}`);
+    log.info(`\tdate: ${meta.date?.toISOString().slice(0, 10)}`);
+
     // Check if content has changed
-    if (existingPost && existingPost.content === content) {
+    if (
+        existingPost &&
+        existingPost.content === content &&
+        existingPost.updatedAt?.toISOString() === meta.date?.toISOString()
+    ) {
         log.info(`skipping ${url} (content unchanged)\n`);
 
         // Update scrape time
-        await db.scrapeState.update({
+        await db.scrapeState.upsert({
             where: { domain_type: { domain, type: postType } },
-            data: {
+            create: {
+                domain,
+                type: postType,
+                status: ScrapeStatus.SCRAPED,
+                scapedAt: new Date()
+            },
+            update: {
                 scapedAt: new Date()
             }
         });
@@ -153,12 +171,6 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
         return;
     }
 
-    const meta = await getMeta(url, html, content);
-    // Log debug stats
-    log.info(`scraped ${url}:`);
-    log.info(`\ttitle: ${title}`);
-    log.info(`\twords: ${wordCount}`);
-    log.info(`\tdate: ${meta.date?.toISOString().slice(0, 10)}`);
     log.info(``);
 
     // Update post

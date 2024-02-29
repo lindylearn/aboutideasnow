@@ -54,7 +54,7 @@
         <div
             class="text-sm whitespace-pre-wrap overflow-hidden line-clamp-[10] font-mono font-normal"
         >
-            {#if date && date.getFullYear() !== 1970}
+            {#if date && date.getFullYear() > 1970}
                 Updated {new Intl.DateTimeFormat("en-US", {
                     month: "long",
                     day: "numeric",
@@ -70,7 +70,7 @@
     </div>
 
     <!-- Maybe the updated date looks less distracting inside the post text? -->
-    <!-- {#if post.updatedAt && post.updatedAt.getFullYear() !== 1970}
+    <!-- {#if post.updatedAt && post.updatedAt.getFullYear() > 1970}
         <div class="p-2">
             <div class="text-xs font-bold uppercase text-slate-500">Last updated:</div>
             <div class="font-sans font-bold text-slate-700">

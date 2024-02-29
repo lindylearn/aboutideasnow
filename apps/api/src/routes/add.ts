@@ -74,18 +74,17 @@ export async function addDomain(req: Request, res: Response) {
         success = false;
     }
 
-    // Save status
-    const submittedDomain: SubmittedDomain = {
-        domain,
-        email,
-        success,
-        submittedAt: new Date()
-    };
-    await db.submittedDomain.upsert({
-        where: { domain },
-        update: submittedDomain,
-        create: submittedDomain
-    });
+    // Save submitted info if not exists
+    try {
+        await db.submittedDomain.create({
+            data: {
+                domain,
+                email,
+                success,
+                submittedAt: new Date()
+            }
+        });
+    } catch {}
 
     // Return results
     if (success) {

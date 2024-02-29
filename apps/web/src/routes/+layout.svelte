@@ -51,26 +51,6 @@
 <div
     class="flex flex-col items-center min-h-screen gap-5 p-5 overflow-hidden md:mt-5 md:gap-10 bg-background font-text text-text animate-fadein"
 >
-    <h1>
-        <a
-            class="flex text-3xl font-bold leading-relaxed text-center transition-all shadow md:text-6xl font-title rounded-2xl hover:opacity-75 hover:shadow-lg"
-            {href}
-        >
-            {#each ["about", "ideas", "now"] as word, i}
-                <div
-                    class={clsx(
-                        "bg-light h-full py-1 md:py-3 px-3 md:px-4 border border-border",
-                        i === 0 && "rounded-l-2xl",
-                        i === 2 && "rounded-r-2xl"
-                    )}
-                    style:background-color={colorPalette[i]}
-                >
-                    {word}
-                </div>
-            {/each}
-        </a>
-    </h1>
-
     <slot />
 
     {#if href !== "/"}

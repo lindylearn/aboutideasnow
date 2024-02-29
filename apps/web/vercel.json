@@ -1,0 +1,14 @@
+{
+    "redirects": [
+        {
+            "source": "/now",
+            "destination": "https://github.com/lindylearn/aboutideasnow/pulls",
+            "permanent": true
+        },
+        {
+            "source": "/ideas",
+            "destination": "https://github.com/lindylearn/aboutideasnow/issues",
+            "permanent": true
+        }
+    ]
+}

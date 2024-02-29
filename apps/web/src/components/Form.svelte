@@ -24,7 +24,7 @@
                         <span class="font-bold">
                             {new URL(post.url).hostname}{new URL(post.url).pathname}
                         </span>
-                        {#if post.updatedAt && new Date(post.updatedAt).getFullYear() !== 1970}
+                        {#if post.updatedAt && new Date(post.updatedAt).getFullYear() > 1970}
                             last updated at {new Intl.DateTimeFormat("en-US", {
                                 month: "long",
                                 day: "numeric",

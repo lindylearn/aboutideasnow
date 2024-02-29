@@ -29,12 +29,12 @@ export async function runCrawler(directoryUrls: string[], documentUrls: string[]
     ];
 
     // Run crawler
-    // const proxyConfiguration = new ProxyConfiguration({
-    //     // proxyUrls: ["http://spzk5975qs:wf4Fy0TDrwncJa74ts@dc.smartproxy.com:10000"],
-    //     proxyUrls: Array.from(Array(100).keys()).map(
-    //         (i) => `http://spzk5975qs:wf4Fy0TDrwncJa74ts@dc.smartproxy.com:${10000 + i + 1}`
-    //     )
-    // });
+    const proxyConfiguration = new ProxyConfiguration({
+        // proxyUrls: ["URL"]
+        // proxyUrls: Array.from(Array(100).keys()).map(
+        //     (i) => `URL:${10000 + i + 1}`
+        // )
+    });
     await purgeDefaultStorages();
     const crawler = new CheerioCrawler(
         {
