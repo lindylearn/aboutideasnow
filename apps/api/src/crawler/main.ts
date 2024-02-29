@@ -47,42 +47,45 @@ export async function runCrawler(directoryUrls: string[], documentUrls: string[]
             maxConcurrency: 10,
             retryOnBlocked: false,
             maxRequestRetries: 1,
-            maxRequestsPerMinute: 100,
+            maxRequestsPerMinute: 120,
             sameDomainDelaySecs: 0,
 
             requestHandler: router,
-            failedRequestHandler: async ({ request, log, pushData }) => {
+            failedRequestHandler: async ({ request, log, enqueueLinks }) => {
                 const url = normalizeUrl(request.url);
                 const domain = getDomain(url);
                 const pathname = new URL(url).pathname;
                 const postType = getPostType(pathname);
 
-                if (pathname === "/about") {
+                log.info(`Failed to crawl ${url}`);
+
+                // Mark as unavailable
+                if (postType) {
+                    await db.scrapeState.upsert({
+                        where: { domain_type: { domain, type: postType } },
+                        create: {
+                            domain,
+                            type: postType,
+                            status: ScrapeStatus.UNAVAILABLE,
+                            scapedAt: new Date()
+                        },
+                        update: {
+                            status: ScrapeStatus.UNAVAILABLE,
+                            scapedAt: new Date()
+                        }
+                    });
+                }
+
+                // Try other paths
+                if (postType === "ABOUT" && pathname !== "/") {
                     log.info(`Trying / instead of /about for ${domain}`);
-                    pushData({
-                        url: `https://${domain}/`,
-                        label: "document"
+                    await enqueueLinks({
+                        strategy: "all",
+                        label: "document",
+                        urls: [`https://${domain}/`]
                     });
                     return;
                 }
-
-                log.info(`Failed to crawl ${url} (${postType})`);
-                if (!postType) {
-                    return;
-                }
-                await db.scrapeState.upsert({
-                    where: { domain_type: { domain, type: postType } },
-                    create: {
-                        domain,
-                        type: postType,
-                        status: ScrapeStatus.UNAVAILABLE,
-                        scapedAt: new Date()
-                    },
-                    update: {
-                        status: ScrapeStatus.UNAVAILABLE,
-                        scapedAt: new Date()
-                    }
-                });
             }
         },
         new Configuration({
