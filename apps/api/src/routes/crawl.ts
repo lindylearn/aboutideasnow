@@ -21,7 +21,6 @@ export async function periodicCrawl(req: Request, res: Response) {
         take: limit
     });
     const documents = scrapeStates.map((s) => `https://${s.domain}/${s.type.toLowerCase()}`);
-    console.log(documents);
 
     // const docs = await db.post.findMany({
     //     where: { type: "ABOUT" },
