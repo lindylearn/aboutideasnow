@@ -1,6 +1,7 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
     import { colorPalette } from "../common/constants"; // Adjust the import path as necessary
+    import { getUTCDate } from "../common/util";
     import type { ActionData } from "../routes/about/$types";
     import posthog from "posthog-js";
 
@@ -25,11 +26,7 @@
                             {new URL(post.url).hostname}{new URL(post.url).pathname}
                         </span>
                         {#if post.updatedAt && new Date(post.updatedAt).getFullYear() > 1970}
-                            last updated at {new Intl.DateTimeFormat("en-US", {
-                                month: "long",
-                                day: "numeric",
-                                year: "numeric"
-                            }).format(new Date(post.updatedAt))}
+                            last updated at {getUTCDate(new Date(post.updatedAt))}
                         {:else}
                             without update time
                         {/if}

@@ -1,5 +1,5 @@
 import { getDatabaseClient } from "@repo/core/dist";
-import type { PostType } from "@repo/core/generated/prisma-client";
+import type { Post, PostType } from "@repo/core/generated/prisma-client";
 import { handleSubmit } from "../common/formActions.js";
 
 export async function load({ url, setHeaders }): Promise<{
