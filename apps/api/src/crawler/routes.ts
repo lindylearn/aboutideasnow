@@ -101,6 +101,8 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
     const { rawContent, articleContent } = await getPageContent(url, html);
     const wordCount = articleContent?.split(/\s+/).length || 0;
 
+    // console.log(articleContent);
+
     // Check if should exclude / delete post
     if (
         !articleContent ||

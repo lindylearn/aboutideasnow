@@ -32,6 +32,7 @@
         "@types/node": "^20.11.10",
         "@types/turndown": "^5.0.4",
         "nodemon": "^3.0.3",
+        "parser": "link:@types/@postlight/parser",
         "ts-node": "^10.9.2",
         "typescript": "^5.3.3"
     },
