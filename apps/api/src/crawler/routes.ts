@@ -139,7 +139,7 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
     }
 
     // Always scrape the metadata for now to improve the date extraction
-    const meta = await getMeta(url, html, content);
+    const meta = await getMeta(url, html, content, log.info.bind(log));
     // Log debug stats
     log.info(`scraped ${url}:`);
     log.info(`\ttitle: ${title}`);

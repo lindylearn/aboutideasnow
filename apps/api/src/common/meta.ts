@@ -7,7 +7,7 @@ import { openai } from "./openai.js";
 // @ts-ignore
 const metascraper = _metascraper([_metascraperDate()]);
 
-export async function getMeta(url: string, html: string, content?: string) {
+export async function getMeta(url: string, html: string, content?: string, log = console.log) {
     const meta = await metascraper({ url, html });
     const domain = getDomain(url);
 
@@ -17,19 +17,14 @@ export async function getMeta(url: string, html: string, content?: string) {
     if (content) {
         date = await findDateUsingGPT(content.slice(0, 2000));
 
-        // Use metdata fallback for undetected dates
-        if (date && date.getFullYear() <= 1970) {
-            date = undefined;
-        }
-        // Don't trust future dates, e.g. on https://kunalmarwaha.com/now
-        if (date && date.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10)) {
-            date = undefined;
-        }
+        // console.log(`GPT date: ${date?.toISOString().slice(0, 10)}`);
+        // console.log(`meta date: ${meta.date}`);
     }
 
     if (!date) {
-        // Try using metadata data instead
+        // Use metadata date instead
         date = meta.date ? new Date(meta.date) : undefined;
+
         // Don't trust future dates, e.g. on https://francescasciandra.art/now
         // Include the current date in case people create their now page before submitting it
         if (date && date.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10)) {
@@ -69,7 +64,18 @@ async function findDateUsingGPT(text: string): Promise<Date | undefined> {
 
     try {
         const isoString = JSON.parse(completion!).lastUpdated;
-        return new Date(isoString);
+        const date = new Date(isoString);
+
+        // GTP returns 1970-01-01 for empty dates
+        if (date && date.getFullYear() <= 1970) {
+            return undefined;
+        }
+        // Don't trust future dates, e.g. on https://kunalmarwaha.com/now
+        if (date && date.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10)) {
+            return undefined;
+        }
+
+        return date;
     } catch (err) {
         console.error(`Could not parse date from string with GPT: ${completion}`);
         return undefined;
