@@ -22,6 +22,13 @@ export async function periodicCrawl(req: Request, res: Response) {
     });
     const documents = scrapeStates.map((s) => `https://${s.domain}/${s.type.toLowerCase()}`);
 
+    // const posts = await db.post.findMany({
+    //     where: { type: "NOW", updatedAt: { lt: new Date("2010-01-01") } },
+    //     select: { url: true },
+    //     take: limit
+    // });
+    // const documents = posts.map((d) => d.url);
+
     // const docs = await db.post.findMany({
     //     where: { type: "ABOUT" },
     //     orderBy: { updatedAt: "asc" },
