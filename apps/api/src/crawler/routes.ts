@@ -101,8 +101,6 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
     const { rawContent, articleContent } = await getPageContent(url, html);
     const wordCount = articleContent?.split(/\s+/).length || 0;
 
-    // console.log(articleContent);
-
     // Check if should exclude / delete post
     if (
         !articleContent ||
@@ -141,22 +139,8 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
         return;
     }
 
-    // Always scrape the metadata for now to improve the date extraction
-    // Use rawContent in case date is outside main text (e.g. on https://alexcarpenter.me/now)
-    const meta = await getMeta(url, html, rawContent, log.info.bind(log));
-
-    // Log debug stats
-    log.info(`scraped ${url}:`);
-    log.info(`\ttitle: ${title}`);
-    log.info(`\twords: ${wordCount}`);
-    log.info(`\tdate: ${meta.date?.toISOString().slice(0, 10)}`);
-
     // Check if content has changed
-    if (
-        existingPost &&
-        existingPost.content === articleContent &&
-        existingPost.updatedAt?.toISOString() === meta.date?.toISOString()
-    ) {
+    if (existingPost && existingPost.content === articleContent) {
         log.info(`skipping ${url} (content unchanged)\n`);
 
         // Update scrape time
@@ -176,6 +160,13 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
         return;
     }
 
+    // Use rawContent in case date is outside main text (e.g. on https://alexcarpenter.me/now)
+    const meta = await getMeta(url, html, rawContent, log.info.bind(log));
+    // Log debug stats
+    log.info(`scraped ${url}:`);
+    log.info(`\ttitle: ${title}`);
+    log.info(`\twords: ${wordCount}`);
+    log.info(`\tdate: ${meta.date?.toISOString().slice(0, 10)}`);
     log.info(``);
 
     // Update post
