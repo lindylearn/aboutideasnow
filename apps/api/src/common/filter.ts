@@ -57,6 +57,7 @@ export function isExcludedPage(
     // Exclude some domains & pages manually
     if (
         [
+            // company websites
             "founderslist.com",
             "notesnook.com",
             "aisnakeoil.com",
@@ -76,7 +77,11 @@ export function isExcludedPage(
             "privacytools.io",
             "openthemagazine.com",
             "newstatesman.com",
-            "learninpublic.org"
+            "learninpublic.org",
+            "vibilagare.se",
+            // bad date parsing
+            "manojranaweera.me",
+            "blog.halfvast.com"
         ].includes(domain)
     ) {
         return true;

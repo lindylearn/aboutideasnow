@@ -20,10 +20,10 @@ export async function getMeta(url: string, html: string, content?: string, log =
             // Try end of large pages
             date = await findDateUsingGPT(content.slice(-1000));
         }
-
-        console.log(`GPT date: ${date?.toISOString().slice(0, 10)}`);
-        console.log(`meta date: ${meta.date}`);
     }
+
+    console.log(`GPT date: ${date?.toISOString().slice(0, 10)}`);
+    console.log(`meta date: ${meta.date}`);
 
     if (!date) {
         // Use metadata date instead
@@ -34,9 +34,9 @@ export async function getMeta(url: string, html: string, content?: string, log =
             date = undefined;
         }
 
-        // Don't trust future dates, e.g. on https://francescasciandra.art/now
-        // Include the current date in case people create their now page before submitting it
-        if (date && date.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10)) {
+        // Don't trust very recent or future dates, e.g. on https://francescasciandra.art/now, https://nycsubwaygirl.com/now
+        // But include the current date in case people create their now page before submitting it
+        if (date && date.getTime() > new Date().getTime() - 1000 * 60) {
             date = undefined;
         }
     }
