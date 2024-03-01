@@ -29,6 +29,11 @@ export async function getMeta(url: string, html: string, content?: string, log =
         // Use metadata date instead
         date = meta.date ? new Date(meta.date) : undefined;
 
+        // Ingore dates a long time in the past
+        if (date && date.toISOString().slice(0, 10) < "2010-01-01") {
+            date = undefined;
+        }
+
         // Don't trust future dates, e.g. on https://francescasciandra.art/now
         // Include the current date in case people create their now page before submitting it
         if (date && date.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10)) {
@@ -71,7 +76,7 @@ async function findDateUsingGPT(text: string): Promise<Date | undefined> {
         const date = new Date(isoString);
 
         // GTP returns 1970-01-01 for empty dates
-        if (date && date.getFullYear() <= 1970) {
+        if (date && date.toISOString().slice(0, 10) < "2010-01-01") {
             return undefined;
         }
         // Don't trust future dates, e.g. on https://kunalmarwaha.com/now
