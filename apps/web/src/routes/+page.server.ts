@@ -1,5 +1,5 @@
 import { getDatabaseClient } from "@repo/core/dist";
-import type { Post, PostType } from "@repo/core/generated/prisma-client";
+import { type Post, PostType, PrismaClient } from "@repo/core/generated/prisma-client";
 import { handleSubmit } from "../common/formActions.js";
 
 export async function load({ url, setHeaders }): Promise<{
@@ -11,21 +11,8 @@ export async function load({ url, setHeaders }): Promise<{
 
         const postTypeFilter =
             (url.searchParams.get("filter")?.toUpperCase() as PostType) || undefined;
-        const defaultPosts = await db.post.findMany({
-            where: {
-                type: postTypeFilter
-            },
-            orderBy: [
-                {
-                    updatedAt: "desc"
-                },
-                {
-                    domain: "desc"
-                }
-            ],
-            take: 12
-        });
 
+        const defaultPosts = await getRepresentativePosts(postTypeFilter, db);
         const websiteCount = await db.scrapeState.count({
             where: {
                 status: "SCRAPED",
@@ -46,6 +33,33 @@ export async function load({ url, setHeaders }): Promise<{
 
         return { websiteCount: 7591, defaultPosts: [] };
     }
+}
+
+async function getRepresentativePosts(
+    postTypeFilter: PostType | undefined,
+    db: PrismaClient,
+    limit = 12
+) {
+    // Apply filter if present
+    if (postTypeFilter) {
+        return await getPosts(postTypeFilter, db, limit);
+    }
+
+    // Ensure that all three post types exist
+    const postsByType = await Promise.all(
+        [PostType.ABOUT, PostType.IDEAS, PostType.NOW].map((type) =>
+            getPosts(type, db, Math.floor(limit / 3))
+        )
+    );
+    return postsByType.flat().sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+}
+
+async function getPosts(postTypeFilter: PostType, db: PrismaClient, limit = 12) {
+    return await db.post.findMany({
+        where: { type: postTypeFilter },
+        orderBy: { updatedAt: "desc" },
+        take: limit
+    });
 }
 
 export const actions = {
