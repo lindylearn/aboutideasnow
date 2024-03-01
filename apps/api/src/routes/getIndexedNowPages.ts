@@ -9,7 +9,7 @@ export async function getIndexedNowPages(req: Request, res: Response) {
         },
         select: {
             domain: true,
-            url: true,
+            // url: true,
             updatedAt: true
         },
         orderBy: {
@@ -17,14 +17,17 @@ export async function getIndexedNowPages(req: Request, res: Response) {
         }
     });
     // Map format
-    const publicPosts = posts.map((post) => {
-        let updatedAt: string | undefined = post.updatedAt.toISOString().slice(0, 10);
+    const websitesUpdatedAt = posts.reduce((obj, post) => {
+        let updatedAt: string | null = post.updatedAt.toISOString().slice(0, 10);
         if (updatedAt === "1970-01-01") {
-            updatedAt = undefined;
+            updatedAt = null;
         }
 
-        return { ...post, updatedAt };
-    });
+        return {
+            ...obj,
+            [post.domain]: updatedAt
+        };
+    }, {});
 
     const lastScrapeState = await db.scrapeState.findFirst({
         where: {
@@ -39,8 +42,8 @@ export async function getIndexedNowPages(req: Request, res: Response) {
     });
 
     return res.json({
-        validWebsitesCount: publicPosts.length,
+        validWebsitesCount: posts.length,
         lastScrapedAt: lastScrapeState?.scapedAt,
-        websites: publicPosts
+        websitesUpdatedAt
     });
 }
