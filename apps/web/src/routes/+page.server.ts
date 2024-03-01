@@ -51,7 +51,7 @@ async function getRepresentativePosts(
             getPosts(type, db, Math.floor(limit / 3))
         )
     );
-    return postsByType.flat().sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+    return postsByType.flat().sort((a, b) => a.domain.localeCompare(b.domain));
 }
 
 async function getPosts(postTypeFilter: PostType, db: PrismaClient, limit = 12) {
