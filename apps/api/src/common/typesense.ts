@@ -55,6 +55,10 @@ export async function indexPost(post: Post, logger = console.log) {
         // Delete existing paragraphs for this post (the number might have changed)
         await unIndexPost(post.domain, post.type);
 
+        if (paragraphs.length === 0) {
+            return;
+        }
+
         await typesense
             .collections("paragraphs")
             .documents()
