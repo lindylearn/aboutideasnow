@@ -12,15 +12,17 @@ export async function runBackfill(req: Request, res: Response) {
         skip: start
     });
 
-    let index = 1;
+    let index = start;
     for (const post of posts) {
-        console.log(`(${index}/${posts.length}) Backfilling post ${post.url}`);
+        console.log(`(${index}/${posts.length + start}) Backfilling post ${post.url}`);
 
         try {
-            await indexPost(post);
+            indexPost(post);
         } catch (e) {
             console.error(e);
         }
+
+        await new Promise((resolve) => setTimeout(resolve, 300));
 
         index++;
     }
