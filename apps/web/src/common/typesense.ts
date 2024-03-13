@@ -39,7 +39,7 @@ export async function searchPosts(query: string, postType?: PostType): Promise<S
             group_by: "domain,type",
             group_limit: 1,
 
-            limit: 20
+            limit: 50
         });
 
     const hits = searchResults.grouped_hits?.map((hit) => hit.hits[0]) || [];
