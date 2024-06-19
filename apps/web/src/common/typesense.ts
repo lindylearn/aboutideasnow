@@ -1,10 +1,6 @@
-// import { PUBLIC_TYPESENSE_SEARCH_API_KEY, PUBLIC_TYPESENSE_URL } from "$env/static/public";
+import { PUBLIC_TYPESENSE_SEARCH_API_KEY, PUBLIC_TYPESENSE_URL } from "$env/static/public";
 import type { Post, PostType } from "@repo/core/generated/prisma-client";
 import Typesense from "typesense";
-
-// Vercel build fails if not hardcoded for some reason
-const PUBLIC_TYPESENSE_URL = "o8k5amdihc3vegn7p-1.a1.typesense.net";
-const PUBLIC_TYPESENSE_SEARCH_API_KEY = "IRHY5vFh26RNZxoYem0hFs6Gb6ilSOnv";
 
 export const typesense = new Typesense.Client({
     nodes: [

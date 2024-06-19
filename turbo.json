@@ -1,6 +1,19 @@
 {
     "$schema": "https://turbo.build/schema.json",
     "globalDependencies": ["**/.env.*local"],
+    "globalEnv": [
+        "PUBLIC_TYPESENSE_URL",
+        "PUBLIC_TYPESENSE_SEARCH_API_KEY",
+        "SUPABASE_URL",
+        "SUPABASE_PRIVATE_KEY",
+        "DATABASE_URL",
+        "INTERNAL_API_URL",
+        "OPENAI_API_KEY",
+        "COHERE_API_KEY",
+        "PINECONE_API_KEY",
+        "TYPESENSE_URL",
+        "TYPESENSE_ADMIN_API_KEY"
+    ],
     "tasks": {
         "build": {
             "dependsOn": ["^build"],
