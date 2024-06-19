@@ -25,9 +25,9 @@ export async function searchPosts(query: string, postType?: PostType): Promise<S
         .search({
             q: query,
 
-            query_by: "embedding",
+            // query_by: "embedding",
             // uncomment this to enable keyword search
-            // query_by: "embedding,content,domain",
+            query_by: "content,domain",
 
             filter_by: postType ? `type:${postType}` : undefined,
 
