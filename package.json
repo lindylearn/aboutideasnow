@@ -19,7 +19,8 @@
     },
     "pnpm": {
         "patchedDependencies": {
-            "re2@1.22.1": "patches/re2@1.22.1.patch"
+            "re2@1.22.1": "patches/re2@1.22.1.patch",
+            "url-regex-safe@4.0.0": "patches/url-regex-safe@4.0.0.patch"
         }
     }
 }

@@ -1,0 +1,37 @@
+diff --git a/package.json b/package.json
+index c7dc545c7de7f624f06bd2a10e8c332eca4e0834..78b34e6c2f4b109abe261176807a4133b01dccf6 100644
+--- a/package.json
++++ b/package.json
+@@ -3,9 +3,6 @@
+   "description": "Regular expression matching for URL's. Maintained, safe, and browser-friendly version of url-regex. Resolves CVE-2020-7661. Works in Node v10.12.0+ and browsers.",
+   "version": "4.0.0",
+   "author": "Forward Email LLC (https://forwardemail.net)",
+-  "browser": {
+-    "re2": false
+-  },
+   "bugs": {
+     "url": "https://github.com/spamscanner/url-regex-safe/issues"
+   },
+@@ -38,7 +35,6 @@
+     "jsdom": "15",
+     "lint-staged": "^14.0.0",
+     "nyc": "^15.1.0",
+-    "re2": "^1.20.1",
+     "remark-cli": "^11.0.0",
+     "remark-preset-github": "^4.0.4",
+     "rimraf": "^5.0.1",
+@@ -90,14 +86,6 @@
+   ],
+   "license": "MIT",
+   "main": "lib/index.js",
+-  "peerDependencies": {
+-    "re2": "^1.20.1"
+-  },
+-  "peerDependenciesMeta": {
+-    "re2": {
+-      "optional": true
+-    }
+-  },
+   "repository": {
+     "type": "git",
+     "url": "https://github.com/spamscanner/url-regex-safe"

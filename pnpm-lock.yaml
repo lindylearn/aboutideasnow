@@ -8,6 +8,9 @@ patchedDependencies:
   re2@1.22.1:
     hash: ohau3kcg24dktl6fccue7lp6ki
     path: patches/re2@1.22.1.patch
+  url-regex-safe@4.0.0:
+    hash: va37ctuwhypaj6724iitsy7rom
+    path: patches/url-regex-safe@4.0.0.patch
 
 importers:
 
@@ -1898,7 +1901,7 @@ packages:
       re2: 1.22.1(patch_hash=ohau3kcg24dktl6fccue7lp6ki)
       smartquotes: 2.3.2
       tldts: 7.0.10
-      url-regex-safe: 4.0.0(re2@1.22.1)
+      url-regex-safe: 4.0.0(patch_hash=va37ctuwhypaj6724iitsy7rom)(re2@1.22.1)
       video-extensions: 1.2.0
     transitivePeerDependencies:
       - bufferutil
@@ -9840,7 +9843,7 @@ packages:
       requires-port: 1.0.0
     dev: false
 
-  /url-regex-safe@4.0.0(re2@1.22.1):
+  /url-regex-safe@4.0.0(patch_hash=va37ctuwhypaj6724iitsy7rom)(re2@1.22.1):
     resolution: {integrity: sha512-BrnFCWKNFrFnRzKD66NtJqQepfJrUHNPvPxE5y5NSAhXBb4OlobQjt7907Jm4ItPiXaeX+dDWMkcnOd4jR9N8A==}
     engines: {node: '>= 14'}
     peerDependencies:
@@ -9853,6 +9856,7 @@ packages:
       re2: 1.22.1(patch_hash=ohau3kcg24dktl6fccue7lp6ki)
       tlds: 1.249.0
     dev: false
+    patched: true
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
