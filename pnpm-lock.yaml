@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  re2@1.22.1:
+    hash: ohau3kcg24dktl6fccue7lp6ki
+    path: patches/re2@1.22.1.patch
+
 importers:
 
   .:
@@ -1890,7 +1895,7 @@ packages:
       microsoft-capitalize: 1.0.5
       mime: 3.0.0
       normalize-url: 6.1.0
-      re2: 1.22.1
+      re2: 1.22.1(patch_hash=ohau3kcg24dktl6fccue7lp6ki)
       smartquotes: 2.3.2
       tldts: 7.0.10
       url-regex-safe: 4.0.0(re2@1.22.1)
@@ -8364,7 +8369,7 @@ packages:
       unpipe: 1.0.0
     dev: false
 
-  /re2@1.22.1:
+  /re2@1.22.1(patch_hash=ohau3kcg24dktl6fccue7lp6ki):
     resolution: {integrity: sha512-E4J0EtgyNLdIr0wTg0dQPefuiqNY29KaLacytiUAYYRzxCG+zOkWoUygt1rI+TA1LrhN49/njrfSO1DHtVC5Vw==}
     requiresBuild: true
     dependencies:
@@ -8374,6 +8379,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+    patched: true
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -9844,7 +9850,7 @@ packages:
         optional: true
     dependencies:
       ip-regex: 4.3.0
-      re2: 1.22.1
+      re2: 1.22.1(patch_hash=ohau3kcg24dktl6fccue7lp6ki)
       tlds: 1.249.0
     dev: false
 

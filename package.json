@@ -13,11 +13,13 @@
         "prettier": "^3.1.1",
         "turbo": "^2.5.5"
     },
-    "overrides": {
-        "re2": "npm:re2-regexp@1.0.0-RegExp"
-    },
     "packageManager": "pnpm@8.9.0",
     "engines": {
         "node": ">=18"
+    },
+    "pnpm": {
+        "patchedDependencies": {
+            "re2@1.22.1": "patches/re2@1.22.1.patch"
+        }
     }
 }
