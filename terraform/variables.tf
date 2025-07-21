@@ -9,7 +9,7 @@ variable "aws_region" {
 variable "instance_type" {
   description = "The EC2 instance type for the Typesense node."
   type        = string
-  default     = "t3.small"
+  default     = "t2.micro"
 }
 
 variable "domain_name" {
