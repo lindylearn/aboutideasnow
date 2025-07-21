@@ -1,14 +1,14 @@
 // @ts-ignore
-import Parser from "@postlight/parser";
-import _metascraper from "metascraper";
-import _metascraperDate from "metascraper-date";
+// import Parser from "@postlight/parser";
+// import _metascraper from "metascraper";
+// import _metascraperDate from "metascraper-date";
 import { openai } from "./openai.js";
 
 // @ts-ignore
-const metascraper = _metascraper([_metascraperDate()]);
+// const metascraper = _metascraper([_metascraperDate()]);
 
 export async function getMeta(url: string, html: string, content?: string, log = console.log) {
-    const meta = await metascraper({ url, html });
+    // const meta = await metascraper({ url, html });
     const domain = getDomain(url);
 
     let date: Date | undefined = undefined;
@@ -23,23 +23,23 @@ export async function getMeta(url: string, html: string, content?: string, log =
     }
 
     console.log(`GPT date: ${date?.toISOString().slice(0, 10)}`);
-    console.log(`meta date: ${meta.date}`);
+    // console.log(`meta date: ${meta.date}`);
 
-    if (!date) {
-        // Use metadata date instead
-        date = meta.date ? new Date(meta.date) : undefined;
+    // if (!date) {
+    //     // Use metadata date instead
+    //     date = meta.date ? new Date(meta.date) : undefined;
 
-        // Ingore dates a long time in the past
-        if (date && date.toISOString().slice(0, 10) < "2010-01-01") {
-            date = undefined;
-        }
+    //     // Ingore dates a long time in the past
+    //     if (date && date.toISOString().slice(0, 10) < "2010-01-01") {
+    //         date = undefined;
+    //     }
 
-        // Don't trust very recent or future dates, e.g. on https://francescasciandra.art/now, https://nycsubwaygirl.com/now
-        // But include the current date in case people create their now page before submitting it
-        if (date && date.getTime() > new Date().getTime() - 1000 * 60) {
-            date = undefined;
-        }
-    }
+    //     // Don't trust very recent or future dates, e.g. on https://francescasciandra.art/now, https://nycsubwaygirl.com/now
+    //     // But include the current date in case people create their now page before submitting it
+    //     if (date && date.getTime() > new Date().getTime() - 1000 * 60) {
+    //         date = undefined;
+    //     }
+    // }
 
     return {
         domain,
