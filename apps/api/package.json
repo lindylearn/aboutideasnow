@@ -36,8 +36,5 @@
         "ts-node": "^10.9.2",
         "typescript": "^5.3.3"
     },
-    "overrides": {
-        "re2": "npm:re2-regexp@1.0.0-RegExp"
-    },
     "type": "module"
 }
