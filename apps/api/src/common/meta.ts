@@ -53,7 +53,7 @@ async function findDateUsingGPT(text: string): Promise<Date | undefined> {
     }
 
     const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo-1106", // 3.5 seems enough for this
+        model: "o4-mini",
         max_tokens: 50,
         temperature: 0,
         messages: [
