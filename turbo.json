@@ -9,7 +9,6 @@
         "DATABASE_URL",
         "INTERNAL_API_URL",
         "OPENAI_API_KEY",
-        "COHERE_API_KEY",
         "TYPESENSE_URL",
         "TYPESENSE_ADMIN_API_KEY"
     ],

@@ -20,7 +20,6 @@
         "@vercel/analytics": "^1.2.2",
         "axios": "^1.6.7",
         "clsx": "^2.1.0",
-        "cohere-ai": "^7.7.3",
         "lodash": "^4.17.21",
         "loglevel": "^1.9.1",
         "openai": "^4.26.0",

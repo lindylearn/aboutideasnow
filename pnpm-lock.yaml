@@ -55,7 +55,7 @@ importers:
         version: 23.2.0
       langchain:
         specifier: ^0.1.11
-        version: 0.1.11(@mozilla/readability@0.5.0)(cheerio@1.0.0-rc.12)(jsdom@23.2.0)(typesense@1.7.2)
+        version: 0.1.11(@mozilla/readability@0.5.0)(cheerio@1.0.0-rc.12)(jsdom@23.2.0)(typesense@2.0.3)
       metascraper:
         specifier: ^5.43.4
         version: 5.43.4
@@ -72,8 +72,8 @@ importers:
         specifier: ^7.1.2
         version: 7.1.2
       typesense:
-        specifier: ^1.7.2
-        version: 1.7.2(@babel/runtime@7.23.2)
+        specifier: ^2.0.3
+        version: 2.0.3(@babel/runtime@7.23.2)
     devDependencies:
       '@flydotio/dockerfile':
         specifier: ^0.4.11
@@ -107,7 +107,7 @@ importers:
     dependencies:
       '@langchain/community':
         specifier: ^0.0.21
-        version: 0.0.21(@supabase/supabase-js@2.39.3)(cohere-ai@7.7.3)(lodash@4.17.21)(typesense@1.7.2)
+        version: 0.0.21(@supabase/supabase-js@2.39.3)(lodash@4.17.21)(typesense@1.7.2)
       '@langchain/openai':
         specifier: ^0.0.13
         version: 0.0.13
@@ -126,9 +126,6 @@ importers:
       clsx:
         specifier: ^2.1.0
         version: 2.1.0
-      cohere-ai:
-        specifier: ^7.7.3
-        version: 7.7.3
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -1146,6 +1143,7 @@ packages:
   /@humanwhocodes/config-array@0.11.14:
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
     dependencies:
       '@humanwhocodes/object-schema': 2.0.2
       debug: 4.3.4(supports-color@5.5.0)
@@ -1161,6 +1159,7 @@ packages:
 
   /@humanwhocodes/object-schema@2.0.2:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
+    deprecated: Use @eslint/object-schema instead
     dev: true
 
   /@isaacs/cliui@8.0.2:
@@ -1219,7 +1218,7 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@langchain/community@0.0.21(@mozilla/readability@0.5.0)(jsdom@23.2.0)(typesense@1.7.2):
+  /@langchain/community@0.0.21(@mozilla/readability@0.5.0)(jsdom@23.2.0)(typesense@2.0.3):
     resolution: {integrity: sha512-2b3azTwY3i4hKeNpxXhZ34h9CQHvPu1kNTxAT8mSuOwkA0ZZ+DQ1niOT0Ai1K0ZrSyice5aivgvy6v7Jf0yFZw==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -1474,14 +1473,14 @@ packages:
       flat: 5.0.2
       jsdom: 23.2.0
       langsmith: 0.0.63
-      typesense: 1.7.2(@babel/runtime@7.23.2)
+      typesense: 2.0.3(@babel/runtime@7.23.2)
       uuid: 9.0.1
       zod: 3.22.4
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /@langchain/community@0.0.21(@supabase/supabase-js@2.39.3)(cohere-ai@7.7.3)(lodash@4.17.21)(typesense@1.7.2):
+  /@langchain/community@0.0.21(@supabase/supabase-js@2.39.3)(lodash@4.17.21)(typesense@1.7.2):
     resolution: {integrity: sha512-2b3azTwY3i4hKeNpxXhZ34h9CQHvPu1kNTxAT8mSuOwkA0ZZ+DQ1niOT0Ai1K0ZrSyice5aivgvy6v7Jf0yFZw==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -1733,7 +1732,6 @@ packages:
       '@langchain/core': 0.1.18
       '@langchain/openai': 0.0.13
       '@supabase/supabase-js': 2.39.3
-      cohere-ai: 7.7.3
       flat: 5.0.2
       langsmith: 0.0.63
       lodash: 4.17.21
@@ -2283,7 +2281,7 @@ packages:
       vite: ^5.0.0
     dependencies:
       '@sveltejs/vite-plugin-svelte': 3.0.2(svelte@4.2.0)(vite@5.0.12)
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       svelte: 4.2.0
       vite: 5.0.12
     transitivePeerDependencies:
@@ -2298,7 +2296,7 @@ packages:
       vite: ^5.0.0
     dependencies:
       '@sveltejs/vite-plugin-svelte-inspector': 2.0.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.0)(vite@5.0.12)
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.5
@@ -2858,7 +2856,7 @@ packages:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
     dependencies:
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3147,6 +3145,16 @@ packages:
     resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
     dependencies:
       follow-redirects: 1.15.5
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios@1.10.0:
+    resolution: {integrity: sha512-/1xYAC4MP/HEG+3duIhFr4ZQXR4sQXOIe+o6sdqzeykGLx6Upp/1p8MHqhINOvGeP7xyNHe7tsiJByc4SSVUxw==}
+    dependencies:
+      follow-redirects: 1.15.9
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
     dev: false
@@ -3615,18 +3623,6 @@ packages:
       periscopic: 3.1.0
     dev: true
 
-  /cohere-ai@7.7.3:
-    resolution: {integrity: sha512-g6PF/sDusd/RJ+KgWPg+pMq8dO97Le3JcvgS+xV5j/Fr4By5psy/D87OdlHlfnhmQ/40gr2D7wgrOtb3Os/I4Q==}
-    dependencies:
-      form-data: 4.0.0
-      js-base64: 3.7.2
-      node-fetch: 2.7.0
-      qs: 6.11.2
-      url-join: 4.0.1
-    transitivePeerDependencies:
-      - encoding
-    dev: false
-
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
     dependencies:
@@ -3885,6 +3881,18 @@ packages:
 
   /debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
+    dev: true
+
+  /debug@4.3.4:
+    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
+    engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
     peerDependenciesMeta:
@@ -4723,6 +4731,7 @@ packages:
   /eslint@8.56.0:
     resolution: {integrity: sha512-Go19xM6T9puCOWntie1/P997aXxFsOi37JIHRWI514Hc6ZnaHGKY9xFhrU65RT6CcBEzZoGG1e6Nq+DT04ZtZQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.56.0)
@@ -5100,6 +5109,16 @@ packages:
 
   /follow-redirects@1.15.5:
     resolution: {integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
+
+  /follow-redirects@1.15.9:
+    resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -5626,7 +5645,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6158,10 +6177,6 @@ packages:
     resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
     dev: false
 
-  /js-base64@3.7.2:
-    resolution: {integrity: sha512-NnRs6dsyqUXejqk/yv2aiXlAvOs56sLkX6nUdeaNezI5LFFLlsZjOThmwnrcwh5ZZRwZlCMnVAY3CvhIhoVEKQ==}
-    dev: false
-
   /js-tiktoken@1.0.10:
     resolution: {integrity: sha512-ZoSxbGjvGyMT13x6ACo9ebhDha/0FHdKA+OsQcMOWcm1Zs7r90Rhk5lhERLzji+3rA7EKpXCgwXcM5fF3DMpdA==}
     dependencies:
@@ -6349,7 +6364,7 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /langchain@0.1.11(@mozilla/readability@0.5.0)(cheerio@1.0.0-rc.12)(jsdom@23.2.0)(typesense@1.7.2):
+  /langchain@0.1.11(@mozilla/readability@0.5.0)(cheerio@1.0.0-rc.12)(jsdom@23.2.0)(typesense@2.0.3):
     resolution: {integrity: sha512-Ma1QW8pX0BAgnmgL5J97WQ17Ir46b8lWiZ3s+sK5iS6zicJzalx0J9FUdFg4XAFzLj6Dy1oHoXcupjrOZLQGOA==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -6512,7 +6527,7 @@ packages:
         optional: true
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
-      '@langchain/community': 0.0.21(@mozilla/readability@0.5.0)(jsdom@23.2.0)(typesense@1.7.2)
+      '@langchain/community': 0.0.21(@mozilla/readability@0.5.0)(jsdom@23.2.0)(typesense@2.0.3)
       '@langchain/core': 0.1.18
       '@langchain/openai': 0.0.13
       binary-extensions: 2.2.0
@@ -7994,13 +8009,6 @@ packages:
       side-channel: 1.0.4
     dev: false
 
-  /qs@6.11.2:
-    resolution: {integrity: sha512-tDNIz22aBzCDxLtVH++VnTfzxlfeK5CbqohpSqpJgj1Wg/cQbStNAz3NuqCs5vV+pjBsK4x4pN9HlVh7rcYRiA==}
-    engines: {node: '>=0.6'}
-    dependencies:
-      side-channel: 1.0.4
-    dev: false
-
   /qs@6.5.3:
     resolution: {integrity: sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==}
     engines: {node: '>=0.6'}
@@ -9318,6 +9326,20 @@ packages:
       - debug
     dev: false
 
+  /typesense@2.0.3(@babel/runtime@7.23.2):
+    resolution: {integrity: sha512-fRJjFdDNZn6qF9XzIk+bB8n8cm0fiAx1SGcpLDfNcsGtp8znITfG+SO+l/qk63GCRXZwJGq7wrMDLFUvblJSHA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@babel/runtime': ^7.23.2
+    dependencies:
+      '@babel/runtime': 7.23.2
+      axios: 1.10.0
+      loglevel: 1.9.1
+      tslib: 2.6.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /uhyphen@0.2.0:
     resolution: {integrity: sha512-qz3o9CHXmJJPGBdqzab7qAYuW8kQGKNEuoHFYrBwV6hWIMcpAmxDLXojcHfFr9US1Pe6zUswEIJIbLI610fuqA==}
     dev: false
@@ -9409,10 +9431,6 @@ packages:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
       punycode: 2.3.0
-
-  /url-join@4.0.1:
-    resolution: {integrity: sha512-jk1+QP6ZJqyOiuEI9AEWQfju/nB2Pw466kbA0LEZljHwKeMgd9WrAEgEGxjPDD2+TNbbb37rTyhEfrCXfuKXnA==}
-    dev: false
 
   /url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
