@@ -4,14 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  re2@1.22.1:
-    hash: ohau3kcg24dktl6fccue7lp6ki
-    path: patches/re2@1.22.1.patch
-  url-regex-safe@4.0.0:
-    hash: va37ctuwhypaj6724iitsy7rom
-    path: patches/url-regex-safe@4.0.0.patch
-
 importers:
 
   .:
@@ -68,8 +60,8 @@ importers:
         specifier: ^8.0.0
         version: 8.0.0
       openai:
-        specifier: ^4.26.0
-        version: 4.26.0
+        specifier: ^6.15.0
+        version: 6.15.0(zod@3.22.4)
       turndown:
         specifier: ^7.1.2
         version: 7.1.2
@@ -6968,6 +6960,21 @@ packages:
       web-streams-polyfill: 3.3.2
     transitivePeerDependencies:
       - encoding
+    dev: false
+
+  /openai@6.15.0(zod@3.22.4):
+    resolution: {integrity: sha512-F1Lvs5BoVvmZtzkUEVyh8mDQPPFolq4F+xdsx/DO8Hee8YF3IGAlZqUIsF+DVGhqf4aU0a3bTghsxB6OIsRy1g==}
+    hasBin: true
+    peerDependencies:
+      ws: ^8.18.0
+      zod: ^3.25 || ^4.0
+    peerDependenciesMeta:
+      ws:
+        optional: true
+      zod:
+        optional: true
+    dependencies:
+      zod: 3.22.4
     dev: false
 
   /openapi-types@12.1.3:

@@ -19,7 +19,7 @@
         "jsdom": "^23.2.0",
         "langchain": "^0.1.11",
         "normalize-url": "^8.0.0",
-        "openai": "^4.26.0",
+        "openai": "^6.15.0",
         "turndown": "^7.1.2",
         "typesense": "^2.0.3"
     },
