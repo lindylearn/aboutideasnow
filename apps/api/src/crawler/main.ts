@@ -50,6 +50,21 @@ export async function runCrawler(directoryUrls: string[], documentUrls: string[]
             maxRequestsPerMinute: 120,
             sameDomainDelaySecs: 0,
 
+            // Use browser-like headers to avoid being blocked
+            additionalMimeTypes: ["text/html"],
+            requestHandlerTimeoutSecs: 30,
+            navigationTimeoutSecs: 30,
+            preNavigationHooks: [
+                async ({ request }) => {
+                    request.headers = {
+                        ...request.headers,
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                        "Accept-Language": "en-US,en;q=0.5",
+                    };
+                }
+            ],
+
             requestHandler: router,
             failedRequestHandler: async ({ request, log, enqueueLinks }) => {
                 const url = normalizeUrl(request.url);

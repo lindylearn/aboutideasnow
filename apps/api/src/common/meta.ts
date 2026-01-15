@@ -54,8 +54,8 @@ async function findDateUsingGPT(text: string): Promise<Date | undefined> {
 
     const response = await openai.chat.completions.create({
         model: "gpt-5-mini-2025-08-07",
-        max_tokens: 50,
-        temperature: 0,
+        max_completion_tokens: 50,
+        // Note: temperature: 0 is not supported by GPT-5, using default (1)
         messages: [
             {
                 role: "system",
