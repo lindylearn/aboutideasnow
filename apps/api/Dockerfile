@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Adjust NODE_VERSION as desired
-ARG NODE_VERSION=18.16.1
+ARG NODE_VERSION=22.12.0
 FROM node:${NODE_VERSION}-slim as base
 
 LABEL fly_launch_runtime="Node.js/Prisma"
@@ -23,13 +23,13 @@ COPY --link . .
 RUN npm install -g pnpm turbo
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN CI=true pnpm install --frozen-lockfile
 
 # Build application
 RUN pnpm build --filter=@repo/api
 
 # Remove development dependencies
-RUN pnpm install --prod --frozen-lockfile
+RUN CI=true pnpm install --prod --frozen-lockfile
 
 # Final stage for app image
 FROM base

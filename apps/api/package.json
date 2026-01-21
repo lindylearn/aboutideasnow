@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "dev": "nodemon src/index.ts",
+        "dev": "tsx watch src/index.ts",
         "build": "tsc"
     },
     "dependencies": {
@@ -32,6 +32,7 @@
         "nodemon": "^3.0.3",
         "parser": "link:@types/@postlight/parser",
         "ts-node": "^10.9.2",
+        "tsx": "^4.21.0",
         "typescript": "^5.3.3"
     },
     "type": "module"
