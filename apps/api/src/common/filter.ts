@@ -33,9 +33,10 @@ export function isExcludedPage(
         "| substack",
         "existiert noch nicht"
     ];
+    const haystack = `${title}\n${rawContent}`.toLowerCase();
     if (
-        wordBlocklist.some(
-            (w) => title.toLowerCase().includes(w) || rawContent.toLowerCase().includes(w)
+        wordBlocklist.some((w) =>
+            new RegExp(`(^|[^a-z0-9])${escapeRegExp(w)}([^a-z0-9]|$)`).test(haystack)
         )
     ) {
         return true;
@@ -134,4 +135,8 @@ export function isExcludedPage(
     }
 
     return false;
+}
+
+function escapeRegExp(value: string) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
