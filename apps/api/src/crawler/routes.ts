@@ -5,7 +5,7 @@ import { getPageContent } from "../common/content.js";
 import { PostType, ScrapeStatus } from "@repo/core/generated/prisma-client";
 import { db, deletePost } from "../common/db.js";
 import { isExcludedPage } from "../common/filter.js";
-import { indexPost, unIndexPost } from "../common/typesense.js";
+import { indexPost, isPostIndexed, unIndexPost } from "../common/typesense.js";
 import { getPostType } from "../common/postType.js";
 
 export const router = createCheerioRouter();
@@ -143,6 +143,15 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
     if (existingPost && existingPost.content === articleContent) {
         log.info(`skipping ${url} (content unchanged)\n`);
 
+        try {
+            if (!(await isPostIndexed(domain, postType))) {
+                log.info(`${url} missing from search index — re-indexing\n`);
+                await indexPost(existingPost, log.info.bind(log));
+            }
+        } catch (e) {
+            log.error(`re-index check failed for ${url}: ${e}`);
+        }
+
         // Update scrape time
         await db.scrapeState.upsert({
             where: { domain_type: { domain, type: postType } },
@@ -183,8 +192,11 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
         update: post
     });
 
-    // Index for search async
-    indexPost(post, log.info.bind(log));
+    try {
+        await indexPost(post, log.info.bind(log));
+    } catch (e) {
+        log.error(`indexPost failed for ${url}: ${e}`);
+    }
 
     // Save scrape success
     await db.scrapeState.upsert({

@@ -3,7 +3,7 @@ import { runCrawler } from "../crawler/main.js";
 import { db } from "../common/db.js";
 import { getDomain } from "../common/meta.js";
 import { SubmittedDomain } from "@repo/core/generated/prisma-client";
-import { unIndexPost } from "../common/typesense.js";
+import { indexPost, isPostIndexed } from "../common/typesense.js";
 
 export async function addDirectory(req: Request, res: Response) {
     const url = req.query.url as string | undefined;
@@ -92,6 +92,17 @@ export async function addDomain(req: Request, res: Response) {
             where: { domain },
             orderBy: { updatedAt: "desc" }
         });
+
+        for (const post of posts) {
+            try {
+                if (!(await isPostIndexed(post.domain, post.type))) {
+                    await indexPost(post);
+                }
+            } catch (e) {
+                console.error(`add-domain: failed to index ${post.url}: ${e}`);
+            }
+        }
+
         return res.json(posts);
     } else {
         return res.status(500).json({ message: "Failed to scrape website :(" });

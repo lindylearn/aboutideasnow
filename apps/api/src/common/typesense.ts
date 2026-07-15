@@ -12,7 +12,7 @@ export const typesense = new Typesense.Client({
         }
     ],
     apiKey: env.TYPESENSE_ADMIN_API_KEY!,
-    connectionTimeoutSeconds: 2
+    connectionTimeoutSeconds: 15
 });
 
 // typesense.collections().create({
@@ -39,44 +39,57 @@ export const typesense = new Typesense.Client({
 //     default_sorting_field: "updatedAt"
 // });
 
+const IMPORT_MAX_RETRIES = 3;
+
 export async function indexPost(post: Post, logger = console.log) {
-    try {
-        const t0 = Date.now();
-        const paragraphs = await getPostParagraphs(post.content);
+    const paragraphs = await getPostParagraphs(post.content);
 
-        // Paragraph splitting debug
-        // logger(`# ${post.url}\n`);
-        // for (const p of paragraphs) {
-        //     logger(`- ${p}\n`);
-        // }
-        // logger(`\n\n`);
-        // return;
-
-        // Delete existing paragraphs for this post (the number might have changed)
+    if (paragraphs.length === 0) {
         await unIndexPost(post.domain, post.type);
-
-        if (paragraphs.length === 0) {
-            return;
-        }
-
-        await typesense
-            .collections("paragraphs")
-            .documents()
-            .import(
-                paragraphs.map((p, i) => ({
-                    // id: `${post.domain}-${post.type}-${i}`,
-                    url: post.url,
-                    domain: post.domain,
-                    type: post.type,
-                    content: p,
-                    updatedAt: post.updatedAt.getTime()
-                }))
-            );
-
-        // logger(`Inserted ${paragraphs.length} paragraphs in ${Date.now() - t0}ms`);
-    } catch (e) {
-        logger(`Error indexing post ${post.url}: ${e}`);
+        return;
     }
+
+    const documents = paragraphs.map((p) => ({
+        url: post.url,
+        domain: post.domain,
+        type: post.type,
+        content: p,
+        updatedAt: post.updatedAt.getTime()
+    }));
+
+    let lastErr: unknown;
+    for (let attempt = 1; attempt <= IMPORT_MAX_RETRIES; attempt++) {
+        try {
+            await unIndexPost(post.domain, post.type);
+            await typesense.collections("paragraphs").documents().import(documents);
+            return;
+        } catch (e) {
+            lastErr = e;
+            logger(
+                `Error indexing post ${post.url} (attempt ${attempt}/${IMPORT_MAX_RETRIES}): ${e}`
+            );
+            if (attempt < IMPORT_MAX_RETRIES) {
+                await new Promise((resolve) => setTimeout(resolve, 500 * 2 ** (attempt - 1)));
+            }
+        }
+    }
+
+    throw new Error(
+        `Failed to index post ${post.url} after ${IMPORT_MAX_RETRIES} attempts: ${lastErr}`
+    );
+}
+
+export async function isPostIndexed(domain: string, postType: PostType): Promise<boolean> {
+    const res = await typesense
+        .collections("paragraphs")
+        .documents()
+        .search({
+            q: "*",
+            query_by: "content",
+            filter_by: `domain:=${domain} && type:=${postType}`,
+            per_page: 0
+        });
+    return (res.found ?? 0) > 0;
 }
 
 export async function unIndexPost(domain: string, postType: PostType) {

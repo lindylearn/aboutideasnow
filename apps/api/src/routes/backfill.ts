@@ -17,7 +17,7 @@ export async function runBackfill(req: Request, res: Response) {
         console.log(`(${index}/${posts.length + start}) Backfilling post ${post.url}`);
 
         try {
-            indexPost(post);
+            await indexPost(post);
         } catch (e) {
             console.error(e);
         }
