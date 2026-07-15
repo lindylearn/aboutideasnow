@@ -77,7 +77,21 @@
 
         isSearching = true;
         showFilter = false;
-        searchedPosts = await searchPosts(searchQuery, postTypeFilter); // Call TypeSense directly from the browser
+        const queryAtStart = searchQuery;
+        let results = await searchPosts(searchQuery, postTypeFilter); // Call TypeSense directly from the browser
+        if (results.length === 0) {
+            try {
+                const res = await fetch(`/api/search?q=${encodeURIComponent(queryAtStart)}`);
+                if (res.ok) {
+                    results = await res.json();
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        if (searchQuery === queryAtStart) {
+            searchedPosts = results;
+        }
         isSearching = false;
 
         posthog.capture("search");
