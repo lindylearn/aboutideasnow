@@ -52,41 +52,37 @@ async function findDateUsingGPT(text: string): Promise<Date | undefined> {
         return undefined;
     }
 
-    const response = await openai.chat.completions.create({
-        model: "gpt-5-mini-2025-08-07",
-        max_completion_tokens: 50,
-        // Note: temperature: 0 is not supported by GPT-5, using default (1)
-        messages: [
-            {
-                role: "system",
-                content: `You are an API that extracts the lastUpdated full ISO date from a text. Return null if there's no date mentioned. Return only the data as JSON.`
-            },
-            {
-                role: "user",
-                content: text
-            }
-        ],
-        response_format: { type: "json_object" }
-    });
-    const completion = response.choices[0].message.content;
-    // Parse again with Chrono for error handling
-
     try {
+        const response = await openai.chat.completions.create({
+            model: "gpt-5-mini-2025-08-07",
+            max_completion_tokens: 50,
+            messages: [
+                {
+                    role: "system",
+                    content: `You are an API that extracts the lastUpdated full ISO date from a text. Return null if there's no date mentioned. Return only the data as JSON.`
+                },
+                {
+                    role: "user",
+                    content: text
+                }
+            ],
+            response_format: { type: "json_object" }
+        });
+        const completion = response.choices[0].message.content;
+
         const isoString = JSON.parse(completion!).lastUpdated;
         const date = new Date(isoString);
 
-        // GTP returns 1970-01-01 for empty dates
         if (date && date.toISOString().slice(0, 10) < "2010-01-01") {
             return undefined;
         }
-        // Don't trust future dates, e.g. on https://kunalmarwaha.com/now
         if (date && date.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10)) {
             return undefined;
         }
 
         return date;
     } catch (err) {
-        console.error(`Could not parse date from string with GPT: ${completion}`);
+        console.error(`Could not get date from GPT (skipping date): ${err}`);
         return undefined;
     }
 }
