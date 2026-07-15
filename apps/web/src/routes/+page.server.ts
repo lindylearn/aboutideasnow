@@ -1,24 +1,34 @@
 import { getDatabaseClient } from "@repo/core/dist";
-import { type Post, PostType, PrismaClient } from "@repo/core/generated/prisma-client";
+import type { Post, PostType } from "@repo/core/generated/prisma-client";
 import { handleSubmit } from "../common/formActions.js";
+
+const PER_PAGE = 24;
 
 export async function load({ url, setHeaders }): Promise<{
     websiteCount: number;
     defaultPosts: Post[];
+    page: number;
+    totalPages: number;
 }> {
     try {
         const db = getDatabaseClient();
 
         const postTypeFilter =
             (url.searchParams.get("filter")?.toUpperCase() as PostType) || undefined;
+        const page = Math.max(1, parseInt(url.searchParams.get("page") || "1") || 1);
 
-        const defaultPosts = await getRepresentativePosts(postTypeFilter, db);
-        const websiteCount = await db.scrapeState.count({
-            where: {
-                status: "SCRAPED",
-                type: "ABOUT"
-            }
-        });
+        const where = postTypeFilter ? { type: postTypeFilter } : {};
+        const [defaultPosts, total, websiteCount] = await Promise.all([
+            db.post.findMany({
+                where,
+                orderBy: [{ updatedAt: "desc" }, { url: "asc" }],
+                skip: (page - 1) * PER_PAGE,
+                take: PER_PAGE
+            }),
+            db.post.count({ where }),
+            db.scrapeState.count({ where: { status: "SCRAPED", type: "ABOUT" } })
+        ]);
+        const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
 
         db.$disconnect();
 
@@ -27,39 +37,12 @@ export async function load({ url, setHeaders }): Promise<{
             "Cache-Control": "max-age=0, s-max-age=3600"
         });
 
-        return { websiteCount, defaultPosts };
+        return { websiteCount, defaultPosts, page, totalPages };
     } catch (err) {
         console.error(`load() function failed: ${err}`);
 
-        return { websiteCount: 7591, defaultPosts: [] };
+        return { websiteCount: 7591, defaultPosts: [], page: 1, totalPages: 1 };
     }
-}
-
-async function getRepresentativePosts(
-    postTypeFilter: PostType | undefined,
-    db: PrismaClient,
-    limit = 12
-) {
-    // Apply filter if present
-    if (postTypeFilter) {
-        return await getPosts(postTypeFilter, db, limit);
-    }
-
-    // Ensure that all three post types exist
-    const postsByType = await Promise.all(
-        [PostType.ABOUT, PostType.IDEAS, PostType.NOW].map((type) =>
-            getPosts(type, db, Math.floor(limit / 3))
-        )
-    );
-    return postsByType.flat().sort((a, b) => a.domain.localeCompare(b.domain));
-}
-
-async function getPosts(postTypeFilter: PostType, db: PrismaClient, limit = 12) {
-    return await db.post.findMany({
-        where: { type: postTypeFilter },
-        orderBy: { updatedAt: "desc" },
-        take: limit
-    });
 }
 
 export const actions = {

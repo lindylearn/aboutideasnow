@@ -98,6 +98,14 @@
     }
     const runSearchDebounced = debounce(runSearch, 200);
 
+    function pageUrl(n: number) {
+        const params = new URLSearchParams();
+        if (postTypeFilter) params.set("filter", postTypeFilter.toLowerCase());
+        if (n > 1) params.set("page", String(n));
+        const qs = params.toString();
+        return qs ? `?${qs}` : "/";
+    }
+
     // Run search on page load
     if (searchQuery && typeof window !== "undefined") {
         runSearch();
@@ -228,6 +236,28 @@
         <IdeaCard {post}></IdeaCard>
     {/each}
 </div>
+
+{#if !searchQuery && data.totalPages > 1}
+    <div class="flex items-center justify-center w-full gap-4 font-mono md:text-lg">
+        {#if data.page > 1}
+            <a
+                class="px-3 py-1 transition-colors border rounded-lg border-border hover:text-text/50"
+                href={pageUrl(data.page - 1)}>← Prev</a
+            >
+        {:else}
+            <span class="px-3 py-1 border rounded-lg border-border opacity-30">← Prev</span>
+        {/if}
+        <span>Page {data.page} of {data.totalPages}</span>
+        {#if data.page < data.totalPages}
+            <a
+                class="px-3 py-1 transition-colors border rounded-lg border-border hover:text-text/50"
+                href={pageUrl(data.page + 1)}>Next →</a
+            >
+        {:else}
+            <span class="px-3 py-1 border rounded-lg border-border opacity-30">Next →</span>
+        {/if}
+    </div>
+{/if}
 
 <section class="flex flex-col items-center max-w-xl gap-0 text-center md:text-lg">
     <p>

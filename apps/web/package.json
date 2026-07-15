@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "vite dev --port 7100",
-        "build": "vite build",
+        "build": "NODE_OPTIONS=--max-old-space-size=4096 vite build",
         "preview": "vite preview",
         "test": "playwright test",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
