@@ -4,7 +4,6 @@ import { db } from "../common/db.js";
 import { getDomain } from "../common/meta.js";
 import { SubmittedDomain } from "@repo/core/generated/prisma-client";
 import { indexPost, isPostIndexed } from "../common/typesense.js";
-import { isDomainRemoved } from "../common/removed.js";
 
 export async function addDirectory(req: Request, res: Response) {
     const url = req.query.url as string | undefined;
@@ -63,10 +62,6 @@ export async function addDomain(req: Request, res: Response) {
     }
     const domain = getDomain(url);
     let email = (req.query.email as string) || null;
-
-    if (await isDomainRemoved(domain)) {
-        return res.status(410).json({ message: "This website was removed at the owner's request" });
-    }
 
     // Scrape website
     let success = true;

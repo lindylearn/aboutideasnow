@@ -7,7 +7,6 @@ import { db, deletePost } from "../common/db.js";
 import { isExcludedPage } from "../common/filter.js";
 import { indexPost, isPostIndexed, unIndexPost } from "../common/typesense.js";
 import { getPostType } from "../common/postType.js";
-import { isDomainRemoved } from "../common/removed.js";
 
 export const router = createCheerioRouter();
 
@@ -68,12 +67,6 @@ router.addHandler("document", async ({ $, request, log, enqueueLinks }) => {
     const originalUrl = normalizeUrl(request.url);
     const originalDomain = getDomain(originalUrl);
     const originalPathname = new URL(originalUrl).pathname;
-
-    // Never re-add domains removed at the owner's request
-    if ((await isDomainRemoved(domain)) || (await isDomainRemoved(originalDomain))) {
-        log.info(`${domain} skipped (removed)\n`);
-        return;
-    }
 
     // Detect post type
     const postType = getPostType(pathname) || getPostType(originalPathname);

@@ -14,7 +14,6 @@ import { db } from "../common/db.js";
 import { getDomain } from "../common/meta.js";
 import { ScrapeStatus } from "@repo/core/generated/prisma-client";
 import { getPostType } from "../common/postType.js";
-import { isDomainRemoved } from "../common/removed.js";
 
 export async function runCrawler(directoryUrls: string[], documentUrls: string[]) {
     // Seed URLs
@@ -74,10 +73,6 @@ export async function runCrawler(directoryUrls: string[], documentUrls: string[]
                 const postType = getPostType(pathname);
 
                 log.info(`Failed to crawl ${url}`);
-
-                if (await isDomainRemoved(domain)) {
-                    return;
-                }
 
                 // Mark as unavailable
                 if (postType) {
