@@ -93,6 +93,10 @@
             movement without which this all wouldn't be possible.
         </p>
         <p>
+            <a class="font-bold" href="https://abdullahtayyab.dev" target="_blank" rel="noopener noreferrer">Abdullah Tayyab</a
+            > (Ellife Dash) also contributes.
+        </p>
+        <p>
             Contribute
             <a href="https://github.com/lindylearn/aboutideasnow" target="_blank"> on GitHub</a> to add
             your name here!
